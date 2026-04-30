@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { JetBrains_Mono, Merriweather, Outfit } from "next/font/google";
 import "./globals.css";
+import { Navbar } from "@/shared/components/layout/navbar";
+import { Providers } from "@/shared/components/providers";
 
 const fontSans = Outfit({
   subsets: ["latin"],
@@ -28,11 +30,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${fontSans.variable} ${fontSerif.variable} ${fontMono.variable} antialiased`}
       >
-        {children}
+        <Providers>
+          <Navbar />
+          <main>{children}</main>
+        </Providers>
       </body>
     </html>
   );
