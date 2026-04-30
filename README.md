@@ -58,6 +58,7 @@ Example in React:
 ```text
 src/
   app/                # Next.js routes, layout, page, and global styles
+  modules/            # Feature modules used by pages
   shared/
     components/ui/     # Reusable UI components
     providers/         # Global providers like theme
@@ -69,7 +70,26 @@ src/
 
 - `src/app/layout.tsx`: root layout for the whole app
 - `src/app/page.tsx`: home page
+- `src/app/*/page.tsx`: route entry points (usually render a module component)
+- `src/modules/*`: feature modules for each page/section
 - `src/app/globals.css`: global theme, tokens, and Tailwind setup
+
+Example page using a module:
+
+```tsx
+// src/app/contacto/page.tsx
+import type { Metadata } from "next";
+import Title from "@/modules/contacto/components/title";
+import { routes } from "@/shared/config/routes";
+
+export const metadata: Metadata = {
+  title: routes.contacto.name,
+};
+
+export default function ContactoPage() {
+  return <Title />;
+}
+```
 - `src/shared/components/ui/*`: reusable UI components
 - `src/shared/providers/*`: context/providers used across the app
 - `src/shared/lib/utils.ts`: shared helper functions like `cn`
