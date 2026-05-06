@@ -7,22 +7,10 @@ const homeRoute = createStaticRoute({
   fullPath: APP_URL,
 });
 
-const contactoRoute = createStaticRoute({
-  name: "Contacto",
-  path: "/contacto",
-  fullPath: `${APP_URL}/contacto`,
-});
-
-const marcaRoute = createStaticRoute({
-  name: "Marca",
-  path: "/marca",
-  fullPath: `${APP_URL}/marca`,
-});
-
-const proyectosRoute = createStaticRoute({
-  name: "Proyectos",
-  path: "/proyectos",
-  fullPath: `${APP_URL}/proyectos`,
+const organizacionRoute = createStaticRoute({
+  name: "Organización",
+  path: "/organizacion",
+  fullPath: `${APP_URL}/organizacion`,
 });
 
 const serviciosRoute = createStaticRoute({
@@ -31,27 +19,39 @@ const serviciosRoute = createStaticRoute({
   fullPath: `${APP_URL}/servicios`,
 });
 
-const sobreNosotrosRoute = createStaticRoute({
-  name: "Sobre Nosotros",
-  path: "/sobre-nosotros",
-  fullPath: `${APP_URL}/sobre-nosotros`,
+const proyectosRoute = createStaticRoute({
+  name: "Proyectos",
+  path: "/proyectos",
+  fullPath: `${APP_URL}/proyectos`,
+});
+
+const atencionRoute = createStaticRoute({
+  name: "Atención",
+  path: "/atencion",
+  fullPath: `${APP_URL}/atencion`,
+});
+
+const contactoRoute = createStaticRoute({
+  name: "Contactenos",
+  path: "/contacto",
+  fullPath: `${APP_URL}/contacto`,
 });
 
 export const routes = {
   ...homeRoute,
+  organizacion: {
+    ...organizacionRoute,
+  },
+  atencion: {
+    ...atencionRoute,
+  },
   contacto: {
     ...contactoRoute,
-  },
-  marca: {
-    ...marcaRoute,
   },
   proyectos: {
     ...proyectosRoute,
   },
   servicios: {
     ...serviciosRoute,
-  },
-  sobreNosotros: {
-    ...sobreNosotrosRoute,
   },
 };
