@@ -86,11 +86,12 @@ export type ProjectItem = {
   title: string;
   image: string;
   paragraphs: string[];
+  description: string;
 };
 
 export type ProjectsPage = {
   items: ProjectItem[];
-  description: string[];
+  description: string;
   testimonial: Testimonial;
 };
 

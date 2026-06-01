@@ -1,0 +1,116 @@
+import type { ProjectsPage } from "../types/data";
+import { images } from "./images";
+
+export const projects: ProjectsPage = {
+  items: [
+    {
+      title: "Memoria de cálculo base de tanque para mina",
+      image: images.proyectos_memoria_tanque.name,
+      description:
+        "Diseño y verificación de una base metálica para tanque rectangular de combustible de 3 000 L en condiciones de operación minera, considerando cargas estáticas, sísmicas y de mantenimiento.",
+      paragraphs: [
+        "El objetivo del proyecto fue diseñar y verificar una base metálica capaz de",
+        "soportar un tanque rectangular de combustible de 3 000 L en condiciones de",
+        "operación minera. Para ello se definieron las combinaciones de carga que",
+        "incluyen peso propio, llenado completo del tanque, empuje sísmico zona 3",
+        "según la NTE E.030, y acciones de mantenimiento",
+        "(trabajos de soldadura y acceso de personal).",
+        "El modelo estructural se desarrolló en SolidWorks 2024 y se exportó a ANSYS",
+        "Workbench para el análisis por elementos finitos. Se aplicaron las propiedades",
+        "del acero ASTM A36, un módulo de elasticidad de 200 GPa y un límite de fluencia",
+        "de 250 MPa. Se incorporaron las rigideces de anclajes M20 – Grado 8.8 y una",
+        "losa de concreto f'c=280 kg/cm². Los resultados arrojaron tensiones máximas",
+        "de 148 MPa (≤ 0.6 Fy), flechas de 1.4 mm (≤ L/360) y un factor de seguridad",
+        "global de 1.75.",
+        "Con base en los resultados se validó el espesor de la placa base de 10 mm,",
+        "el patrón de diafragmas transversales y la malla de platabandas de refuerzo,",
+        "garantizando un comportamiento elástico ante las combinaciones de servicio y",
+        "excepcionales. Se recomendó un acabado de galvanizado en caliente de 100 µm y",
+        "protección catódica para prolongar la vida útil a más de 20 años en ambiente",
+        "corrosivo C3. El informe de memoria de cálculo incluye planos de fabricación,",
+        "fichas de soldadura WPS – PQR y procedimiento de montaje en mina.",
+      ],
+    },
+    {
+      title:
+        "Planos de fabricación de escalera de acceso a poza de estación de combustible para mina",
+      image: images.proyectos_memoria_escalera.name,
+      description:
+        "El proyecto consistió en el diseño y elaboración de planos de fabricación para una escalera metálica modular destinada a proporcionar acceso seguro a la poza de abastecimiento de combustible en una unidad minera, cumpliendo con normativas de seguridad laboral y resistencia estructural.",
+      paragraphs: [
+        "El encargo consistió en elaborar los planos de fabricación de una escalera metálica modular",
+        "que permite el acceso seguro a la poza de abastecimiento de combustible de una unidad minera.",
+        "Se definió una inclinación de 35° para cumplir con la NTP 399.010 (equivalente a OSHA 1910",
+        "Subpart D) y facilitar el ascenso con botas y equipo de protección personal.",
+        "La estructura principal se diseñó con largueros de canal C 150 × 50 × 20 (ASTM A36) y",
+        "peldaños tipo grating antideslizante de 30×5 mm. Los pasamanos se fabricarán con tubería",
+        "schedule 40 de 1 ½ in y un sistema de barandas intermedias a mid-span para prevenir caídas.",
+        "Todas las uniones son atornilladas con pernos A325, lo que permite desmontaje y",
+        "traslado rápidos en interior mina.",
+        "Los planos entregados incluyen: despiece individual, soldaduras WPS — GMAW, listado de",
+        "materiales y ficha de pintura epóxica de alto espesor (DFT 250 µm) resistente a derrames",
+        "de diésel. Además, se adjuntó un procedimiento de inspección visual y dimensional que",
+        "garantiza la conformidad antes de la galvanización en caliente y el envío al sitio.",
+      ],
+    },
+    {
+      title: "Memoria de cálculo soporte de transformador móvil",
+      image: images.proyectos_memoria_transformador.name,
+      description:
+        "Diseño y verificación de un bastidor portante para un transformador móvil de 5 MVA, considerando cargas dinámicas de transporte en rutas no pavimentadas, con énfasis en la integridad estructural y la seguridad durante el izaje y la descarga.",
+      paragraphs: [
+        "Este estudio aborda el diseño y la verificación de un bastidor portante para un",
+        "transformador móvil de 5 MVA que será transportado sobre cama baja en rutas no",
+        "pavimentadas. Se definieron los casos de carga correspondientes a frenado de emergencia,",
+        "aceleración lateral en curvas de radio reducido y la combinación vertical de peso",
+        "propio + sobrecarga dinámica de 1.4 g según la norma AASHTO LRFD 2017 para puentes móviles.",
+        "El modelo estructural se elaboró con vigas IPE 300 y travesaños HSS 200 × 100 × 6 mm,",
+        "generándose un mallado sólido de 115 000 elementos en ANSYS Mechanical. Las tensiones",
+        "de Von Mises se mantuvieron por debajo de 160 MPa (0.64 Fy) y la deformada global no",
+        "superó los 3 mm, garantizando la alineación de los bujes de montaje del transformador",
+        "durante el transporte y la descarga.",
+        "Se recomendó el uso de pernos de alta resistencia ASTM A490 de 1 in para la unión",
+        "entre largueros y ménsulas, así como topes de caucho NR 70 ShA para amortiguar",
+        "vibraciones de hasta 15 Hz. El informe incluye instrucciones de izaje, secuencia",
+        "de soldadura SMAW y criterios de inspección (VT, MT y pruebas de torsión) que",
+        "aseguran la integridad del bastidor a lo largo de su vida útil en campo.",
+      ],
+    },
+    {
+      title: "Memoria de cálculo andamio colgante para puerto",
+      image: images.proyectos_memoria_andamio.name,
+      description:
+        "El proyecto comprende la verificación estructural de un andamio colgante de 12 m × 6 m destinado a labores de mantenimiento de defensas y tuberías en un muelle comercial, considerando cargas de trabajo, peso propio, sobrepeso por herramientas y acción simultánea de viento para zona costera expuesta.",
+      paragraphs: [
+        "El proyecto comprende la verificación estructural de un andamio colgante",
+        "de 12 m × 6 m destinado a labores de mantenimiento de defensas y tuberías",
+        "en un muelle comercial. Se consideraron las cargas de trabajo de 2.0 kN/m²",
+        "según EN 12811-1, el peso propio del sistema, el sobrepeso por herramientas",
+        "y la acción simultánea de viento de 0.6 kN/m² para zona costera expuesta",
+        "(EN 1991-1-4, categoría III).",
+        "El modelo se construyó en Revit y se exportó a SAP2000 v25; se utilizaron",
+        "perfiles tubulares de acero galvanizado S355 JR y plataformas de aluminio",
+        "antideslizante. Los resultados arrojaron factores de uso ≤ 0.78 y",
+        "desplazamientos horizontales máximos de 9 mm, cumpliendo el límite de L/200",
+        "exigido por la norma. Se verificaron además los anclajes químicos M16 en",
+        "hormigón C30/37, obteniendo un coeficiente de seguridad de 2.1 frente",
+        "a extracción.",
+        "El informe incluye un plan de montaje paso a paso, certificados de",
+        "soldadura MIG conforme a ISO 9606-1, y recomendaciones de inspección diaria",
+        "de cuerdas y guardacabos. Se sugiere recubrimiento epóxico marino de 250 µm",
+        "y controles de corrosión bianuales para garantizar una vida útil de",
+        "diez años en ambiente salino.",
+      ],
+    },
+  ],
+  description:
+    "En Proyectos, encontrarás una selección de nuestros trabajos más destacados de memorias de cálculo, diseños industriales y piezas fabricadas en 3D que demuestran cómo convertimos ideas en soluciones reales. Nuestro equipo de expertos trabaja con herramientas de última generación para transformar ideas en grandes proyectos.",
+  testimonial: {
+    name: "Janio Oliver Quispe Ticona",
+    role: "CEO JP3D",
+    phone: "+51 951 890 330",
+    email: "oficina@jp3doficial.com",
+    quote:
+      "Cada proyecto que desarrollamos demuestra que la imaginación, respaldada por ingeniería de precisión y fabricación digital, se convierte en valor tangible para nuestros clientes.",
+  },
+};
