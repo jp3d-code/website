@@ -10,9 +10,9 @@ export function ProjectsSection() {
     <Section>
       <Container>
         <div className="flex w-full items-center justify-between">
-          <p className="text-foreground text-xs uppercase tracking-[0.2em]">
+          <h2 className="text-xl uppercase tracking-widest">
             Nuestros proyectos
-          </p>
+          </h2>
           <Link
             href={routes.proyectos.path}
             className="text-muted-foreground text-xs uppercase tracking-[0.3em]"

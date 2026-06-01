@@ -4,7 +4,7 @@ import { homeData } from "@/shared/data/home";
 
 export function HeroSection() {
   return (
-    <Section className="relative overflow-hidden border-border/60 border-b">
+    <Section className="relative overflow-hidden">
       <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top,rgba(245,200,70,0.35),transparent_55%)]" />
       <div className="absolute top-16 right-30 h-64 w-64 rounded-full bg-secondary/40 blur-3xl" />
       <Container className="w-full">

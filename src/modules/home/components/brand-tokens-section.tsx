@@ -6,9 +6,7 @@ export function BrandTokensSection() {
   return (
     <Section>
       <Container className="grid gap-14">
-        <p className="text-foreground text-xs uppercase tracking-[0.2em]">
-          Sobre JP3D
-        </p>
+        <h2 className="text-xl uppercase tracking-widest">Sobre JP3D</h2>
         <h2 className="flex flex-wrap text-4xl text-foreground/40">
           <span className="mr-2">Especialistas en diseño 3D y</span>
           <span className="text-secondary">fabricación digital</span>
