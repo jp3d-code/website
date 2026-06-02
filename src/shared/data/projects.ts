@@ -6,9 +6,9 @@ export const projects: ProjectsPage = {
     {
       title: "Memoria de cálculo base de tanque para mina",
       image: images.proyectos_memoria_tanque.name,
-      description:
+      excerpt:
         "Diseño y verificación de una base metálica para tanque rectangular de combustible de 3 000 L en condiciones de operación minera, considerando cargas estáticas, sísmicas y de mantenimiento.",
-      paragraphs: [
+      content: [
         "El objetivo del proyecto fue diseñar y verificar una base metálica capaz de",
         "soportar un tanque rectangular de combustible de 3 000 L en condiciones de",
         "operación minera. Para ello se definieron las combinaciones de carga que",
@@ -23,7 +23,7 @@ export const projects: ProjectsPage = {
         "de 148 MPa (≤ 0.6 Fy), flechas de 1.4 mm (≤ L/360) y un factor de seguridad",
         "global de 1.75.",
         "Con base en los resultados se validó el espesor de la placa base de 10 mm,",
-        "el patrón de diafragmas transversales y la malla de platabandas de refuerzo,",
+        "el patrón de diafragmas transversales y la malla de platabandas de reflejo,",
         "garantizando un comportamiento elástico ante las combinaciones de servicio y",
         "excepcionales. Se recomendó un acabado de galvanizado en caliente de 100 µm y",
         "protección catódica para prolongar la vida útil a más de 20 años en ambiente",
@@ -35,9 +35,9 @@ export const projects: ProjectsPage = {
       title:
         "Planos de fabricación de escalera de acceso a poza de estación de combustible para mina",
       image: images.proyectos_memoria_escalera.name,
-      description:
+      excerpt:
         "El proyecto consistió en el diseño y elaboración de planos de fabricación para una escalera metálica modular destinada a proporcionar acceso seguro a la poza de abastecimiento de combustible en una unidad minera, cumpliendo con normativas de seguridad laboral y resistencia estructural.",
-      paragraphs: [
+      content: [
         "El encargo consistió en elaborar los planos de fabricación de una escalera metálica modular",
         "que permite el acceso seguro a la poza de abastecimiento de combustible de una unidad minera.",
         "Se definió una inclinación de 35° para cumplir con la NTP 399.010 (equivalente a OSHA 1910",
@@ -56,9 +56,9 @@ export const projects: ProjectsPage = {
     {
       title: "Memoria de cálculo soporte de transformador móvil",
       image: images.proyectos_memoria_transformador.name,
-      description:
+      excerpt:
         "Diseño y verificación de un bastidor portante para un transformador móvil de 5 MVA, considerando cargas dinámicas de transporte en rutas no pavimentadas, con énfasis en la integridad estructural y la seguridad durante el izaje y la descarga.",
-      paragraphs: [
+      content: [
         "Este estudio aborda el diseño y la verificación de un bastidor portante para un",
         "transformador móvil de 5 MVA que será transportado sobre cama baja en rutas no",
         "pavimentadas. Se definieron los casos de carga correspondientes a frenado de emergencia,",
@@ -79,9 +79,9 @@ export const projects: ProjectsPage = {
     {
       title: "Memoria de cálculo andamio colgante para puerto",
       image: images.proyectos_memoria_andamio.name,
-      description:
+      excerpt:
         "El proyecto comprende la verificación estructural de un andamio colgante de 12 m × 6 m destinado a labores de mantenimiento de defensas y tuberías en un muelle comercial, considerando cargas de trabajo, peso propio, sobrepeso por herramientas y acción simultánea de viento para zona costera expuesta.",
-      paragraphs: [
+      content: [
         "El proyecto comprende la verificación estructural de un andamio colgante",
         "de 12 m × 6 m destinado a labores de mantenimiento de defensas y tuberías",
         "en un muelle comercial. Se consideraron las cargas de trabajo de 2.0 kN/m²",

@@ -73,20 +73,21 @@ export type Testimonial = {
 export type ContentSection = {
   title: string;
   image?: string;
-  paragraphs: string[];
+  excerpt: string;
+  content: string[];
 };
 
 export type BrandPage = {
   sections: ContentSection[];
-  description: string[];
+  description: string;
   testimonial: Testimonial;
 };
 
 export type ProjectItem = {
   title: string;
   image: string;
-  paragraphs: string[];
-  description: string;
+  excerpt: string;
+  content: string[];
 };
 
 export type ProjectsPage = {
@@ -98,12 +99,13 @@ export type ProjectsPage = {
 export type ServiceItem = {
   title: string;
   image: string;
-  paragraphs: string[];
+  excerpt: string;
+  content: string[];
 };
 
 export type ServicesPage = {
   items: ServiceItem[];
-  description: string[];
+  description: string;
   testimonial: Testimonial;
 };
 
@@ -127,12 +129,13 @@ export type AboutItem = {
   title: string;
   image?: string;
   video?: string;
-  paragraphs: string[];
+  excerpt: string;
+  content: string[];
 };
 
 export type AboutPage = {
   items: AboutItem[];
-  description: string[];
+  description: string;
   testimonial: Testimonial;
 };
 

@@ -8,7 +8,6 @@ import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet";
 const navItems = [
   routes.marca,
   routes.proyectos,
-  routes.productos,
   routes.servicios,
   routes.sobreNosotros,
   routes.contacto,

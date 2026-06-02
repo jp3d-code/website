@@ -6,12 +6,9 @@ export const servicesData: ServicesPage = {
     {
       title: "INGENIERÍA",
       image: images.servicios_ingenieria.name,
-      paragraphs: [
-        "Nuestro servicio de Ingeniería abarca todo el ciclo de desarrollo:",
-        "conceptualización, modelado 3D y verificación numérica. Trabajamos con",
-        "SolidWorks y ANSYS para validar esfuerzos, vibraciones y durabilidad,",
-        "garantizando soluciones que cumplen normas internacionales como ASME,",
-        "AWS y Eurocode.",
+      excerpt:
+        "Nuestro servicio de Ingeniería abarca todo el ciclo de desarrollo: conceptualización, modelado 3D y verificación numérica. Trabajamos con SolidWorks y ANSYS para validar esfuerzos, vibraciones y durabilidad.",
+      content: [
         "Integraremos diseño mecánico, estructural y de procesos en un único flujo",
         "colaborativo. Esto reduce retrabajos y acelera la transición de la idea al",
         "plano de fabricación. Entregamos memorias de cálculo completas, planos",
@@ -25,12 +22,9 @@ export const servicesData: ServicesPage = {
     {
       title: "EDUCACIÓN",
       image: images.servicios_educacion.name,
-      paragraphs: [
-        "En Educación potenciamos el aprendizaje STEM mediante talleres",
-        "prácticos de diseño y fabricación digital. Nuestros programas incluyen",
-        "modelado 3D, impresión aditiva, corte láser y electrónica básica,",
-        "adaptados a colegios, institutos y universidades que desean incorporar",
-        "metodologías learning by making.",
+      excerpt:
+        "En Educación potenciamos el aprendizaje STEM mediante talleres prácticos de diseño y fabricación digital. Nuestros programas incluyen modelado 3D, impresión aditiva, corte láser y electrónica básica.",
+      content: [
         "Cada curso combina teoría concisa con proyectos reales: los estudiantes",
         "diseñan prototipos, fabrican sus piezas en impresoras FDM / SLA y los",
         "validan con pruebas funcionales. Esto desarrolla pensamiento crítico,",
@@ -41,11 +35,9 @@ export const servicesData: ServicesPage = {
     {
       title: "FABRICACIÓN DIGITAL",
       image: images.servicios_fabricacion_digital.name,
-      paragraphs: [
-        "Nuestro servicio de Fabricación Digital convierte modelos CAD en piezas",
-        "físicas en cuestión de horas. Combinamos impresión 3D FDM / SLA, corte láser y",
-        "CNC router para producir prototipos funcionales, utillaje y piezas finales en",
-        "plásticos técnicos, resinas de alto desempeño y aluminio.",
+      excerpt:
+        "Nuestro servicio de Fabricación Digital convierte modelos CAD en piezas físicas en cuestión de horas. Combinamos impresión 3D FDM / SLA, corte láser y CNC router para producir prototipos funcionales.",
+      content: [
         "El flujo de trabajo se gestiona íntegramente en entorno digital:",
         "optimizamos la orientación, rebanado y trayectorias de herramienta para",
         "minimizar soportes y tiempos de ciclo; luego aplicamos post-procesos",
@@ -58,16 +50,8 @@ export const servicesData: ServicesPage = {
       ],
     },
   ],
-  description: [
-    "En Servicios encontrarás un portafolio integrado que cubre Ingeniería, Fabricación",
-    "Digital y programas de Educación STEM. Acompañamos a nuestros clientes desde la",
-    "concepción de la idea hasta la entrega de piezas finales, combinando modelado 3D,",
-    "simulación avanzada y producción bajo demanda.",
-    "Operamos con herramientas de última generación y metodologías ágiles para garantizar",
-    "tiempos de ciclo cortos, alta precisión y trazabilidad completa. Así, transformamos",
-    "retos técnicos en soluciones tangibles que cumplen estándares internacionales y",
-    "generan valor inmediato.",
-  ],
+  description:
+    "En Servicios encontrarás un portafolio integrado que cubre Ingeniería, Fabricación Digital y programas de Educación STEM. Acompañamos a nuestros clientes desde la concepción de la idea hasta la entrega de piezas finales, combinando modelado 3D, simulación avanzada y producción bajo demanda. Operamos con herramientas de última generación y metodologías ágiles para garantizar tiempos de ciclo cortos, alta precisión y trazabilidad completa. Así, transformamos retos técnicos en soluciones tangibles que cumplen estándares internacionales y generan valor inmediato.",
   testimonial: {
     name: "Janio Oliver Quispe Ticona",
     role: "CEO JP3D",
