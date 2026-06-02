@@ -1,3 +1,1 @@
-export const {
-  APP_URL = 'http://localhost:3000',
-} = process.env;
+export const { APP_URL = "http://localhost:3000" } = process.env;

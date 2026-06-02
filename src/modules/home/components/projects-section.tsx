@@ -28,7 +28,7 @@ export function ProjectsSection() {
                 key={project.title}
                 title={project.title}
                 image={imageSrc(image)}
-                description={project.description}
+                description={project.excerpt}
                 links={{ demo: routes.proyectos.path }}
               />
             );
