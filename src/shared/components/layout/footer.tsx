@@ -15,23 +15,17 @@ const quickLinks = [
 export function Footer() {
   return (
     <footer className="flex items-center justify-center border-foreground/20 border-t bg-background/5 px-6 py-10">
-      <Container className="grid items-start gap-y-15 md:grid-cols-3">
-        <div className="space-y-6">
-          <Link href={routes.path} className="flex flex-col items-baseline">
-            <span className="0.5 text-4xl uppercase tracking-widest">JP3D</span>
-            <span className="text-muted-foreground leading-3.5">
-              Ingenieria y fabricacion
-            </span>
-          </Link>
-          <div className="space-y-1 text-sm">
-            <p>{contactData.email}</p>
-            <p>{contactData.phone}</p>
-            <p>{contactData.location}</p>
-          </div>
-        </div>
-        <div className="space-y-3">
+      <Container className="grid items-start gap-y-15 md:grid-cols-4">
+        <Link href={routes.path} className="flex flex-col items-baseline">
+          <span className="0.5 text-4xl uppercase tracking-widest">JP3D</span>
+          <span className="text-muted-foreground leading-3.5">
+            Ingenieria y fabricacion
+          </span>
+        </Link>
+
+        <div className="space-y-5">
           <p className="text-xs uppercase tracking-[0.25em]">Navegacion</p>
-          <ul className="space-y-2 pl-4 text-sm">
+          <ul className="space-y-4 pl-4 text-sm">
             {quickLinks.map((route) => (
               <li key={route.path}>
                 <Link href={route.path} className="">
@@ -56,7 +50,14 @@ export function Footer() {
               </LinkBtm>
             ))}
           </div>
-          <p className="text-background/50 text-xs">{contactData.copyright}</p>
+        </div>
+        <div className="space-y-3">
+          <p className="text-xs uppercase tracking-[0.25em]">Contacto</p>
+          <ul className="space-y-2 pl-2 text-sm">
+            <li>{contactData.email}</li>
+            <li>{contactData.phone}</li>
+            <li>{contactData.location}</li>
+          </ul>
         </div>
       </Container>
     </footer>
