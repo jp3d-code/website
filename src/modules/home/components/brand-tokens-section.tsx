@@ -7,17 +7,13 @@ export function BrandTokensSection() {
     <Section>
       <Container className="grid gap-14">
         <h2 className="text-xl uppercase tracking-widest">Sobre JP3D</h2>
-        <h2 className="flex flex-wrap text-4xl text-foreground/40">
-          <span className="mr-2">Especialistas en diseño 3D y</span>
-          <span className="text-secondary">fabricación digital</span>
-          <span className="mr-2">, fusionando</span>
-          <span className="text-secondary">innovación</span>
-          <span className="mr-2">,</span>
-          <span className="text-secondary">creatividad</span>
-          <span className="mr-2">,</span>
-          <span className="mr-2 text-secondary">ingeniería</span>
-          <span className="mr-2">y</span>
-          <span className="text-secondary">tecnología.</span>
+        <h2 className="text-3xl text-foreground/40 leading-tight md:text-4xl">
+          Especialistas en diseño 3D y{" "}
+          <span className="text-secondary">fabricación digital</span>,
+          fusionando <span className="text-secondary">innovación</span>,{" "}
+          <span className="text-secondary">creatividad</span>,{" "}
+          <span className="text-secondary">ingeniería</span> y{" "}
+          <span className="text-secondary">tecnología</span>.
         </h2>
         <div className="flex flex-wrap gap-4">
           <LinkBtm
@@ -31,30 +27,6 @@ export function BrandTokensSection() {
             Ver nuestros los proyectos
           </LinkBtm>
         </div>
-        {/*<div className="grid gap-3">
-          {homeData.brandTokens
-            .filter((token) => token.type === "highlight")
-            .map((token) => {
-              const image = imageByName[token.image];
-              return (
-                <div
-                  key={token.image}
-                  className="glow-sweep relative overflow-hidden rounded-2xl border border-border/60 bg-muted/40 p-4"
-                >
-                  <p className="text-muted-foreground text-xs uppercase tracking-[0.3em]">
-                    {token.value}
-                  </p>
-                  {image && (
-                    <img
-                      src={imageSrc(image)}
-                      alt={token.value}
-                      className="mt-4 h-24 w-full rounded-xl object-cover"
-                    />
-                  )}
-                </div>
-              );
-            })}
-        </div>*/}
       </Container>
     </Section>
   );
