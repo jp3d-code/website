@@ -13,13 +13,17 @@ export function MarqueeSection() {
     offset: ["start end", "end start"],
   });
 
-  const x = useTransform(scrollYProgress, [0, 1], ["0%", "-80%"]);
-  const revertX = useTransform(scrollYProgress, [0, 1], ["-80%", "0%"]);
+  const x = useTransform(scrollYProgress, [0, 1], ["0%", "-90%"]);
+  const revertX = useTransform(scrollYProgress, [0, 1], ["-90%", "0%"]);
 
-  const marqueeWords = [...homeData.movingWords, ...homeData.movingWords];
+  const marqueeWords = [
+    homeData.movingWords[homeData.movingWords.length - 1],
+    ...homeData.movingWords,
+    homeData.movingWords[0],
+  ];
 
   return (
-    <Section ref={ref} className="py-16">
+    <Section ref={ref} className="bg-card">
       <div className="mask-edge mx-auto flex w-full max-w-6xl flex-col gap-16 overflow-hidden px-4">
         <motion.div
           className="flex gap-8 font-medium text-3xl text-foreground uppercase tracking-[0.2em] md:text-7xl"

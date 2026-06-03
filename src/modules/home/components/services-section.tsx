@@ -5,7 +5,7 @@ import { homeData } from "@/shared/data/home";
 
 export function ServicesSection() {
   return (
-    <Section className="bg-muted/30">
+    <Section className="bg-card">
       <Container>
         <div className="flex w-full items-center justify-between">
           <h2 className="text-xl uppercase tracking-widest">Servicios</h2>

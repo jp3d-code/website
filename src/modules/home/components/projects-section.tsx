@@ -1,17 +1,19 @@
 import Link from "next/link";
-import { ProjectCard } from "@/components/uitripled/project-card-shadcnui";
+import { ProjectCard } from "@/shared/components/ui/project-card-shadcnui";
 import { Container, Section } from "@/shared/components/ui/section";
 import { routes } from "@/shared/config/routes";
 import { imageByName, imageSrc } from "@/shared/data/images";
 import { projects } from "@/shared/data/projects";
 
 export function ProjectsSection() {
+  const recentProjects = projects.items.slice(0, 3);
+
   return (
     <Section>
       <Container>
         <div className="flex w-full items-center justify-between">
           <h2 className="text-xl uppercase tracking-widest">
-            Nuestros proyectos
+            Nuestros ultimos proyectos
           </h2>
           <Link
             href={routes.proyectos.path}
@@ -21,7 +23,7 @@ export function ProjectsSection() {
           </Link>
         </div>
         <div className="mt-8 grid gap-6 sm:grid-cols-2 md:grid-cols-3">
-          {projects.items.map((project) => {
+          {recentProjects.map((project) => {
             const image = imageByName[project.image];
             return (
               <ProjectCard

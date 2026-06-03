@@ -4,7 +4,7 @@ import { homeData } from "@/shared/data/home";
 
 export function HeroSection() {
   return (
-    <Section className="relative overflow-hidden">
+    <Section className="relative -z-20 overflow-hidden bg-card">
       <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top,rgba(245,200,70,0.35),transparent_55%)]" />
       <div className="absolute top-16 right-30 h-64 w-64 rounded-full bg-secondary/40 blur-3xl" />
       <Container className="w-full">
@@ -13,7 +13,7 @@ export function HeroSection() {
             <p className="text-muted-foreground text-xs uppercase tracking-[0.35em]">
               {homeData.banner.subtitle}
             </p>
-            <h1 className="font-semibold text-4xl text-shadow-soft md:text-6xl">
+            <h1 className="font-semibold text-6xl text-shadow-soft">
               {homeData.banner.title}
             </h1>
             <p className="max-w-xl text-base text-muted-foreground md:text-lg">
