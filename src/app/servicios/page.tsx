@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Title from "@/modules/servicios/components/title";
+import ServicesPage from "@/modules/servicios/components/services-page";
 import { routes } from "@/shared/config/routes";
 
 export const metadata: Metadata = {
@@ -7,5 +7,5 @@ export const metadata: Metadata = {
 };
 
 export default function ServiciosPage() {
-  return <Title />;
+  return <ServicesPage />;
 }

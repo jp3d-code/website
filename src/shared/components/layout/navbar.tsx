@@ -111,7 +111,7 @@ function HeaderMobile() {
 
 export function Navbar() {
   return (
-    <header className="sticky top-0 z-40 w-full border-border/60 border-b bg-background/80 backdrop-blur">
+    <header className="sticky top-0 z-40 w-full border-border/60 border-b bg-background/70 backdrop-blur">
       <HeaderDesktop />
       <HeaderMobile />
     </header>

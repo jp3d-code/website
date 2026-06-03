@@ -1,5 +1,6 @@
 @import "tw-animate-css";
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
 /*@custom-variant dark (&:is(.dark *));*/
 
@@ -184,6 +185,10 @@
   html {
     @apply font-sans;
   }
+}
+
+.paragraph {
+  @apply prose font-normal text-muted-foreground prose-headings:uppercase prose-headings:tracking-widest w-full max-w-none prose-blockquote:border-primary/40 prose-hr:border-border prose-headings:text-xl prose-a:text-primary prose-blockquote:text-secondary/80 prose-h2:text-3xl prose-h3:text-2xl prose-headings:text-secondary/90 prose-strong:text-secondary prose-li:marker:text-primary;
 }
 
 @keyframes float-slow {

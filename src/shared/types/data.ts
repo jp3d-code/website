@@ -100,7 +100,7 @@ export type ServiceItem = {
   title: string;
   image: string;
   excerpt: string;
-  content: string[];
+  content: string;
 };
 
 export type ServicesPage = {
