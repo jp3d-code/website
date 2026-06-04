@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "motion/react";
+import { motion, useScroll, useSpring, useTransform } from "motion/react";
 import { useRef } from "react";
 import { Section } from "@/shared/components/ui/section";
 import { homeData } from "@/shared/data/home";
@@ -13,8 +13,20 @@ export function MarqueeSection() {
     offset: ["start end", "end start"],
   });
 
-  const x = useTransform(scrollYProgress, [0, 1], ["0%", "-90%"]);
-  const revertX = useTransform(scrollYProgress, [0, 1], ["-90%", "0%"]);
+  const rawX = useTransform(scrollYProgress, [0, 1], ["0%", "-90%"]);
+  const rawRevertX = useTransform(scrollYProgress, [0, 1], ["-90%", "0%"]);
+
+  const x = useSpring(rawX, {
+    stiffness: 50,
+    damping: 20,
+    mass: 0.5,
+  });
+
+  const revertX = useSpring(rawRevertX, {
+    stiffness: 50,
+    damping: 20,
+    mass: 0.5,
+  });
 
   const marqueeWords = [
     homeData.movingWords[homeData.movingWords.length - 1],
@@ -24,7 +36,7 @@ export function MarqueeSection() {
 
   return (
     <Section ref={ref} className="bg-card">
-      <div className="mask-edge mx-auto flex w-full max-w-6xl flex-col gap-16 overflow-hidden px-4">
+      <div className="mask-edge mx-auto flex w-full flex-col gap-16 overflow-hidden px-4">
         <motion.div
           className="flex gap-8 font-medium text-3xl text-foreground uppercase tracking-[0.2em] md:text-7xl"
           style={{ x }}
