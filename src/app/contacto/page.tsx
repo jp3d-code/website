@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Title from "@/modules/contacto/components/title";
+import ContactPage from "@/modules/contacto/components/contact-page";
 import { routes } from "@/shared/config/routes";
 
 export const metadata: Metadata = {
@@ -7,5 +7,5 @@ export const metadata: Metadata = {
 };
 
 export default function ContactoPage() {
-  return <Title />;
+  return <ContactPage />;
 }
