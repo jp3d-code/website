@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
-import Title from "@/modules/marca/components/title";
+import { Us } from "@/modules/marca/components/us";
+import { OurValues } from "@/modules/marca/components/values";
+import { VisionMission } from "@/modules/marca/components/vision-mission";
 import { routes } from "@/shared/config/routes";
 
 export const metadata: Metadata = {
@@ -7,5 +9,11 @@ export const metadata: Metadata = {
 };
 
 export default function MarcaPage() {
-  return <Title />;
+  return (
+    <>
+      <Us />
+      <VisionMission />
+      <OurValues />
+    </>
+  );
 }
