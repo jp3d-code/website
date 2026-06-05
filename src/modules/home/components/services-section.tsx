@@ -21,7 +21,7 @@ export function ServicesSection() {
             <Link
               key={service.title}
               href={`${routes.servicios.path}${service.hash}`}
-              className="inset-shadow-md rounded-3xl border border-border/60 bg-background p-6 shadow-sm shadow-white transition hover:-translate-y-1 hover:shadow-zinc-200"
+              className="inset-shadow-md rounded-lg border border-border/60 bg-background p-6 shadow-sm shadow-white transition hover:-translate-y-1 hover:shadow-zinc-200"
             >
               <p className="text-muted-foreground text-xs uppercase tracking-widest">
                 {service.number}

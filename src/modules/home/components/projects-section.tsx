@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ProjectCard } from "@/shared/components/ui/project-card-shadcnui";
+import { ProjectCard } from "@/shared/components/ui/project-card";
 import { Container, Section } from "@/shared/components/ui/section";
 import { routes } from "@/shared/config/routes";
 import { imageByName, imageSrc } from "@/shared/data/images";

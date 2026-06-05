@@ -1,29 +1,36 @@
+import { marked } from "marked";
 import { imageByName, imageSrc } from "@/shared/data/images";
 import { projects } from "@/shared/data/projects";
+
+marked.setOptions({});
 
 export default function ProjectsPage() {
   return (
     <div className="mx-auto w-full max-w-6xl px-4 py-16">
       <div className="grid gap-10 md:grid-cols-[1.2fr_0.8fr]">
-        <div className="space-y-10">
+        <div className="space-y-16">
           {projects.items.map((project) => {
             const image = imageByName[project.image];
+            const htmlContent = marked.parse(project.content) as string;
             return (
               <section key={project.title} className="space-y-4">
-                <h2 className="font-semibold text-xl">{project.title}</h2>
+                <h2 className="text-3xl uppercase tracking-widest md:text-4xl">
+                  {project.title}
+                </h2>
                 {image && (
                   <img
                     src={imageSrc(image)}
                     alt={project.title}
-                    className="h-56 w-full rounded-3xl object-cover"
+                    className="aspect-video w-full rounded-lg object-cover"
                   />
                 )}
-                <div className="space-y-3 text-muted-foreground text-sm">
-                  <p>{project.excerpt}</p>
-                  {project.content.map((text, index) => (
-                    <p key={`${project.title}-${index}`}>{text}</p>
-                  ))}
-                </div>
+                <p className="text-muted-foreground text-sm">
+                  {project.excerpt}
+                </p>
+                <div
+                  className="paragraph"
+                  dangerouslySetInnerHTML={{ __html: htmlContent }}
+                />
               </section>
             );
           })}

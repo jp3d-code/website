@@ -1,4 +1,4 @@
-import { JetBrains_Mono, Merriweather, Outfit } from "next/font/google";
+import { Aleo, JetBrains_Mono, Merriweather } from "next/font/google";
 import "./globals.css";
 import type { Metadata } from "next";
 import { Footer } from "@/shared/components/layout/footer";
@@ -8,7 +8,7 @@ import metadataConfig from "@/shared/config/metadata";
 
 export const metadata: Metadata = metadataConfig;
 
-const fontSans = Outfit({
+const fontSans = Aleo({
   subsets: ["latin"],
   variable: "--font-sans",
 });

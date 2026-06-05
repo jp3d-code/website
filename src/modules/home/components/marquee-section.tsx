@@ -4,6 +4,7 @@ import { motion, useScroll, useSpring, useTransform } from "motion/react";
 import { useRef } from "react";
 import { Section } from "@/shared/components/ui/section";
 import { homeData } from "@/shared/data/home";
+import { cn } from "@/shared/lib/utils";
 
 export function MarqueeSection() {
   const ref = useRef<HTMLElement>(null);
@@ -17,15 +18,15 @@ export function MarqueeSection() {
   const rawRevertX = useTransform(scrollYProgress, [0, 1], ["-90%", "0%"]);
 
   const x = useSpring(rawX, {
-    stiffness: 50,
+    stiffness: 20,
     damping: 20,
-    mass: 0.5,
+    mass: 0.6,
   });
 
   const revertX = useSpring(rawRevertX, {
-    stiffness: 50,
+    stiffness: 20,
     damping: 20,
-    mass: 0.5,
+    mass: 0.6,
   });
 
   const marqueeWords = [
@@ -42,7 +43,12 @@ export function MarqueeSection() {
           style={{ x }}
         >
           {marqueeWords.map((word, index) => (
-            <span key={`${word}-${index}`} className="shrink-0">
+            <span
+              key={`${word}-${index}`}
+              className={cn("shrink-0", {
+                "text-primary": word === "INGENIERÍA",
+              })}
+            >
               {word}
             </span>
           ))}
@@ -53,7 +59,12 @@ export function MarqueeSection() {
           style={{ x: revertX }}
         >
           {marqueeWords.map((word, index) => (
-            <span key={`${word}-${index}`} className="shrink-0">
+            <span
+              key={`${word}-${index}`}
+              className={cn("shrink-0", {
+                "text-primary": word === "FABRICACIÓN",
+              })}
+            >
               {word}
             </span>
           ))}

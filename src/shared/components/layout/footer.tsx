@@ -14,7 +14,7 @@ const quickLinks = [
 
 export function Footer() {
   return (
-    <footer className="flex items-center justify-center border-foreground/20 border-t bg-background/5 px-6 py-10">
+    <footer className="flex items-center justify-center border-foreground/20 border-t bg-background/5 px-6 py-20">
       <Container className="grid items-start gap-y-15 md:grid-cols-4">
         <Link href={routes.path} className="flex flex-col items-baseline">
           <span className="0.5 text-4xl uppercase tracking-widest">JP3D</span>
