@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Title from "@/modules/sobre-nosotros/components/title";
+import AboutPage from "@/modules/sobre-nosotros/components/about-page";
 import { routes } from "@/shared/config/routes";
 
 export const metadata: Metadata = {
@@ -7,5 +7,5 @@ export const metadata: Metadata = {
 };
 
 export default function SobreNosotrosPage() {
-  return <Title />;
+  return <AboutPage />;
 }

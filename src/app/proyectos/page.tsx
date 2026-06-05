@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Title from "@/modules/proyectos/components/title";
+import ProjectsPage from "@/modules/proyectos/components/projects-page";
 import { routes } from "@/shared/config/routes";
 
 export const metadata: Metadata = {
@@ -7,5 +7,5 @@ export const metadata: Metadata = {
 };
 
 export default function ProyectoPage() {
-  return <Title />;
+  return <ProjectsPage />;
 }
