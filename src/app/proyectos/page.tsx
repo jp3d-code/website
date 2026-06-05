@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import ProjectsPage from "@/modules/proyectos/components/projects-page";
+import { Hero } from "@/modules/proyectos/components/hero";
+import { ProjectsGrid } from "@/modules/proyectos/components/projects-grid";
 import { routes } from "@/shared/config/routes";
 
 export const metadata: Metadata = {
@@ -7,5 +8,10 @@ export const metadata: Metadata = {
 };
 
 export default function ProyectoPage() {
-  return <ProjectsPage />;
+  return (
+    <>
+      <Hero />
+      <ProjectsGrid />
+    </>
+  );
 }

@@ -87,7 +87,7 @@ export type ProjectItem = {
   title: string;
   image: string;
   excerpt: string;
-  content: string[];
+  content: string;
 };
 
 export type ProjectsPage = {

@@ -87,7 +87,7 @@ export const homeData: HomeData = {
         "Prototipado y producción bajo demanda con impresión 3D, corte láser y fresado CNC.",
     },
   ],
-  movingWords: ["INGENIERÍA", "EDUCACIÓN", "FABRICACIÓN", "DIGITAL"],
+  movingWords: ["EDUCACIÓN", "INGENIERÍA", "FABRICACIÓN", "DIGITAL"],
   sponsors: [
     {
       name: "UNAP",

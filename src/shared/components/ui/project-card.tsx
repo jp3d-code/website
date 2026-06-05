@@ -43,7 +43,7 @@ export function ProjectCard({
       transition={{ duration: 0.4 }}
       className={cn("w-full max-w-100", className)}
     >
-      <Card className="group relative h-full overflow-hidden rounded-2xl border-border/50 bg-card pt-0 backdrop-blur-sm transition-all duration-300 hover:border-primary/50 hover:shadow-primary/10 hover:shadow-xl">
+      <Card className="group relative h-full overflow-hidden rounded-lg border-border/50 bg-card pt-0 backdrop-blur-sm transition-all duration-300 hover:border-primary/50 hover:shadow-primary/10 hover:shadow-xl">
         <div className="relative aspect-video overflow-hidden">
           <motion.img
             src={image}
