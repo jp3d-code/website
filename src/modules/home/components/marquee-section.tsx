@@ -20,13 +20,13 @@ export function MarqueeSection() {
   const x = useSpring(rawX, {
     stiffness: 20,
     damping: 20,
-    mass: 0.6,
+    mass: 1,
   });
 
   const revertX = useSpring(rawRevertX, {
     stiffness: 20,
     damping: 20,
-    mass: 0.6,
+    mass: 1,
   });
 
   const marqueeWords = [
@@ -39,7 +39,7 @@ export function MarqueeSection() {
     <Section ref={ref} className="bg-card">
       <div className="mask-edge mx-auto flex w-full flex-col gap-16 overflow-hidden px-4">
         <motion.div
-          className="flex gap-8 font-medium text-3xl text-foreground uppercase tracking-[0.2em] md:text-7xl"
+          className="flex gap-10 font-medium text-3xl text-foreground uppercase tracking-[0.2em] md:text-7xl"
           style={{ x }}
         >
           {marqueeWords.map((word, index) => (
@@ -55,7 +55,7 @@ export function MarqueeSection() {
         </motion.div>
 
         <motion.div
-          className="flex gap-8 font-medium text-3xl text-foreground uppercase tracking-[0.2em] md:text-7xl"
+          className="flex gap-10 font-medium text-3xl text-foreground uppercase tracking-[0.2em] md:text-7xl"
           style={{ x: revertX }}
         >
           {marqueeWords.map((word, index) => (

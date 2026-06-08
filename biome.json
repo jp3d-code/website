@@ -13,7 +13,10 @@
       "!.next",
       "!dist",
       "!build",
-      "!legacy-page"
+      "!legacy-page",
+      "!src/payload-types.ts",
+      "!src/app/(payload)",
+      "!src/migrations"
     ]
   },
   "css": {
