@@ -71,6 +71,12 @@ export interface Config {
     media: Media;
     tags: Tag;
     projects: Project;
+    services: Service;
+    videos: Video;
+    values: Value;
+    timeline: Timeline;
+    'social-media': SocialMedia;
+    locations: Location;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -82,6 +88,12 @@ export interface Config {
     media: MediaSelect<false> | MediaSelect<true>;
     tags: TagsSelect<false> | TagsSelect<true>;
     projects: ProjectsSelect<false> | ProjectsSelect<true>;
+    services: ServicesSelect<false> | ServicesSelect<true>;
+    videos: VideosSelect<false> | VideosSelect<true>;
+    values: ValuesSelect<false> | ValuesSelect<true>;
+    timeline: TimelineSelect<false> | TimelineSelect<true>;
+    'social-media': SocialMediaSelect<false> | SocialMediaSelect<true>;
+    locations: LocationsSelect<false> | LocationsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -91,8 +103,12 @@ export interface Config {
     defaultIDType: number;
   };
   fallbackLocale: null;
-  globals: {};
-  globalsSelect: {};
+  globals: {
+    contact: Contact;
+  };
+  globalsSelect: {
+    contact: ContactSelect<false> | ContactSelect<true>;
+  };
   locale: null;
   widgets: {
     collections: CollectionsWidget;
@@ -182,19 +198,130 @@ export interface Tag {
  */
 export interface Project {
   id: number;
-  name: string;
+  title: string;
   slug: string;
-  sector: string;
-  serviceArea: string;
-  status: string;
-  country: string;
-  client: string;
-  location: string;
-  year: string;
-  modality: string;
-  summary: string;
   image: number | Media;
-  tags?: (number | Tag)[] | null;
+  excerpt: string;
+  content: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  order: number;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "services".
+ */
+export interface Service {
+  id: number;
+  title: string;
+  image: number | Media;
+  excerpt: string;
+  content: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  order: number;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "videos".
+ */
+export interface Video {
+  id: number;
+  title: string;
+  url: string;
+  platform: 'tiktok' | 'youtube' | 'instagram' | 'other';
+  excerpt: string;
+  content: {
+    text: string;
+    id?: string | null;
+  }[];
+  order: number;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "values".
+ */
+export interface Value {
+  id: number;
+  title: string;
+  description: string;
+  /**
+   * Lucide icon name (e.g. 'Shield', 'Lightbulb', 'Leaf', 'Users')
+   */
+  icon?: string | null;
+  order: number;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "timeline".
+ */
+export interface Timeline {
+  id: number;
+  year: string;
+  title: string;
+  description: string;
+  order: number;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "social-media".
+ */
+export interface SocialMedia {
+  id: number;
+  label: string;
+  url: string;
+  /**
+   * Lucide icon name (e.g. 'Linkedin', 'Instagram', 'Tiktok', 'Facebook')
+   */
+  icon?: ('Linkedin' | 'Instagram' | 'Tiktok' | 'Facebook' | 'Twitter') | null;
+  order: number;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "locations".
+ */
+export interface Location {
+  id: number;
+  name: string;
+  address: string;
+  lat: number;
+  lng: number;
   updatedAt: string;
   createdAt: string;
 }
@@ -237,6 +364,30 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'projects';
         value: number | Project;
+      } | null)
+    | ({
+        relationTo: 'services';
+        value: number | Service;
+      } | null)
+    | ({
+        relationTo: 'videos';
+        value: number | Video;
+      } | null)
+    | ({
+        relationTo: 'values';
+        value: number | Value;
+      } | null)
+    | ({
+        relationTo: 'timeline';
+        value: number | Timeline;
+      } | null)
+    | ({
+        relationTo: 'social-media';
+        value: number | SocialMedia;
+      } | null)
+    | ({
+        relationTo: 'locations';
+        value: number | Location;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -335,19 +486,92 @@ export interface TagsSelect<T extends boolean = true> {
  * via the `definition` "projects_select".
  */
 export interface ProjectsSelect<T extends boolean = true> {
-  name?: T;
+  title?: T;
   slug?: T;
-  sector?: T;
-  serviceArea?: T;
-  status?: T;
-  country?: T;
-  client?: T;
-  location?: T;
-  year?: T;
-  modality?: T;
-  summary?: T;
   image?: T;
-  tags?: T;
+  excerpt?: T;
+  content?: T;
+  order?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "services_select".
+ */
+export interface ServicesSelect<T extends boolean = true> {
+  title?: T;
+  image?: T;
+  excerpt?: T;
+  content?: T;
+  order?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "videos_select".
+ */
+export interface VideosSelect<T extends boolean = true> {
+  title?: T;
+  url?: T;
+  platform?: T;
+  excerpt?: T;
+  content?:
+    | T
+    | {
+        text?: T;
+        id?: T;
+      };
+  order?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "values_select".
+ */
+export interface ValuesSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  icon?: T;
+  order?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "timeline_select".
+ */
+export interface TimelineSelect<T extends boolean = true> {
+  year?: T;
+  title?: T;
+  description?: T;
+  order?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "social-media_select".
+ */
+export interface SocialMediaSelect<T extends boolean = true> {
+  label?: T;
+  url?: T;
+  icon?: T;
+  order?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "locations_select".
+ */
+export interface LocationsSelect<T extends boolean = true> {
+  name?: T;
+  address?: T;
+  lat?: T;
+  lng?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -390,6 +614,38 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   batch?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contact".
+ */
+export interface Contact {
+  id: number;
+  smallTitle: string;
+  bigTitle: string;
+  locations?: (number | null) | Location;
+  phone: string;
+  email: string;
+  socials?: (number | SocialMedia)[] | null;
+  copyright: string;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contact_select".
+ */
+export interface ContactSelect<T extends boolean = true> {
+  smallTitle?: T;
+  bigTitle?: T;
+  locations?: T;
+  phone?: T;
+  email?: T;
+  socials?: T;
+  copyright?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

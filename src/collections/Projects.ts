@@ -14,8 +14,8 @@ export const Projects: CollectionConfig = {
     },
   },
   admin: {
-    useAsTitle: "name",
-    defaultColumns: ["name", "sector", "serviceArea", "status", "year"],
+    useAsTitle: "title",
+    defaultColumns: ["title", "order"],
     group: {
       en: "Content",
       es: "Contenido",
@@ -29,18 +29,12 @@ export const Projects: CollectionConfig = {
   },
   fields: [
     {
-      name: "name",
+      name: "title",
       type: "text",
       required: true,
       label: {
-        en: "Name",
-        es: "Nombre",
-      },
-      admin: {
-        placeholder: {
-          en: "Enter project name",
-          es: "Ingresa el nombre del proyecto",
-        },
+        en: "Title",
+        es: "Título",
       },
     },
     {
@@ -59,141 +53,6 @@ export const Projects: CollectionConfig = {
       },
     },
     {
-      name: "sector",
-      type: "text",
-      required: true,
-      label: {
-        en: "Sector",
-        es: "Sector",
-      },
-      admin: {
-        placeholder: {
-          en: "Enter sector",
-          es: "Ingresa el sector",
-        },
-      },
-    },
-    {
-      name: "serviceArea",
-      label: {
-        en: "Service Area",
-        es: "Área de servicio",
-      },
-      type: "text",
-      required: true,
-      admin: {
-        placeholder: {
-          en: "Enter service area",
-          es: "Ingresa el área de servicio",
-        },
-      },
-    },
-    {
-      name: "status",
-      type: "text",
-      required: true,
-      label: {
-        en: "Status",
-        es: "Estado",
-      },
-      admin: {
-        placeholder: {
-          en: "Enter status",
-          es: "Ingresa el estado",
-        },
-      },
-    },
-    {
-      name: "country",
-      type: "text",
-      required: true,
-      label: {
-        en: "Country",
-        es: "País",
-      },
-      admin: {
-        placeholder: {
-          en: "Enter country",
-          es: "Ingresa el país",
-        },
-      },
-    },
-    {
-      name: "client",
-      type: "text",
-      required: true,
-      label: {
-        en: "Client",
-        es: "Cliente",
-      },
-      admin: {
-        placeholder: {
-          en: "Enter client name",
-          es: "Ingresa el nombre del cliente",
-        },
-      },
-    },
-    {
-      name: "location",
-      type: "text",
-      required: true,
-      label: {
-        en: "Location",
-        es: "Ubicación",
-      },
-      admin: {
-        placeholder: {
-          en: "Enter location",
-          es: "Ingresa la ubicación",
-        },
-      },
-    },
-    {
-      name: "year",
-      type: "text",
-      required: true,
-      label: {
-        en: "Year",
-        es: "Año",
-      },
-      admin: {
-        placeholder: {
-          en: "Enter year",
-          es: "Ingresa el año",
-        },
-      },
-    },
-    {
-      name: "modality",
-      type: "text",
-      required: true,
-      label: {
-        en: "Modality",
-        es: "Modalidad",
-      },
-      admin: {
-        placeholder: {
-          en: "Enter modality",
-          es: "Ingresa la modalidad",
-        },
-      },
-    },
-    {
-      name: "summary",
-      type: "textarea",
-      required: true,
-      label: {
-        en: "Summary",
-        es: "Resumen",
-      },
-      admin: {
-        placeholder: {
-          en: "Enter project summary",
-          es: "Ingresa el resumen del proyecto",
-        },
-      },
-    },
-    {
       name: "image",
       type: "upload",
       relationTo: "media",
@@ -204,23 +63,44 @@ export const Projects: CollectionConfig = {
       },
     },
     {
-      name: "tags",
-      type: "relationship",
-      relationTo: "tags",
-      hasMany: true,
+      name: "excerpt",
+      type: "textarea",
+      required: true,
       label: {
-        en: "Tags",
-        es: "Etiquetas",
+        en: "Excerpt",
+        es: "Extracto",
+      },
+    },
+    {
+      name: "content",
+      type: "richText",
+      required: true,
+      label: {
+        en: "Content",
+        es: "Contenido",
+      },
+    },
+    {
+      name: "order",
+      type: "number",
+      required: true,
+      defaultValue: 0,
+      label: {
+        en: "Order",
+        es: "Orden",
+      },
+      admin: {
+        position: "sidebar",
       },
     },
   ],
   hooks: {
     beforeValidate: [
       ({ data }) => {
-        if (data?.name && !data?.slug) {
+        if (data?.title && !data?.slug) {
           return {
             ...data,
-            slug: slugify(data.name),
+            slug: slugify(data.title),
           };
         }
 

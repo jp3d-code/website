@@ -6,10 +6,17 @@ import { en } from "@payloadcms/translations/languages/en";
 import { es } from "@payloadcms/translations/languages/es";
 import { buildConfig } from "payload";
 import sharp from "sharp";
+import { Locations } from "./collections/Locations";
 import { Media } from "./collections/Media";
 import { Projects } from "./collections/Projects";
+import { Services } from "./collections/Services";
+import { SocialMedia } from "./collections/SocialMedia";
 import { Tags } from "./collections/Tags";
+import { Timeline } from "./collections/Timeline";
 import { Users } from "./collections/Users";
+import { Values } from "./collections/Values";
+import { Videos } from "./collections/Videos";
+import { Contact } from "./globals/Contact";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -21,7 +28,19 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, Tags, Projects],
+  collections: [
+    Users,
+    Media,
+    Tags,
+    Projects,
+    Services,
+    Videos,
+    Values,
+    Timeline,
+    SocialMedia,
+    Locations,
+  ],
+  globals: [Contact],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || "",
   typescript: {
