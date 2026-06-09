@@ -1,9 +1,16 @@
+import configPromise from "@payload-config";
 import Link from "next/link";
+import { getPayload } from "payload";
 import { Container, Section } from "@/shared/components/ui/section";
 import { routes } from "@/shared/config/routes";
-import { homeData } from "@/shared/data/home";
 
-export function ServicesSection() {
+export async function ServicesSection() {
+  const payload = await getPayload({ config: configPromise });
+  const { docs: services } = await payload.find({
+    collection: "services",
+    sort: "order",
+  });
+
   return (
     <Section className="bg-card">
       <Container>
@@ -17,21 +24,24 @@ export function ServicesSection() {
           </Link>
         </div>
         <div className="mt-8 grid gap-6 md:grid-cols-3">
-          {homeData.services.map((service) => (
-            <Link
-              key={service.title}
-              href={`${routes.servicios.path}${service.hash}`}
-              className="inset-shadow-md rounded-lg border border-border/60 bg-background p-6 shadow-sm shadow-white transition hover:-translate-y-1 hover:shadow-zinc-200"
-            >
-              <p className="text-muted-foreground text-xs uppercase tracking-widest">
-                {service.number}
-              </p>
-              <h3 className="mt-3 font-semibold text-lg">{service.title}</h3>
-              <p className="mt-3 text-muted-foreground text-sm">
-                {service.description}
-              </p>
-            </Link>
-          ))}
+          {services.map((service, index) => {
+            const serviceNumber = (index + 1).toString().padStart(3, "0");
+            return (
+              <Link
+                key={service.id}
+                href={routes.servicios.path}
+                className="inset-shadow-md rounded-lg border border-border/60 bg-background p-6 shadow-sm shadow-white transition hover:-translate-y-1 hover:shadow-zinc-200"
+              >
+                <p className="text-muted-foreground text-xs uppercase tracking-widest">
+                  {serviceNumber}
+                </p>
+                <h3 className="mt-3 font-semibold text-lg">{service.title}</h3>
+                <p className="mt-3 text-muted-foreground text-sm">
+                  {service.excerpt}
+                </p>
+              </Link>
+            );
+          })}
         </div>
       </Container>
     </Section>

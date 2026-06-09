@@ -1,10 +1,15 @@
+import configPromise from "@payload-config";
 import Link from "next/link";
+import { getPayload } from "payload";
 import { Container, Section } from "@/shared/components/ui/section";
 import { routes } from "@/shared/config/routes";
-import { aboutData } from "@/shared/data/about-us";
 
-export function VideosSection() {
-  const videoCards = aboutData.items.filter((item) => item.video);
+export async function VideosSection() {
+  const payload = await getPayload({ config: configPromise });
+  const { docs: videos } = await payload.find({
+    collection: "videos",
+    sort: "order",
+  });
 
   return (
     <Section className="">
@@ -18,18 +23,19 @@ export function VideosSection() {
             Ir a la historia
           </Link>
         </div>
+
         <div className="mt-8 grid gap-6 md:grid-cols-3">
-          {videoCards.map((item) => (
+          {videos.map((video) => (
             <Link
-              key={item.title}
-              href={item.video ?? "#"}
+              key={video.id}
+              href={video.url}
               target="_blank"
               className="rounded-2xl border border-border bg-card p-5 backdrop-blur"
             >
               <p className="text-xs uppercase tracking-widest">Video</p>
-              <h3 className="mt-3 font-semibold text-lg">{item.title}</h3>
+              <h3 className="mt-3 font-semibold text-lg">{video.title}</h3>
               <p className="mt-3 line-clamp-3 text-muted-foreground text-sm">
-                {item.excerpt}
+                {video.excerpt}
               </p>
             </Link>
           ))}

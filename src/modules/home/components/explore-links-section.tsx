@@ -1,16 +1,13 @@
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { Container, Section } from "@/shared/components/ui/section";
-import { homeData } from "@/shared/data/home";
+import { routes } from "@/shared/config/routes";
 
-const toAppLink = (url: string) => {
-  if (url.startsWith("/")) return url;
-  if (url.endsWith(".html")) {
-    const clean = url.replace("./", "").replace(".html", "");
-    return clean === "index" ? "/" : `/${clean}`;
-  }
-  return url;
-};
+const exploreLinks = [
+  { title: "NOSOTROS", href: routes.sobreNosotros.path },
+  { title: "PROYECTOS", href: routes.proyectos.path },
+  { title: "CONTACTO", href: routes.contacto.path },
+];
 
 export function ExploreLinksSection() {
   return (
@@ -20,10 +17,10 @@ export function ExploreLinksSection() {
           Sigue explorando
         </h2>
         <div className="grid gap-2">
-          {homeData.exploreLinks.map((item) => (
+          {exploreLinks.map((item) => (
             <Link
               key={item.title}
-              href={toAppLink(item.url)}
+              href={item.href}
               className="group flex items-center gap-2 py-1 text-muted-foreground transition-all duration-150 hover:translate-x-2 hover:text-foreground"
             >
               <h3 className="font-medium text-lg">{item.title}</h3>

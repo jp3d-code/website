@@ -6,7 +6,7 @@ import { ProjectsSection } from "@/modules/home/components/projects-section";
 import { ServicesSection } from "@/modules/home/components/services-section";
 import { VideosSection } from "@/modules/home/components/videos-section";
 
-export default function Home() {
+export default async function Home() {
   return (
     <>
       <HeroSection />

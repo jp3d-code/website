@@ -1,8 +1,21 @@
+import configPromise from "@payload-config";
+import { getPayload } from "payload";
+import type { Location, SocialMedia } from "@/payload-types";
 import { LinkBtm } from "@/shared/components/ui/link";
 import { Container, Section } from "@/shared/components/ui/section";
-import { homeData } from "@/shared/data/home";
+import { getCollections } from "@/shared/lib/utils";
 
-export function HeroSection() {
+export async function HeroSection() {
+  const payload = await getPayload({ config: configPromise });
+  const contact = await payload.findGlobal({
+    slug: "contact",
+    depth: 1,
+  });
+
+  const locations = getCollections<Location>(contact.locations);
+  const firstLocation = locations[0];
+  const socials = getCollections<SocialMedia>(contact.socials);
+
   return (
     <Section className="relative -z-20 overflow-hidden bg-card">
       <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top,rgba(245,200,70,0.35),transparent_55%)]" />
@@ -11,27 +24,28 @@ export function HeroSection() {
         <div className="w-full space-y-10">
           <div className="flex flex-col items-start gap-3">
             <p className="text-muted-foreground text-xs uppercase tracking-[0.35em]">
-              {homeData.banner.subtitle}
+              Tecnología
             </p>
-            <h1 className="font-semibold text-6xl text-shadow-soft">
-              {homeData.banner.title}
-            </h1>
+            <h1 className="font-semibold text-6xl text-shadow-soft">JP 3D</h1>
             <p className="max-w-xl text-base text-muted-foreground md:text-lg">
-              {homeData.banner.description}
+              Ingeniería, Modelado 3D, Fabricación 3D, Máquinas, Insumos y
+              Repuestos.
             </p>
           </div>
           <div className="flex flex-wrap gap-6 text-muted-foreground text-sm">
-            <div>
-              <p className="text-foreground text-xs uppercase tracking-[0.2em]">
-                Ubicacion
-              </p>
-              <p>{homeData.banner.location}</p>
-            </div>
+            {firstLocation && (
+              <div>
+                <p className="text-foreground text-xs uppercase tracking-[0.2em]">
+                  Ubicacion
+                </p>
+                <p>{firstLocation.address}</p>
+              </div>
+            )}
             <div>
               <p className="text-foreground text-xs uppercase tracking-[0.2em]">
                 Contacto
               </p>
-              <p>{homeData.banner.phone}</p>
+              <p>{contact.phone}</p>
             </div>
           </div>
           <div className="flex flex-col items-start gap-3">
@@ -39,9 +53,9 @@ export function HeroSection() {
               Redes sociales
             </p>
             <div className="flex flex-wrap gap-2">
-              {homeData.banner.socials.map((social) => (
+              {socials.map((social) => (
                 <LinkBtm
-                  key={social.url}
+                  key={social.id}
                   href={social.url}
                   variant="outline"
                   target="_blank"

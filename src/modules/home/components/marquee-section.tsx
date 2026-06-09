@@ -3,8 +3,9 @@
 import { motion, useScroll, useSpring, useTransform } from "motion/react";
 import { useRef } from "react";
 import { Section } from "@/shared/components/ui/section";
-import { homeData } from "@/shared/data/home";
 import { cn } from "@/shared/lib/utils";
+
+const movingWords = ["EDUCACIÓN", "INGENIERÍA", "FABRICACIÓN", "DIGITAL"];
 
 export function MarqueeSection() {
   const ref = useRef<HTMLElement>(null);
@@ -30,9 +31,9 @@ export function MarqueeSection() {
   });
 
   const marqueeWords = [
-    homeData.movingWords[homeData.movingWords.length - 1],
-    ...homeData.movingWords,
-    homeData.movingWords[0],
+    movingWords[movingWords.length - 1],
+    ...movingWords,
+    movingWords[0],
   ];
 
   return (
