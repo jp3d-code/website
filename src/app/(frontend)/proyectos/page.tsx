@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   title: routes.proyectos.name,
 };
 
-export default function ProyectoPage() {
+export default async function ProyectoPage() {
   return (
     <>
       <Hero />

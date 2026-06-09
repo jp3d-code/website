@@ -1,14 +1,23 @@
+import configPromise from "@payload-config";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { getPayload } from "payload";
 import { ProjectDetail } from "@/modules/proyectos/components/project-detail";
-import { projects } from "@/shared/data/projects";
-import { slugify } from "@/shared/lib/utils";
 
-export const dynamicParams = false;
+export const dynamicParams = true;
 
-export function generateStaticParams() {
-  return projects.items.map((project) => ({
-    slug: slugify(project.title),
+export async function generateStaticParams() {
+  const payload = await getPayload({ config: configPromise });
+  const { docs: projects } = await payload.find({
+    collection: "projects",
+    limit: 1000,
+    select: {
+      slug: true,
+    },
+  });
+
+  return projects.map((project) => ({
+    slug: project.slug,
   }));
 }
 
@@ -18,7 +27,18 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const project = projects.items.find((item) => slugify(item.title) === slug);
+  const payload = await getPayload({ config: configPromise });
+  const { docs } = await payload.find({
+    collection: "projects",
+    where: {
+      slug: {
+        equals: slug,
+      },
+    },
+    limit: 1,
+  });
+
+  const project = docs[0];
 
   if (!project) {
     return {};
@@ -36,7 +56,18 @@ export default async function ProyectoDetallePage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const project = projects.items.find((item) => slugify(item.title) === slug);
+  const payload = await getPayload({ config: configPromise });
+  const { docs } = await payload.find({
+    collection: "projects",
+    where: {
+      slug: {
+        equals: slug,
+      },
+    },
+    limit: 1,
+  });
+
+  const project = docs[0];
 
   if (!project) {
     notFound();

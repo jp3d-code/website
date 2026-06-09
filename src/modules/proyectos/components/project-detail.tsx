@@ -1,17 +1,14 @@
-import { marked } from "marked";
+import { RichText } from "@payloadcms/richtext-lexical/react";
+import type { Project } from "@/payload-types";
 import { Container, Section } from "@/shared/components/ui/section";
-import { imageByName, imageSrc } from "@/shared/data/images";
-import type { ProjectItem } from "@/shared/types/data";
-
-marked.setOptions({});
+import { getMediaUrl } from "@/shared/lib/utils";
 
 interface ProjectDetailProps {
-  project: ProjectItem;
+  project: Project;
 }
 
 export function ProjectDetail({ project }: ProjectDetailProps) {
-  const image = imageByName[project.image];
-  const htmlContent = marked.parse(project.content) as string;
+  const imageUrl = getMediaUrl(project.image);
 
   return (
     <Section>
@@ -24,18 +21,17 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
             <p className="text-muted-foreground text-sm">{project.excerpt}</p>
           </header>
 
-          {image && (
+          {imageUrl && (
             <img
-              src={imageSrc(image)}
+              src={imageUrl}
               alt={project.title}
               className="aspect-video w-full rounded-lg object-cover"
             />
           )}
 
-          <div
-            className="paragraph"
-            dangerouslySetInnerHTML={{ __html: htmlContent }}
-          />
+          <div className="paragraph">
+            {project.content && <RichText data={project.content} />}
+          </div>
         </div>
       </Container>
     </Section>

@@ -1,11 +1,17 @@
+import configPromise from "@payload-config";
+import { getPayload } from "payload";
 import { ProjectCard } from "@/shared/components/ui/project-card";
 import { Container, Section } from "@/shared/components/ui/section";
 import { routes } from "@/shared/config/routes";
-import { imageByName, imageSrc } from "@/shared/data/images";
-import { projects } from "@/shared/data/projects";
-import { slugify } from "@/shared/lib/utils";
+import { getMediaUrl } from "@/shared/lib/utils";
 
-export function ProjectsGrid() {
+export async function ProjectsGrid() {
+  const payload = await getPayload({ config: configPromise });
+  const { docs: projects } = await payload.find({
+    collection: "projects",
+    sort: "order",
+  });
+
   return (
     <Section>
       <Container>
@@ -15,16 +21,15 @@ export function ProjectsGrid() {
           </h2>
         </div>
         <div className="mt-8 grid gap-6 sm:grid-cols-2 md:grid-cols-3">
-          {projects.items.map((project) => {
-            const image = imageByName[project.image];
+          {projects.map((project) => {
             return (
               <ProjectCard
-                key={project.title}
+                key={project.id}
                 title={project.title}
-                image={imageSrc(image)}
+                image={getMediaUrl(project.image)}
                 description={project.excerpt}
                 links={{
-                  demo: `${routes.proyectos.path}/${slugify(project.title)}`,
+                  demo: routes.proyectos.detail.build({ slug: project.slug }),
                 }}
               />
             );
