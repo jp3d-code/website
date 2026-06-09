@@ -7,6 +7,7 @@ import { seedSocialMedia } from "./social-media";
 import { seedTimeline } from "./timeline";
 import { seedValues } from "./values";
 import { seedVideos } from "./videos";
+import { seedContact } from "./contact";
 
 async function main() {
   await seedTags();
@@ -17,6 +18,7 @@ async function main() {
   await seedTimeline();
   await seedValues();
   await seedVideos();
+  await seedContact();
 }
 
 main().catch((error) => {
