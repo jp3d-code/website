@@ -1,13 +1,13 @@
 import "dotenv/config";
-import { seedTags } from "./tags";
+import { seedContact } from "./contact";
 import { seedLocations } from "./locations";
 import { seedProjects } from "./projects";
 import { seedServices } from "./services";
 import { seedSocialMedia } from "./social-media";
+import { seedTags } from "./tags";
 import { seedTimeline } from "./timeline";
 import { seedValues } from "./values";
 import { seedVideos } from "./videos";
-import { seedContact } from "./contact";
 
 async function main() {
   await seedTags();

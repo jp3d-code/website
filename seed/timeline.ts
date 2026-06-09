@@ -4,19 +4,22 @@ const timelineData = [
   {
     year: "2018",
     title: "Laboratorio de Prototipado",
-    description: "Comenzamos en 2018 como un laboratorio de prototipado rápido con enfoque educativo.",
+    description:
+      "Comenzamos en 2018 como un laboratorio de prototipado rápido con enfoque educativo.",
     order: 10,
   },
   {
     year: "2020",
     title: "Expansión Industrial",
-    description: "Expandimos servicios de ingeniería y fabricación digital para minería y energía.",
+    description:
+      "Expandimos servicios de ingeniería y fabricación digital para minería y energía.",
     order: 20,
   },
   {
     year: "Hoy",
     title: "Liderazgo Latam",
-    description: "Aspiramos a liderar la adopción de tecnologías 3D en Latinoamérica, impulsando innovación sostenible.",
+    description:
+      "Aspiramos a liderar la adopción de tecnologías 3D en Latinoamérica, impulsando innovación sostenible.",
     order: 30,
   },
 ];

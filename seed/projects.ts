@@ -12,7 +12,8 @@ import { uploadMediaFromUrl } from "./utils";
 const projectsData = [
   {
     title: "Memoria de cálculo base de tanque para mina",
-    image: "editar/imagenes/proyectos/memoria_de_calculo_base_de_tanque_para_mina.png",
+    image:
+      "editar/imagenes/proyectos/memoria_de_calculo_base_de_tanque_para_mina.png",
     excerpt:
       "Diseño y verificación de una base metálica para tanque rectangular de combustible de 3 000 L en condiciones de operación minera, considerando cargas estáticas, sísmicas y de mantenimiento.",
     content: `El objetivo del proyecto fue diseñar y verificar una base metálica capaz de soportar un tanque rectangular de combustible de **3 000 L** en condiciones de operación minera. Para ello se definieron las combinaciones de carga que incluyen peso propio, llenado completo del tanque, empuje sísmico zona 3 según la **NTE E.030**, y acciones de mantenimiento (trabajos de soldadura y acceso de personal).
@@ -38,7 +39,8 @@ El informe de memoria de cálculo incluye planos de fabricación, fichas de sold
   {
     title:
       "Planos de fabricación de escalera de acceso a poza de estación de combustible para mina",
-    image: "editar/imagenes/proyectos/planos_de_fabricacion_de_escalera_de_acceso_a_poza_de_estacion_de_combustible_para_mina.png",
+    image:
+      "editar/imagenes/proyectos/planos_de_fabricacion_de_escalera_de_acceso_a_poza_de_estacion_de_combustible_para_mina.png",
     excerpt:
       "El proyecto consistió en el diseño y elaboración de planos de fabricación para una escalera metálica modular destinada a proporcionar acceso seguro a la poza de abastecimiento de combustible en una unidad minera, cumpliendo con normativas de seguridad laboral y resistencia estructural.",
     content: `El encargo consistió en elaborar los planos de fabricación de una escalera metálica modular que permite el acceso seguro a la poza de abastecimiento de combustible de una unidad minera. Se definió una inclinación de **35°** para cumplir con la **NTP 399.010** (equivalente a *OSHA 1910 Subpart D*) y facilitar el ascenso con botas y equipo de protección personal.
@@ -62,7 +64,8 @@ Además, se adjuntó un procedimiento de inspección visual y dimensional que ga
   },
   {
     title: "Memoria de cálculo soporte de transformador móvil",
-    image: "editar/imagenes/proyectos/memoria_de_calculo_soporte_de_transformador_movil.png",
+    image:
+      "editar/imagenes/proyectos/memoria_de_calculo_soporte_de_transformador_movil.png",
     excerpt:
       "Diseño y verificación de un bastidor portante para un transformador móvil de 5 MVA, considerando cargas dinámicas de transporte en rutas no pavimentadas, con énfasis en la integridad estructural y la seguridad durante el izaje y la descarga.",
     content: `Este estudio aborda el diseño y la verificación de un bastidor portante para un transformador móvil de **5 MVA** que será transportado sobre cama baja en rutas no pavimentadas. Se definieron los casos de carga correspondientes a frenado de emergencia, aceleración lateral en curvas de radio reducido y la combinación vertical de peso propio + sobrecarga dinámica de *1.4 g* según la norma **AASHTO LRFD 2017** para puentes móviles.
@@ -81,7 +84,8 @@ El informe incluye instrucciones de izaje, secuencia de soldadura *SMAW* y crite
   },
   {
     title: "Memoria de cálculo andamio colgante para puerto",
-    image: "editar/imagenes/proyectos/memoria_de_calculo_andamio_colgante_para_puerto.png",
+    image:
+      "editar/imagenes/proyectos/memoria_de_calculo_andamio_colgante_para_puerto.png",
     excerpt:
       "El proyecto comprende la verificación estructural de un andamio colgante de 12 m × 6 m destinado a labores de mantenimiento de defensas y tuberías en un muelle comercial, considerando cargas de trabajo, peso propio, sobrepeso por herramientas y acción simultánea de viento para zona costera expuesta.",
     content: `El proyecto comprende la verificación estructural de un andamio colgante de **12 m × 6 m** destinado a labores de mantenimiento de defensas y tuberías en un muelle comercial. Se consideraron las cargas de trabajo de *2.0 kN/m²* según **EN 12811-1**, el peso propio del sistema, el sobrepeso por herramientas y la acción simultánea de viento de *0.6 kN/m²* para zona costera expuesta (**EN 1991-1-4**, categoría *III*).
@@ -112,10 +116,16 @@ export async function seedProjects() {
     await editorConfigFactory.default({ config });
 
   for (const [index, project] of projectsData.entries()) {
-    const imageId = await uploadMediaFromUrl(payload, project.image, project.title);
+    const imageId = await uploadMediaFromUrl(
+      payload,
+      project.image,
+      project.title,
+    );
 
     if (!imageId) {
-      payload.logger.error(`Failed to upload image for project: ${project.title}`);
+      payload.logger.error(
+        `Failed to upload image for project: ${project.title}`,
+      );
       continue;
     }
 

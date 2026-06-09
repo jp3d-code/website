@@ -3,25 +3,29 @@ import { getPayloadClient } from "./payload";
 const valuesData = [
   {
     title: "Innovación",
-    description: "Fomentamos la creatividad técnica respaldada por datos y estándares internacionales.",
+    description:
+      "Fomentamos la creatividad técnica respaldada por datos y estándares internacionales.",
     icon: "Lightbulb",
     order: 10,
   },
   {
     title: "Precisión",
-    description: "Cada proyecto entregado busca generar impacto real: optimizar procesos y reducir costos.",
+    description:
+      "Cada proyecto entregado busca generar impacto real: optimizar procesos y reducir costos.",
     icon: "Target",
     order: 20,
   },
   {
     title: "Colaboración",
-    description: "Creemos en alianzas a largo plazo con clientes y en el trabajo multidisciplinario.",
+    description:
+      "Creemos en alianzas a largo plazo con clientes y en el trabajo multidisciplinario.",
     icon: "Users",
     order: 30,
   },
   {
     title: "Sostenibilidad",
-    description: "Seleccionamos materiales reciclables y optimizamos procesos para reducir desperdicios.",
+    description:
+      "Seleccionamos materiales reciclables y optimizamos procesos para reducir desperdicios.",
     icon: "Leaf",
     order: 40,
   },

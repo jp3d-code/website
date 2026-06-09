@@ -24,7 +24,6 @@ export async function seedContact() {
     copyright: "© 2025 JP 3D. Todos los Derechos Reservados.",
   };
 
-
   await payload.updateGlobal({
     slug: "contact",
     data: contactData,

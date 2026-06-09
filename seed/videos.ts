@@ -8,7 +8,9 @@ const videosData = [
     excerpt:
       "La impresión 3D permite crear objetos personalizados utilizando materiales como plásticos, metal y resinas. Es útil en medicina, arquitectura e industria aeroespacial.",
     content: [
-      { text: "Fomenta la sostenibilidad al generar menos desperdicio y ofrece oportunidades educativas, creativas y de prototipado rápido, revolucionando la fabricación global." },
+      {
+        text: "Fomenta la sostenibilidad al generar menos desperdicio y ofrece oportunidades educativas, creativas y de prototipado rápido, revolucionando la fabricación global.",
+      },
     ],
     order: 10,
   },
@@ -19,7 +21,9 @@ const videosData = [
     excerpt:
       "Usa el corte láser para crear decoraciones navideñas personalizadas como adornos, tarjetas tridimensionales, centros de mesa, guirnaldas y más.",
     content: [
-      { text: "Estas ideas permiten darle a tu hogar un toque único y creativo durante la Navidad." },
+      {
+        text: "Estas ideas permiten darle a tu hogar un toque único y creativo durante la Navidad.",
+      },
     ],
     order: 20,
   },
@@ -30,7 +34,9 @@ const videosData = [
     excerpt:
       "Las mejores impresiones 3D de JP3D en diciembre incluyeron creaciones para la competencia de anime Omisoka.",
     content: [
-      { text: "Además de estas piezas, también se realizaron adornos navideños, prototipos industriales y modelos educativos, reflejando la versatilidad y creatividad de JP3D." },
+      {
+        text: "Además de estas piezas, también se realizaron adornos navideños, prototipos industriales y modelos educativos, reflejando la versatilidad y creatividad de JP3D.",
+      },
     ],
     order: 30,
   },

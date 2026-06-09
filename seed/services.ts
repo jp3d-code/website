@@ -152,10 +152,16 @@ export async function seedServices() {
     await editorConfigFactory.default({ config });
 
   for (const [index, service] of servicesData.entries()) {
-    const imageId = await uploadMediaFromUrl(payload, service.image, service.title);
+    const imageId = await uploadMediaFromUrl(
+      payload,
+      service.image,
+      service.title,
+    );
 
     if (!imageId) {
-      payload.logger.error(`Failed to upload image for service: ${service.title}`);
+      payload.logger.error(
+        `Failed to upload image for service: ${service.title}`,
+      );
       continue;
     }
 
