@@ -1,4 +1,4 @@
-import { createStaticRoute } from "@/shared/lib/routes";
+import { createDynamicRoute, createStaticRoute } from "@/shared/lib/routes";
 import { APP_URL } from "./env";
 
 const homeRoute = createStaticRoute({
@@ -25,6 +25,15 @@ const proyectosRoute = createStaticRoute({
   fullPath: `${APP_URL}/proyectos`,
 });
 
+const proyectosDetalleRoute = createDynamicRoute(
+  {
+    name: "Detalle de Proyecto",
+    path: "/proyectos/[slug]",
+    fullPath: `${APP_URL}/proyectos/[slug]`,
+  },
+  ["slug"] as const,
+);
+
 const serviciosRoute = createStaticRoute({
   name: "Servicios",
   path: "/servicios",
@@ -47,6 +56,7 @@ export const routes = {
   },
   proyectos: {
     ...proyectosRoute,
+    detail: proyectosDetalleRoute,
   },
   servicios: {
     ...serviciosRoute,

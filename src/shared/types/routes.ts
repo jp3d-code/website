@@ -15,4 +15,26 @@ export type DynamicRoute<TParams extends string = string> = BaseRoute & {
   buildFull: (params: Record<TParams, string | number>) => string;
 };
 
-export type Route = StaticRoute | DynamicRoute;
+export type QueryParams = Record<
+  string,
+  string | number | boolean | undefined | null
+>;
+
+export type RouteWithQuery<T extends BaseRoute = BaseRoute> = T & {
+  withQuery: (query: QueryParams) => string;
+  withQueryFull: (query: QueryParams) => string;
+};
+
+export type DynamicRouteWithQuery<TParams extends string = string> =
+  DynamicRoute<TParams> & {
+    buildWithQuery: (
+      params: Record<TParams, string | number>,
+      query?: QueryParams,
+    ) => string;
+    buildFullWithQuery: (
+      params: Record<TParams, string | number>,
+      query?: QueryParams,
+    ) => string;
+  };
+
+export type Route = StaticRoute | DynamicRoute | DynamicRouteWithQuery;
