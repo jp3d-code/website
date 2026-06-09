@@ -1,10 +1,9 @@
 import { Container, Section } from "@/shared/components/ui/section";
-import { images } from "@/shared/data/images";
 
 const visionMissionData = [
   {
     title: "MISION",
-    image: images.marca_mision.name,
+    image: "https://jp3doficial.com/editar/imagenes/marca/mision_jp3d.png",
     excerpt:
       "Nuestra misión es transformar ideas en soluciones tangibles mediante la combinación de ingeniería de precisión, fabricación digital y programas formativos que empoderan a la próxima generación de innovadores.",
     content: [
@@ -14,7 +13,7 @@ const visionMissionData = [
   },
   {
     title: "VISION",
-    image: images.marca_vision.name,
+    image: "https://jp3doficial.com/editar/imagenes/marca/vision_jp3d.png",
     excerpt:
       "Ser referentes latinoamericanos en innovación 3D, liderando la transición hacia fábricas inteligentes y ecosistemas educativos orientados a la manufactura avanzada.",
     content: [

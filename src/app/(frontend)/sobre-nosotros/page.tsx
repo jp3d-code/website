@@ -6,6 +6,6 @@ export const metadata: Metadata = {
   title: routes.sobreNosotros.name,
 };
 
-export default function SobreNosotrosPage() {
+export default async function SobreNosotrosPage() {
   return <AboutPage />;
 }

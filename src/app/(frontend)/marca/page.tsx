@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   title: routes.marca.name,
 };
 
-export default function MarcaPage() {
+export default async function MarcaPage() {
   return (
     <>
       <Hero />

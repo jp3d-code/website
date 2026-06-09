@@ -1,10 +1,10 @@
-import { getPayload } from "payload";
 import configPromise from "@payload-config";
 import Link from "next/link";
+import { getPayload } from "payload";
 import { ProjectCard } from "@/shared/components/ui/project-card";
 import { Container, Section } from "@/shared/components/ui/section";
-import { getMediaUrl } from "@/shared/lib/utils";
 import { routes } from "@/shared/config/routes";
+import { getMediaUrl } from "@/shared/lib/utils";
 
 export async function ProjectsSection() {
   const payload = await getPayload({ config: configPromise });
@@ -37,7 +37,9 @@ export async function ProjectsSection() {
                 title={project.title}
                 image={getMediaUrl(project.image)}
                 description={project.excerpt}
-                links={{ demo: routes.proyectos.detail.build({ slug: project.slug }) }}
+                links={{
+                  demo: routes.proyectos.detail.build({ slug: project.slug }),
+                }}
               />
             );
           })}
@@ -46,4 +48,3 @@ export async function ProjectsSection() {
     </Section>
   );
 }
-
