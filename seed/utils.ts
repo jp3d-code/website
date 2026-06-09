@@ -1,12 +1,7 @@
 import type { Payload } from "payload";
-import type { Media } from "@/payload-types";
 
 export const imageBaseUrl = "https://jp3doficial.com/";
 
-/**
- * Downloads an image from a URL and uploads it to Payload's media collection.
- * If the image already exists (checked by alt text or filename), it returns the existing ID.
- */
 export async function uploadMediaFromUrl(
   payload: Payload,
   urlPath: string,
