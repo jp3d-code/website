@@ -1,8 +1,11 @@
+import configPromise from "@payload-config";
 import Link from "next/link";
+import { getPayload } from "payload";
+import type { Contact, Location, SocialMedia } from "@/payload-types";
 import { LinkBtm } from "@/shared/components/ui/link";
 import { Container } from "@/shared/components/ui/section";
 import { routes } from "@/shared/config/routes";
-import { contactData } from "@/shared/data/contact";
+import { getCollections } from "@/shared/lib/utils";
 
 const quickLinks = [
   routes.marca,
@@ -12,7 +15,17 @@ const quickLinks = [
   routes.contacto,
 ];
 
-export function Footer() {
+export async function Footer() {
+  const payload = await getPayload({ config: configPromise });
+  const contact = await payload.findGlobal({
+    slug: "contact",
+    depth: 1,
+  });
+
+  const locations = getCollections<Location>(contact.locations);
+  const firstLocation = locations[0];
+  const socials = getCollections<SocialMedia>(contact.socials);
+
   return (
     <footer className="flex items-center justify-center border-foreground/20 border-t bg-background/5 px-6 py-20">
       <Container className="grid items-start gap-y-15 md:grid-cols-4">
@@ -38,9 +51,9 @@ export function Footer() {
         <div className="space-y-3">
           <p className="text-xs uppercase tracking-[0.25em]">Redes</p>
           <div className="flex flex-wrap gap-2">
-            {contactData.socials.map((social) => (
+            {socials.map((social) => (
               <LinkBtm
-                key={social.url}
+                key={social.id}
                 href={social.url}
                 target="_blank"
                 className="text-xs uppercase tracking-[0.2em]"
@@ -54,9 +67,9 @@ export function Footer() {
         <div className="space-y-3">
           <p className="text-xs uppercase tracking-[0.25em]">Contacto</p>
           <ul className="space-y-2 pl-2 text-sm">
-            <li>{contactData.email}</li>
-            <li>{contactData.phone}</li>
-            <li>{contactData.location}</li>
+            <li>{contact.email}</li>
+            <li>{contact.phone}</li>
+            {firstLocation && <li>{firstLocation.address}</li>}
           </ul>
         </div>
       </Container>

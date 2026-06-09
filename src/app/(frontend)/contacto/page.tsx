@@ -6,6 +6,6 @@ export const metadata: Metadata = {
   title: routes.contacto.name,
 };
 
-export default function ContactoPage() {
+export default async function ContactoPage() {
   return <Hero />;
 }

@@ -6,6 +6,6 @@ export const metadata: Metadata = {
   title: routes.servicios.name,
 };
 
-export default function ServiciosPage() {
+export default async function ServiciosPage() {
   return <ServicesPage />;
 }

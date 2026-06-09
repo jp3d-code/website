@@ -1,32 +1,45 @@
+import configPromise from "@payload-config";
 import Link from "next/link";
+import { getPayload } from "payload";
+import type { Location, SocialMedia } from "@/payload-types";
 import { LinkBtm } from "@/shared/components/ui/link";
-import { contactData } from "@/shared/data/contact";
+import { getCollections } from "@/shared/lib/utils";
 
-export function ContactInfo() {
+export async function ContactInfo() {
+  const payload = await getPayload({ config: configPromise });
+  const contact = await payload.findGlobal({
+    slug: "contact",
+    depth: 1,
+  });
+
+  const locations = getCollections<Location>(contact.locations);
+  const firstLocation = locations[0];
+  const socials = getCollections<SocialMedia>(contact.socials);
+
   return (
     <div className="space-y-6">
       <p className="text-muted-foreground text-xs uppercase tracking-[0.35em]">
-        {contactData.smallTitle}
+        {contact.smallTitle}
       </p>
       <h1 className="font-medium text-3xl uppercase tracking-widest md:text-6xl">
         Ponte en contacto con <span className="text-primary">nosotros</span>
       </h1>
       <div className="space-y-2 text-muted-foreground text-sm">
-        <p>{contactData.location}</p>
-        <p>{contactData.phone}</p>
+        {firstLocation && <p>{firstLocation.address}</p>}
+        <p>{contact.phone}</p>
         <p>
           <Link
-            href={`mailto:${contactData.email}`}
+            href={`mailto:${contact.email}`}
             className="underline-offset-4 hover:underline"
           >
-            {contactData.email}
+            {contact.email}
           </Link>
         </p>
       </div>
       <div className="flex flex-wrap gap-3">
-        {contactData.socials.map((social) => (
+        {socials.map((social) => (
           <LinkBtm
-            key={social.url}
+            key={social.id}
             href={social.url}
             target="_blank"
             variant="outline"

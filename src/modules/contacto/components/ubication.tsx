@@ -1,4 +1,7 @@
+import configPromise from "@payload-config";
 import { MapPin } from "lucide-react";
+import { getPayload } from "payload";
+import type { Location } from "@/payload-types";
 import {
   Map as MapComp,
   MapMarker,
@@ -6,15 +9,27 @@ import {
   MarkerPopup,
   MarkerTooltip,
 } from "@/shared/components/ui/map";
-import { contactData } from "@/shared/data/contact";
+import { getCollections } from "@/shared/lib/utils";
 
-const jp3dLocation = {
-  name: "JP 3D",
-  lat: -16.4168453,
-  lng: -71.5092279,
-};
+export async function Ubication() {
+  const payload = await getPayload({ config: configPromise });
+  const contact = await payload.findGlobal({
+    slug: "contact",
+    depth: 1,
+  });
 
-export function Ubication() {
+  const locations = getCollections<Location>(contact.locations);
+  const firstLocation = locations[0];
+
+  if (!firstLocation) return null;
+
+  const jp3dLocation = {
+    name: firstLocation.name,
+    lat: firstLocation.lat,
+    lng: firstLocation.lng,
+    address: firstLocation.address,
+  };
+
   return (
     <div className="aspect-4/3 overflow-hidden rounded-3xl border border-border/60 shadow-sm">
       <MapComp center={[jp3dLocation.lng, jp3dLocation.lat]} zoom={15}>
@@ -30,7 +45,7 @@ export function Ubication() {
                 {jp3dLocation.lat.toFixed(4)}, {jp3dLocation.lng.toFixed(4)}
               </p>
               <p className="text-muted-foreground text-xs">
-                {contactData.location}
+                {jp3dLocation.address}
               </p>
             </div>
           </MarkerPopup>
