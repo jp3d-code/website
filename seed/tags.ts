@@ -11,6 +11,9 @@ const tagNames = [
   "Construcción",
   "Infraestructura",
   "Tecnología",
+  "Impresión 3D",
+  "Energías Renovables",
+  "Inteligencia Artificial",
 ];
 
 export async function seedTags() {
