@@ -623,7 +623,7 @@ export interface Contact {
   id: number;
   smallTitle: string;
   bigTitle: string;
-  locations?: (number | null) | Location;
+  locations?: (number | Location)[] | null;
   phone: string;
   email: string;
   socials?: (number | SocialMedia)[] | null;

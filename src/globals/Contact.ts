@@ -39,6 +39,7 @@ export const Contact: GlobalConfig = {
       name: "locations",
       type: "relationship",
       relationTo: "locations",
+      hasMany: true,
       label: {
         en: "Locations",
         es: "Ubicaciones",
