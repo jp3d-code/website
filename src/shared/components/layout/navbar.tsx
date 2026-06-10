@@ -1,8 +1,17 @@
-import { MenuIcon } from "lucide-react";
+import { ChevronDown, MenuIcon } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/shared/components/ui/button";
 import { LinkBtm } from "@/shared/components/ui/link";
 import { routes } from "@/shared/config/routes";
+import type { SectionRoute } from "@/shared/types/routes";
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+} from "../ui/navigation-menu";
 import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet";
 
 const navItems = [
@@ -22,17 +31,63 @@ function HeaderDesktop() {
           Ingenieria y fabricacion
         </span>
       </Link>
-      <nav className="flex items-center gap-6 font-medium text-sm">
-        {navItems.map((route) => (
-          <Link
-            key={route.path}
-            href={route.path}
-            className="transition-colors hover:text-foreground/80"
-          >
-            {route.name}
-          </Link>
-        ))}
-      </nav>
+      <NavigationMenu>
+        <NavigationMenuList className="gap-2">
+          {navItems.map((route) => {
+            const hasSections = "order" in route;
+            const sections = hasSections ? (route.order as SectionRoute[]) : [];
+
+            return (
+              <NavigationMenuItem key={route.path}>
+                {hasSections ? (
+                  <>
+                    <NavigationMenuTrigger
+                      render={
+                        <Link
+                          href={route.path}
+                          className="flex items-center justify-center gap-1"
+                        >
+                          <span>{route.name}</span>
+                          <ChevronDown className="size-3" />
+                        </Link>
+                      }
+                      className="bg-transparent hover:bg-transparent focus:bg-transparent data-open:bg-transparent data-popup-open:bg-transparent"
+                    />
+                    <NavigationMenuContent className="min-w-48 bg-popover/90 backdrop-blur-md">
+                      <div className="flex flex-col gap-1 p-2">
+                        {sections.map((section) => (
+                          <NavigationMenuLink
+                            key={section.hash}
+                            render={
+                              <Link
+                                href={section.path}
+                                className="block rounded-md px-3 py-2 text-sm transition-colors hover:bg-accent hover:text-accent-foreground"
+                              >
+                                {section.name}
+                              </Link>
+                            }
+                          />
+                        ))}
+                      </div>
+                    </NavigationMenuContent>
+                  </>
+                ) : (
+                  <NavigationMenuLink
+                    render={
+                      <Link
+                        href={route.path}
+                        className="inline-flex h-9 w-max items-center justify-center rounded-lg px-2.5 py-1.5 font-medium text-sm transition-colors hover:text-foreground/80"
+                      >
+                        {route.name}
+                      </Link>
+                    }
+                  />
+                )}
+              </NavigationMenuItem>
+            );
+          })}
+        </NavigationMenuList>
+      </NavigationMenu>
       <LinkBtm
         variant="outline"
         href={routes.contacto.path}
