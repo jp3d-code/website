@@ -11,6 +11,7 @@ import { Media } from "./collections/Media";
 import { Projects } from "./collections/Projects";
 import { Services } from "./collections/Services";
 import { SocialMedia } from "./collections/SocialMedia";
+import { Testimonials } from "./collections/Testimonials";
 import { Tags } from "./collections/Tags";
 import { Timeline } from "./collections/Timeline";
 import { Users } from "./collections/Users";
@@ -38,6 +39,7 @@ export default buildConfig({
     Values,
     Timeline,
     SocialMedia,
+    Testimonials,
     Locations,
   ],
   globals: [Contact],

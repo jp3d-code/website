@@ -52,14 +52,34 @@ const serviciosRoute = createStaticRoute({
   fullPath: `${APP_URL}/servicios`,
 });
 
+const serviciosDetalleRoute = createDynamicRoute(
+  {
+    name: "Detalle de Servicio",
+    path: "/servicios/[slug]",
+    fullPath: `${APP_URL}/servicios/[slug]`,
+  },
+  ["slug"] as const,
+);
+
 const serviciosSections = defineSections({
-  ingenieria: createSection(serviciosRoute, "ingenieria", "Ingeniería"),
-  educacion: createSection(serviciosRoute, "educacion", "Educación"),
-  fabricacionDigital: createSection(
-    serviciosRoute,
-    "fabricacion-digital",
-    "Fabricación Digital",
-  ),
+  ingenieria: {
+    name: "Ingeniería",
+    hash: "ingenieria",
+    path: serviciosDetalleRoute.build({ slug: "ingenieria" }),
+    fullPath: serviciosDetalleRoute.buildFull({ slug: "ingenieria" }),
+  },
+  educacion: {
+    name: "Educación",
+    hash: "educacion",
+    path: serviciosDetalleRoute.build({ slug: "educacion" }),
+    fullPath: serviciosDetalleRoute.buildFull({ slug: "educacion" }),
+  },
+  fabricacionDigital: {
+    name: "Fabricación Digital",
+    hash: "fabricacion-digital",
+    path: serviciosDetalleRoute.build({ slug: "fabricacion-digital" }),
+    fullPath: serviciosDetalleRoute.buildFull({ slug: "fabricacion-digital" }),
+  },
 } as const);
 
 const sobreNosotrosRoute = createStaticRoute({
@@ -89,6 +109,7 @@ export const routes = {
   },
   servicios: {
     ...serviciosRoute,
+    detail: serviciosDetalleRoute,
     ...serviciosSections,
   },
   sobreNosotros: {

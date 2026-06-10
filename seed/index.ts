@@ -6,6 +6,7 @@ import { seedServices } from "./services";
 import { seedSocialMedia } from "./social-media";
 import { seedTags } from "./tags";
 import { seedTimeline } from "./timeline";
+import { seedTestimonials } from "./testimonials";
 import { seedValues } from "./values";
 import { seedVideos } from "./videos";
 
@@ -16,6 +17,7 @@ async function main() {
   await seedServices();
   await seedSocialMedia();
   await seedTimeline();
+  await seedTestimonials();
   await seedValues();
   await seedVideos();
   await seedContact();

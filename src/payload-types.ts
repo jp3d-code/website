@@ -76,6 +76,7 @@ export interface Config {
     values: Value;
     timeline: Timeline;
     'social-media': SocialMedia;
+    testimonials: Testimonial;
     locations: Location;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
@@ -93,6 +94,7 @@ export interface Config {
     values: ValuesSelect<false> | ValuesSelect<true>;
     timeline: TimelineSelect<false> | TimelineSelect<true>;
     'social-media': SocialMediaSelect<false> | SocialMediaSelect<true>;
+    testimonials: TestimonialsSelect<false> | TestimonialsSelect<true>;
     locations: LocationsSelect<false> | LocationsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
@@ -228,6 +230,7 @@ export interface Project {
 export interface Service {
   id: number;
   title: string;
+  slug: string;
   image: number | Media;
   excerpt: string;
   content: {
@@ -314,6 +317,35 @@ export interface SocialMedia {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "testimonials".
+ */
+export interface Testimonial {
+  id: number;
+  name: string;
+  role: string;
+  phone?: string | null;
+  email?: string | null;
+  quote: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  order: number;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "locations".
  */
 export interface Location {
@@ -384,6 +416,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'social-media';
         value: number | SocialMedia;
+      } | null)
+    | ({
+        relationTo: 'testimonials';
+        value: number | Testimonial;
       } | null)
     | ({
         relationTo: 'locations';
@@ -501,6 +537,7 @@ export interface ProjectsSelect<T extends boolean = true> {
  */
 export interface ServicesSelect<T extends boolean = true> {
   title?: T;
+  slug?: T;
   image?: T;
   excerpt?: T;
   content?: T;
@@ -559,6 +596,20 @@ export interface SocialMediaSelect<T extends boolean = true> {
   label?: T;
   url?: T;
   icon?: T;
+  order?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "testimonials_select".
+ */
+export interface TestimonialsSelect<T extends boolean = true> {
+  name?: T;
+  role?: T;
+  phone?: T;
+  email?: T;
+  quote?: T;
   order?: T;
   updatedAt?: T;
   createdAt?: T;
