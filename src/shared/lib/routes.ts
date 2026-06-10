@@ -2,7 +2,9 @@ import type {
   BaseRoute,
   DynamicRouteWithQuery,
   QueryParams,
+  RouteSections,
   RouteWithQuery,
+  SectionRoute,
   StaticRoute,
 } from "@/shared/types/routes";
 
@@ -74,5 +76,27 @@ export function createDynamicRoute<TParams extends string>(
       const path = buildFull(paramValues);
       return query ? `${path}${buildQueryString(query)}` : path;
     },
+  };
+}
+
+export function createSection(
+  parentRoute: BaseRoute,
+  hash: string,
+  name: string,
+): SectionRoute {
+  return {
+    name,
+    hash,
+    path: `${parentRoute.path}#${hash}`,
+    fullPath: `${parentRoute.fullPath}#${hash}`,
+  };
+}
+
+export function defineSections<T extends Record<string, SectionRoute>>(
+  sections: T,
+): RouteSections<T> {
+  return {
+    sections,
+    order: Object.values(sections) as T[keyof T][],
   };
 }

@@ -38,3 +38,15 @@ export type DynamicRouteWithQuery<TParams extends string = string> =
   };
 
 export type Route = StaticRoute | DynamicRoute | DynamicRouteWithQuery;
+
+export type SectionRoute = {
+  name: string;
+  hash: string;
+  path: string;
+  fullPath: string;
+};
+
+export type RouteSections<T extends Record<string, SectionRoute>> = {
+  sections: T;
+  order: T[keyof T][];
+};

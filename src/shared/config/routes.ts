@@ -1,4 +1,9 @@
-import { createDynamicRoute, createStaticRoute } from "@/shared/lib/routes";
+import {
+  createDynamicRoute,
+  createSection,
+  createStaticRoute,
+  defineSections,
+} from "@/shared/lib/routes";
 import { APP_URL } from "./env";
 
 const homeRoute = createStaticRoute({
@@ -18,6 +23,13 @@ const marcaRoute = createStaticRoute({
   path: "/marca",
   fullPath: `${APP_URL}/marca`,
 });
+
+const marcaSections = defineSections({
+  intro: createSection(marcaRoute, "intro", "Introducción"),
+  mision: createSection(marcaRoute, "mision", "Misión"),
+  vision: createSection(marcaRoute, "vision", "Visión"),
+  valores: createSection(marcaRoute, "valores", "Valores"),
+} as const);
 
 const proyectosRoute = createStaticRoute({
   name: "Proyectos",
@@ -40,11 +52,27 @@ const serviciosRoute = createStaticRoute({
   fullPath: `${APP_URL}/servicios`,
 });
 
+const serviciosSections = defineSections({
+  ingenieria: createSection(serviciosRoute, "ingenieria", "Ingeniería"),
+  educacion: createSection(serviciosRoute, "educacion", "Educación"),
+  fabricacionDigital: createSection(
+    serviciosRoute,
+    "fabricacion-digital",
+    "Fabricación Digital",
+  ),
+} as const);
+
 const sobreNosotrosRoute = createStaticRoute({
   name: "Sobre Nosotros",
   path: "/sobre-nosotros",
   fullPath: `${APP_URL}/sobre-nosotros`,
 });
+
+const sobreNosotrosSections = defineSections({
+  equipo: createSection(sobreNosotrosRoute, "equipo", "Nuestro Equipo"),
+  historia: createSection(sobreNosotrosRoute, "historia", "Nuestra Historia"),
+  videos: createSection(sobreNosotrosRoute, "videos", "Videos"),
+} as const);
 
 export const routes = {
   ...homeRoute,
@@ -53,6 +81,7 @@ export const routes = {
   },
   marca: {
     ...marcaRoute,
+    ...marcaSections,
   },
   proyectos: {
     ...proyectosRoute,
@@ -60,8 +89,10 @@ export const routes = {
   },
   servicios: {
     ...serviciosRoute,
+    ...serviciosSections,
   },
   sobreNosotros: {
     ...sobreNosotrosRoute,
+    ...sobreNosotrosSections,
   },
 };
