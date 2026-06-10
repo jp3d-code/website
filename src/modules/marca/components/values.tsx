@@ -1,6 +1,7 @@
 import configPromise from "@payload-config";
 import { getPayload } from "payload";
 import { Container, Section } from "@/shared/components/ui/section";
+import { routes } from "@/shared/config/routes";
 
 export async function OurValues() {
   const payload = await getPayload({ config: configPromise });
@@ -10,7 +11,7 @@ export async function OurValues() {
   });
 
   return (
-    <Section className="bg-card">
+    <Section id={routes.marca.sections.valores.hash} className="bg-card">
       <Container className="grid items-center justify-items-center gap-10 md:grid-cols-2">
         <h2 className="font-medium text-2xl uppercase tracking-widest md:text-3xl">
           NUESTROS VALORES

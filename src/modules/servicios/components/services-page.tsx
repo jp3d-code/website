@@ -1,7 +1,8 @@
 import configPromise from "@payload-config";
 import { RichText } from "@payloadcms/richtext-lexical/react";
 import { getPayload } from "payload";
-import { getMediaUrl } from "@/shared/lib/utils";
+import { routes } from "@/shared/config/routes";
+import { getMediaUrl, slugify } from "@/shared/lib/utils";
 
 export default async function ServicesPage() {
   const payload = await getPayload({ config: configPromise });
@@ -10,17 +11,26 @@ export default async function ServicesPage() {
     sort: "order",
   });
 
+  const sectionHashes: Record<string, string> = {
+    INGENIERÍA: routes.servicios.sections.ingenieria.hash,
+    EDUCACIÓN: routes.servicios.sections.educacion.hash,
+    "FABRICACIÓN DIGITAL": routes.servicios.sections.fabricacionDigital.hash,
+  };
+
   return (
     <div className="mx-auto w-full max-w-4xl px-4 py-16">
       <div className="grid gap-10">
         <div className="space-y-40">
           {services.map((service) => {
             const imageUrl = getMediaUrl(service.image);
+            const sectionId =
+              sectionHashes[service.title] || slugify(service.title);
             return (
-              <section key={service.id} className="space-y-4">
+              <section key={service.id} id={sectionId} className="space-y-4">
                 <h2 className="text-5xl tracking-widest md:text-6xl">
                   {service.title}
                 </h2>
+
                 <div className="prose prose-sm max-w-none text-muted-foreground">
                   <p>{service.excerpt}</p>
                   <div className="paragraph">

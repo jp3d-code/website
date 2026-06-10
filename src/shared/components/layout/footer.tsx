@@ -1,7 +1,7 @@
 import configPromise from "@payload-config";
 import Link from "next/link";
 import { getPayload } from "payload";
-import type { Contact, Location, SocialMedia } from "@/payload-types";
+import type { Location, SocialMedia } from "@/payload-types";
 import { LinkBtm } from "@/shared/components/ui/link";
 import { Container } from "@/shared/components/ui/section";
 import { routes } from "@/shared/config/routes";
