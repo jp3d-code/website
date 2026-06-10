@@ -511,6 +511,13 @@
           "notNull": true,
           "autoincrement": false
         },
+        "slug": {
+          "name": "slug",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
         "image_id": {
           "name": "image_id",
           "type": "integer",
@@ -558,6 +565,13 @@
         }
       },
       "indexes": {
+        "services_slug_idx": {
+          "name": "services_slug_idx",
+          "columns": [
+            "slug"
+          ],
+          "isUnique": true
+        },
         "services_image_idx": {
           "name": "services_image_idx",
           "columns": [
@@ -751,8 +765,8 @@
       "uniqueConstraints": {},
       "checkConstraints": {}
     },
-    "values": {
-      "name": "values",
+    "company_values": {
+      "name": "company_values",
       "columns": {
         "id": {
           "name": "id",
@@ -808,15 +822,15 @@
         }
       },
       "indexes": {
-        "values_updated_at_idx": {
-          "name": "values_updated_at_idx",
+        "company_values_updated_at_idx": {
+          "name": "company_values_updated_at_idx",
           "columns": [
             "updated_at"
           ],
           "isUnique": false
         },
-        "values_created_at_idx": {
-          "name": "values_created_at_idx",
+        "company_values_created_at_idx": {
+          "name": "company_values_created_at_idx",
           "columns": [
             "created_at"
           ],
@@ -1232,8 +1246,8 @@
           "notNull": false,
           "autoincrement": false
         },
-        "values_id": {
-          "name": "values_id",
+        "company_values_id": {
+          "name": "company_values_id",
           "type": "integer",
           "primaryKey": false,
           "notNull": false,
@@ -1325,10 +1339,10 @@
           ],
           "isUnique": false
         },
-        "payload_locked_documents_rels_values_id_idx": {
-          "name": "payload_locked_documents_rels_values_id_idx",
+        "payload_locked_documents_rels_company_values_id_idx": {
+          "name": "payload_locked_documents_rels_company_values_id_idx",
           "columns": [
-            "values_id"
+            "company_values_id"
           ],
           "isUnique": false
         },
@@ -1449,9 +1463,9 @@
         "payload_locked_documents_rels_values_fk": {
           "name": "payload_locked_documents_rels_values_fk",
           "tableFrom": "payload_locked_documents_rels",
-          "tableTo": "values",
+          "tableTo": "company_values",
           "columnsFrom": [
-            "values_id"
+            "company_values_id"
           ],
           "columnsTo": [
             "id"
@@ -1939,6 +1953,6 @@
   "internal": {
     "indexes": {}
   },
-  "id": "21002c28-07c2-4d55-a36c-020d46ab6424",
+  "id": "273c9578-a218-42a9-b63f-1636ec128fca",
   "prevId": "00000000-0000-0000-0000-000000000000"
 }
