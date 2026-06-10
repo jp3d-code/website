@@ -42,17 +42,11 @@ function HeaderDesktop() {
                 {hasSections ? (
                   <>
                     <NavigationMenuTrigger
-                      render={
-                        <Link
-                          href={route.path}
-                          className="flex items-center justify-center gap-1"
-                        >
-                          <span>{route.name}</span>
-                          <ChevronDown className="size-3" />
-                        </Link>
-                      }
+                      render={<Link href={route.path} />}
                       className="bg-transparent hover:bg-transparent focus:bg-transparent data-open:bg-transparent data-popup-open:bg-transparent"
-                    />
+                    >
+                      {route.name}
+                    </NavigationMenuTrigger>
                     <NavigationMenuContent className="min-w-48 bg-popover/90 backdrop-blur-md">
                       <div className="flex flex-col gap-1 p-2">
                         {sections.map((section) => (
@@ -62,11 +56,11 @@ function HeaderDesktop() {
                               <Link
                                 href={section.path}
                                 className="block rounded-md px-3 py-2 text-sm transition-colors hover:bg-accent hover:text-accent-foreground"
-                              >
-                                {section.name}
-                              </Link>
+                              />
                             }
-                          />
+                          >
+                            {section.name}
+                          </NavigationMenuLink>
                         ))}
                       </div>
                     </NavigationMenuContent>
@@ -77,11 +71,11 @@ function HeaderDesktop() {
                       <Link
                         href={route.path}
                         className="inline-flex h-9 w-max items-center justify-center rounded-lg px-2.5 py-1.5 font-medium text-sm transition-colors hover:text-foreground/80"
-                      >
-                        {route.name}
-                      </Link>
+                      />
                     }
-                  />
+                  >
+                    {route.name}
+                  </NavigationMenuLink>
                 )}
               </NavigationMenuItem>
             );
