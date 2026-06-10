@@ -55,44 +55,26 @@ export function SectionHeader({
   );
 }
 
-export function SectionOverline({
-  children,
-  className,
-  ...props
-}: React.ComponentProps<"h2">) {
-  return (
-    <h2
-      className={cn(
-        "text-primary text-sm uppercase tracking-widest",
-        className,
-      )}
-      {...props}
-    >
-      {children}
-    </h2>
-  );
-}
-
 export function SectionTitle({
   first,
   second,
   className,
   ...props
-}: React.ComponentProps<"h3"> & {
+}: React.ComponentProps<"h2"> & {
   first: string;
   second?: string;
 }) {
   return (
-    <h3
+    <h2
       className={cn(
-        "flex flex-wrap items-center justify-center gap-x-2 font-condensed font-extrabold text-4xl uppercase",
+        "flex flex-wrap items-center justify-center gap-x-2 text-4xl uppercase",
         className,
       )}
       {...props}
     >
       <span className={cn("text-secondary", className)}>{first}</span>{" "}
       {second && <span className="text-primary">{second}</span>}
-    </h3>
+    </h2>
   );
 }
 

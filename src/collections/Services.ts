@@ -1,4 +1,5 @@
 import type { CollectionConfig } from "payload";
+import { slugify } from "@/shared/lib/utils";
 
 export const Services: CollectionConfig = {
   slug: "services",
@@ -34,6 +35,21 @@ export const Services: CollectionConfig = {
       label: {
         en: "Title",
         es: "Título",
+      },
+    },
+    {
+      name: "slug",
+      type: "text",
+      required: true,
+      unique: true,
+      index: true,
+      label: {
+        en: "Slug",
+        es: "Slug",
+      },
+      admin: {
+        readOnly: true,
+        position: "sidebar",
       },
     },
     {
@@ -78,4 +94,18 @@ export const Services: CollectionConfig = {
       },
     },
   ],
+  hooks: {
+    beforeValidate: [
+      ({ data }) => {
+        if (data?.title && !data?.slug) {
+          return {
+            ...data,
+            slug: slugify(data.title),
+          };
+        }
+
+        return data;
+      },
+    ],
+  },
 };

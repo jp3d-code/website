@@ -2,6 +2,7 @@ import type { CollectionConfig } from "payload";
 
 export const Values: CollectionConfig = {
   slug: "values",
+  dbName: "company_values",
   labels: {
     singular: {
       en: "Value",

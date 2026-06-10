@@ -1,8 +1,8 @@
 import configPromise from "@payload-config";
-import { RichText } from "@payloadcms/richtext-lexical/react";
 import { getPayload } from "payload";
+import Link from "next/link";
+import { Container, Section } from "@/shared/components/ui/section";
 import { routes } from "@/shared/config/routes";
-import { getMediaUrl, slugify } from "@/shared/lib/utils";
 
 export default async function ServicesPage() {
   const payload = await getPayload({ config: configPromise });
@@ -11,44 +11,33 @@ export default async function ServicesPage() {
     sort: "order",
   });
 
-  const sectionHashes: Record<string, string> = {
-    INGENIERÍA: routes.servicios.sections.ingenieria.hash,
-    EDUCACIÓN: routes.servicios.sections.educacion.hash,
-    "FABRICACIÓN DIGITAL": routes.servicios.sections.fabricacionDigital.hash,
-  };
-
   return (
-    <div className="mx-auto w-full max-w-4xl px-4 py-16">
-      <div className="grid gap-10">
-        <div className="space-y-40">
-          {services.map((service) => {
-            const imageUrl = getMediaUrl(service.image);
-            const sectionId =
-              sectionHashes[service.title] || slugify(service.title);
+    <Section className="bg-card">
+      <Container>
+        <div className="flex w-full items-center justify-between">
+          <h2 className="text-xl uppercase tracking-widest">Nuestros Servicios</h2>
+        </div>
+        <div className="mt-8 grid gap-6 md:grid-cols-3">
+          {services.map((service, index) => {
+            const serviceNumber = (index + 1).toString().padStart(3, "0");
             return (
-              <section key={service.id} id={sectionId} className="space-y-4">
-                <h2 className="text-5xl tracking-widest md:text-6xl">
-                  {service.title}
-                </h2>
-
-                <div className="prose prose-sm max-w-none text-muted-foreground">
-                  <p>{service.excerpt}</p>
-                  <div className="paragraph">
-                    {service.content && <RichText data={service.content} />}
-                  </div>
-                  {imageUrl && (
-                    <img
-                      src={imageUrl}
-                      alt={service.title}
-                      className="mx-auto aspect-video w-full rounded-lg object-cover"
-                    />
-                  )}
-                </div>
-              </section>
+              <Link
+                key={service.id}
+                href={routes.servicios.detail.build({ slug: service.slug })}
+                className="inset-shadow-md rounded-lg border border-border/60 bg-background p-6 shadow-sm shadow-white transition hover:-translate-y-1 hover:shadow-zinc-200"
+              >
+                <p className="text-muted-foreground text-xs uppercase tracking-widest">
+                  {serviceNumber}
+                </p>
+                <h3 className="mt-3 font-semibold text-lg">{service.title}</h3>
+                <p className="mt-3 text-muted-foreground text-sm">
+                  {service.excerpt}
+                </p>
+              </Link>
             );
           })}
         </div>
-      </div>
-    </div>
+      </Container>
+    </Section>
   );
 }

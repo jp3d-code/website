@@ -5,6 +5,7 @@ import {
   type SanitizedServerEditorConfig,
 } from "@payloadcms/richtext-lexical";
 import type { Service } from "@/payload-types";
+import { slugify } from "@/shared/lib/utils";
 import { getPayloadClient } from "./payload";
 import { uploadMediaFromUrl } from "./utils";
 
@@ -172,6 +173,7 @@ export async function seedServices() {
 
     const data = {
       title: service.title,
+      slug: slugify(service.title),
       image: imageId,
       excerpt: service.excerpt,
       content: lexicalContent,
