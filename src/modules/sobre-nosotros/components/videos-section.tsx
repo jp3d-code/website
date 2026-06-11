@@ -13,6 +13,13 @@ import { Skeleton } from "@/shared/components/ui/skeleton";
 import { routes } from "@/shared/config/routes";
 import { getMediaUrl } from "@/shared/lib/utils";
 
+const platformLabels: Record<string, string> = {
+  youtube: "Ver en YouTube",
+  tiktok: "Ver en TikTok",
+  instagram: "Ver en Instagram",
+  other: "Ver video",
+};
+
 export async function VideosSection() {
   const payload = await getPayload({ config: configPromise });
   const { docs: videos } = await payload.find({
@@ -75,7 +82,7 @@ export async function VideosSection() {
                     rel="noopener noreferrer"
                     className="mt-2 w-max font-semibold text-primary text-sm uppercase tracking-wider hover:underline"
                   >
-                    Ver en YouTube
+                    {platformLabels[video.platform] || "Ver video"}
                   </Link>
                 </div>
               </div>
