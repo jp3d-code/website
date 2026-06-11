@@ -46,6 +46,16 @@ export const Videos: CollectionConfig = {
       },
     },
     {
+      name: "image",
+      type: "upload",
+      relationTo: "media",
+      required: false,
+      label: {
+        en: "Thumbnail",
+        es: "Miniatura",
+      },
+    },
+    {
       name: "platform",
       type: "select",
       required: true,

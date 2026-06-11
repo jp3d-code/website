@@ -1,10 +1,12 @@
 import { getPayloadClient } from "./payload";
+import { uploadMediaFromUrl } from "./utils";
 
 const videosData = [
   {
     title: "Innovación en Fabricación con Impresión 3D",
     url: "https://www.tiktok.com/@jp_3d_makers/video/7444650552417439032",
     platform: "tiktok" as const,
+    image: "editar/imagenes/videos/innovacion_impresion_3d.png",
     excerpt:
       "La impresión 3D permite crear objetos personalizados utilizando materiales como plásticos, metal y resinas. Es útil en medicina, arquitectura e industria aeroespacial.",
     content: [
@@ -18,6 +20,7 @@ const videosData = [
     title: "Decoraciones Navideñas con Corte Láser",
     url: "https://www.tiktok.com/@jp_3d_makers/video/7447658942441770245",
     platform: "tiktok" as const,
+    image: "editar/imagenes/videos/decoraciones_navidenas_corte_laser.png",
     excerpt:
       "Usa el corte láser para crear decoraciones navideñas personalizadas como adornos, tarjetas tridimensionales, centros de mesa, guirnaldas y más.",
     content: [
@@ -31,6 +34,7 @@ const videosData = [
     title: "Impresiones 3D Destacadas de Diciembre",
     url: "https://www.tiktok.com/@jp_3d_makers/video/7445877055603887365",
     platform: "tiktok" as const,
+    image: "editar/imagenes/videos/impresiones_3d_destacadas_diciembre.png",
     excerpt:
       "Las mejores impresiones 3D de JP3D en diciembre incluyeron creaciones para la competencia de anime Omisoka.",
     content: [
@@ -46,6 +50,13 @@ export async function seedVideos() {
   const payload = await getPayloadClient();
 
   for (const video of videosData) {
+    const imageId = video.image
+      ? await uploadMediaFromUrl(payload, video.image, video.title)
+      : undefined;
+
+    const { image: _image, ...videoData } = video;
+    const data = { ...videoData, ...(imageId ? { image: imageId } : {}) };
+
     const existing = await payload.find({
       collection: "videos",
       where: {
@@ -60,7 +71,7 @@ export async function seedVideos() {
       await payload.update({
         collection: "videos",
         id: existing.docs[0].id,
-        data: video,
+        data,
         overrideAccess: true,
       });
       continue;
@@ -68,7 +79,7 @@ export async function seedVideos() {
 
     await payload.create({
       collection: "videos",
-      data: video,
+      data,
       overrideAccess: true,
     });
   }
