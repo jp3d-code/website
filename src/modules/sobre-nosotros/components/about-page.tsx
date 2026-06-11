@@ -1,7 +1,7 @@
-import { HistorySection } from "./sections/history-section";
-import { IntroSection } from "./sections/intro-section";
-import { TeamSection } from "./sections/team-section";
-import { VideosSection } from "./sections/videos-section";
+import { HistorySection } from "./history-section";
+import { IntroSection } from "./intro-section";
+import { TeamSection } from "./team-section";
+import { VideosSection } from "./videos-section";
 
 export default async function AboutPage() {
   return (
