@@ -1,4 +1,4 @@
-import { BrandTokensSection } from "@/modules/home/components/brand-tokens-section";
+import { AboutJp3d } from "@/modules/home/components/aboutJp3d-section";
 import { ExploreLinksSection } from "@/modules/home/components/explore-links-section";
 import { HeroSection } from "@/modules/home/components/hero-section";
 import { MarqueeSection } from "@/modules/home/components/marquee-section";
@@ -10,7 +10,7 @@ export default async function Home() {
   return (
     <>
       <HeroSection />
-      <BrandTokensSection />
+      <AboutJp3d />
       <ServicesSection />
       <ProjectsSection />
       <MarqueeSection />
