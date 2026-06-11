@@ -5,8 +5,8 @@ import { seedProjects } from "./projects";
 import { seedServices } from "./services";
 import { seedSocialMedia } from "./social-media";
 import { seedTags } from "./tags";
-import { seedTimeline } from "./timeline";
 import { seedTestimonials } from "./testimonials";
+import { seedTimeline } from "./timeline";
 import { seedValues } from "./values";
 import { seedVideos } from "./videos";
 

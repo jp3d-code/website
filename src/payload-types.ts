@@ -260,6 +260,7 @@ export interface Video {
   id: number;
   title: string;
   url: string;
+  image?: (number | null) | Media;
   platform: 'tiktok' | 'youtube' | 'instagram' | 'other';
   excerpt: string;
   content: {
@@ -292,10 +293,9 @@ export interface Value {
  */
 export interface Timeline {
   id: number;
-  year: string;
+  date: string;
   title: string;
   description: string;
-  order: number;
   updatedAt: string;
   createdAt: string;
 }
@@ -552,6 +552,7 @@ export interface ServicesSelect<T extends boolean = true> {
 export interface VideosSelect<T extends boolean = true> {
   title?: T;
   url?: T;
+  image?: T;
   platform?: T;
   excerpt?: T;
   content?:
@@ -581,10 +582,9 @@ export interface ValuesSelect<T extends boolean = true> {
  * via the `definition` "timeline_select".
  */
 export interface TimelineSelect<T extends boolean = true> {
-  year?: T;
+  date?: T;
   title?: T;
   description?: T;
-  order?: T;
   updatedAt?: T;
   createdAt?: T;
 }

@@ -14,7 +14,7 @@ export const Timeline: CollectionConfig = {
   },
   admin: {
     useAsTitle: "title",
-    defaultColumns: ["year", "title", "order"],
+    defaultColumns: ["date", "title"],
     group: {
       en: "Content",
       es: "Contenido",
@@ -28,15 +28,12 @@ export const Timeline: CollectionConfig = {
   },
   fields: [
     {
-      name: "year",
-      type: "text",
+      name: "date",
+      type: "date",
       required: true,
       label: {
-        en: "Year",
-        es: "Año",
-      },
-      admin: {
-        placeholder: "2018",
+        en: "Date",
+        es: "Fecha",
       },
     },
     {
@@ -55,19 +52,6 @@ export const Timeline: CollectionConfig = {
       label: {
         en: "Description",
         es: "Descripción",
-      },
-    },
-    {
-      name: "order",
-      type: "number",
-      required: true,
-      defaultValue: 0,
-      label: {
-        en: "Order",
-        es: "Orden",
-      },
-      admin: {
-        position: "sidebar",
       },
     },
   ],
