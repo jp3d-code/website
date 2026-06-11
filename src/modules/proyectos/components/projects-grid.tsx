@@ -10,6 +10,7 @@ export async function ProjectsGrid() {
   const { docs: projects } = await payload.find({
     collection: "projects",
     sort: "order",
+    depth: 2,
   });
 
   return (
@@ -22,12 +23,19 @@ export async function ProjectsGrid() {
         </div>
         <div className="mt-8 grid gap-6 sm:grid-cols-2 md:grid-cols-3">
           {projects.map((project) => {
+            const tags =
+              project.tags
+                ?.map((tag) => (typeof tag === "number" ? null : tag.name))
+                .filter((name): name is string => typeof name === "string") ||
+              [];
+
             return (
               <ProjectCard
                 key={project.id}
                 title={project.title}
                 image={getMediaUrl(project.image)}
                 description={project.excerpt}
+                tags={tags}
                 links={{
                   demo: routes.proyectos.detail.build({ slug: project.slug }),
                 }}
