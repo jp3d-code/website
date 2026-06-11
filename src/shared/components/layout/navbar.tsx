@@ -1,4 +1,4 @@
-import { ChevronDown, MenuIcon } from "lucide-react";
+import { MenuIcon } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/shared/components/ui/button";
 import { LinkBtm } from "@/shared/components/ui/link";

@@ -1,6 +1,6 @@
 import configPromise from "@payload-config";
-import { getPayload } from "payload";
 import Link from "next/link";
+import { getPayload } from "payload";
 import { Container, Section } from "@/shared/components/ui/section";
 import { routes } from "@/shared/config/routes";
 
@@ -15,7 +15,9 @@ export default async function ServicesPage() {
     <Section className="bg-card">
       <Container>
         <div className="flex w-full items-center justify-between">
-          <h2 className="text-xl uppercase tracking-widest">Nuestros Servicios</h2>
+          <h2 className="text-xl uppercase tracking-widest">
+            Nuestros Servicios
+          </h2>
         </div>
         <div className="mt-8 grid gap-6 md:grid-cols-3">
           {services.map((service, index) => {

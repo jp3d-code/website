@@ -1,7 +1,13 @@
 import configPromise from "@payload-config";
 import Link from "next/link";
 import { getPayload } from "payload";
-import { Container, Section } from "@/shared/components/ui/section";
+import {
+  Container,
+  Section,
+  SectionHeader,
+  SectionLink,
+  SectionTitle,
+} from "@/shared/components/ui/section";
 import { routes } from "@/shared/config/routes";
 
 export async function ServicesSection() {
@@ -14,15 +20,11 @@ export async function ServicesSection() {
   return (
     <Section className="bg-card">
       <Container>
-        <div className="flex w-full items-center justify-between">
-          <h2 className="text-xl uppercase tracking-widest">Servicios</h2>
-          <Link
-            href={routes.servicios.path}
-            className="text-muted-foreground text-xs uppercase tracking-[0.2em]"
-          >
-            Ver detalle
-          </Link>
-        </div>
+        <SectionHeader>
+          <SectionTitle first="Nuestros" second="Servicios"></SectionTitle>
+          <SectionLink href={routes.servicios.path}>Explorar mas</SectionLink>
+        </SectionHeader>
+
         <div className="mt-8 grid gap-6 md:grid-cols-3">
           {services.map((service, index) => {
             const serviceNumber = (index + 1).toString().padStart(3, "0");

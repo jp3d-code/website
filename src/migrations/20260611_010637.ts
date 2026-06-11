@@ -106,13 +106,16 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	\`id\` integer PRIMARY KEY NOT NULL,
   	\`title\` text NOT NULL,
   	\`url\` text NOT NULL,
+  	\`image_id\` integer,
   	\`platform\` text DEFAULT 'tiktok' NOT NULL,
   	\`excerpt\` text NOT NULL,
   	\`order\` numeric DEFAULT 0 NOT NULL,
   	\`updated_at\` text DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ', 'now')) NOT NULL,
-  	\`created_at\` text DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ', 'now')) NOT NULL
+  	\`created_at\` text DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ', 'now')) NOT NULL,
+  	FOREIGN KEY (\`image_id\`) REFERENCES \`media\`(\`id\`) ON UPDATE no action ON DELETE set null
   );
   `)
+  await db.run(sql`CREATE INDEX \`videos_image_idx\` ON \`videos\` (\`image_id\`);`)
   await db.run(sql`CREATE INDEX \`videos_updated_at_idx\` ON \`videos\` (\`updated_at\`);`)
   await db.run(sql`CREATE INDEX \`videos_created_at_idx\` ON \`videos\` (\`created_at\`);`)
   await db.run(sql`CREATE TABLE \`company_values\` (
@@ -129,10 +132,9 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   await db.run(sql`CREATE INDEX \`company_values_created_at_idx\` ON \`company_values\` (\`created_at\`);`)
   await db.run(sql`CREATE TABLE \`timeline\` (
   	\`id\` integer PRIMARY KEY NOT NULL,
-  	\`year\` text NOT NULL,
+  	\`date\` text NOT NULL,
   	\`title\` text NOT NULL,
   	\`description\` text NOT NULL,
-  	\`order\` numeric DEFAULT 0 NOT NULL,
   	\`updated_at\` text DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ', 'now')) NOT NULL,
   	\`created_at\` text DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ', 'now')) NOT NULL
   );

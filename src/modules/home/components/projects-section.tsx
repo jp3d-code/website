@@ -1,8 +1,13 @@
 import configPromise from "@payload-config";
-import Link from "next/link";
 import { getPayload } from "payload";
 import { ProjectCard } from "@/shared/components/ui/project-card";
-import { Container, Section } from "@/shared/components/ui/section";
+import {
+  Container,
+  Section,
+  SectionHeader,
+  SectionLink,
+  SectionTitle,
+} from "@/shared/components/ui/section";
 import { routes } from "@/shared/config/routes";
 import { getMediaUrl } from "@/shared/lib/utils";
 
@@ -18,17 +23,10 @@ export async function ProjectsSection() {
   return (
     <Section>
       <Container>
-        <div className="flex w-full items-center justify-between">
-          <h2 className="text-xl uppercase tracking-widest">
-            Nuestros ultimos proyectos
-          </h2>
-          <Link
-            href={routes.proyectos.path}
-            className="text-muted-foreground text-xs uppercase tracking-[0.3em]"
-          >
-            Ver todos
-          </Link>
-        </div>
+        <SectionHeader>
+          <SectionTitle first="Ultimos" second="proyectos"></SectionTitle>
+          <SectionLink href={routes.proyectos.path}>Ver todos</SectionLink>
+        </SectionHeader>
         <div className="mt-8 grid gap-6 sm:grid-cols-2 md:grid-cols-3">
           {projects.map((project) => {
             return (

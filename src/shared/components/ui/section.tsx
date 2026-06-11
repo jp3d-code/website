@@ -1,4 +1,6 @@
+import Link from "next/link";
 import type React from "react";
+import type { ComponentProps } from "react";
 import { cn } from "@/shared/lib/utils";
 
 export function Section({
@@ -45,7 +47,7 @@ export function SectionHeader({
   return (
     <div
       className={cn(
-        "flex flex-col items-center justify-center gap-4",
+        "flex w-full items-center justify-between gap-4",
         className,
       )}
       {...props}
@@ -67,7 +69,7 @@ export function SectionTitle({
   return (
     <h2
       className={cn(
-        "flex flex-wrap items-center justify-center gap-x-2 text-4xl uppercase",
+        "flex flex-wrap items-center justify-center gap-x-2 text-3xl uppercase",
         className,
       )}
       {...props}
@@ -75,6 +77,21 @@ export function SectionTitle({
       <span className={cn("text-secondary", className)}>{first}</span>{" "}
       {second && <span className="text-primary">{second}</span>}
     </h2>
+  );
+}
+
+export function SectionLink({
+  className,
+  ...props
+}: ComponentProps<typeof Link>) {
+  return (
+    <Link
+      {...props}
+      className={cn(
+        "text-muted-foreground text-xs uppercase tracking-[0.2em] hover:underline",
+        className,
+      )}
+    ></Link>
   );
 }
 
