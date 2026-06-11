@@ -10,6 +10,24 @@ export async function uploadMediaFromUrl(
   const fullUrl = `${imageBaseUrl}${urlPath}`;
   const filename = urlPath.split("/").pop() || "image.png";
 
+  return uploadMedia(payload, fullUrl, filename, alt);
+}
+
+export async function uploadMediaFromExternalUrl(
+  payload: Payload,
+  fullUrl: string,
+  alt: string,
+): Promise<number | undefined> {
+  const filename = fullUrl.split("/").pop() || "image.png";
+  return uploadMedia(payload, fullUrl, filename, alt);
+}
+
+async function uploadMedia(
+  payload: Payload,
+  fullUrl: string,
+  filename: string,
+  alt: string,
+): Promise<number | undefined> {
   try {
     // Check if media already exists
     const existingMedia = await payload.find({

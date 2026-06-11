@@ -1,4 +1,6 @@
 import "dotenv/config";
+import { seedCategories } from "./categories";
+import { seedClients } from "./clients";
 import { seedContact } from "./contact";
 import { seedLocations } from "./locations";
 import { seedProjects } from "./projects";
@@ -11,9 +13,11 @@ import { seedValues } from "./values";
 import { seedVideos } from "./videos";
 
 async function main() {
-  await seedTags();
+  const tagsBySlug = await seedTags();
+  const categoriesBySlug = await seedCategories();
+  const clientsBySlug = await seedClients();
   await seedLocations();
-  await seedProjects();
+  await seedProjects({ tagsBySlug, categoriesBySlug, clientsBySlug });
   await seedServices();
   await seedSocialMedia();
   await seedTimeline();

@@ -6,6 +6,8 @@ import { en } from "@payloadcms/translations/languages/en";
 import { es } from "@payloadcms/translations/languages/es";
 import { buildConfig } from "payload";
 import sharp from "sharp";
+import { Categories } from "./collections/Categories";
+import { Clients } from "./collections/Clients";
 import { Locations } from "./collections/Locations";
 import { Media } from "./collections/Media";
 import { Projects } from "./collections/Projects";
@@ -33,6 +35,8 @@ export default buildConfig({
     Users,
     Media,
     Tags,
+    Categories,
+    Clients,
     Projects,
     Services,
     Videos,

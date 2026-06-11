@@ -7,12 +7,12 @@ import {
 import type { Service } from "@/payload-types";
 import { slugify } from "@/shared/lib/utils";
 import { getPayloadClient } from "./payload";
-import { uploadMediaFromUrl } from "./utils";
+import { uploadMediaFromExternalUrl } from "./utils";
 
 const servicesData = [
   {
     title: "INGENIERÍA",
-    image: "editar/imagenes/servicios/ingenieria.png",
+    image: "https://www.hlcsac.com/images/sector-mineria.jpg",
     excerpt:
       "Nuestro servicio de Ingeniería abarca todo el ciclo de desarrollo: conceptualización, modelado 3D y verificación numérica. Trabajamos con SolidWorks y ANSYS para validar esfuerzos, vibraciones y durabilidad.",
     content: `En **JP 3D** entendemos que un proyecto exitoso comienza con una ingeniería sólida. Nuestro servicio integra todas las etapas del desarrollo técnico, desde la conceptualización inicial hasta la generación de documentación lista para fabricación y certificación.
@@ -51,7 +51,7 @@ Al trabajar con **JP 3D**, obtienes soluciones optimizadas en rendimiento, costo
   },
   {
     title: "EDUCACIÓN",
-    image: "editar/imagenes/servicios/educacion.png",
+    image: "https://www.hlcsac.com/images/sector-oil-gas.jpg",
     excerpt:
       "En Educación potenciamos el aprendizaje STEM mediante talleres prácticos de diseño y fabricación digital. Nuestros programas incluyen modelado 3D, impresión aditiva, corte láser y electrónica básica.",
     content: `Nuestro servicio de **Educación** está diseñado para impulsar el aprendizaje de tecnologías emergentes mediante experiencias prácticas y proyectos reales. Creemos que la mejor manera de aprender es creando, experimentando y resolviendo problemas concretos.
@@ -98,7 +98,7 @@ Nuestros programas están dirigidos a instituciones educativas, empresas y centr
   },
   {
     title: "FABRICACIÓN DIGITAL",
-    image: "editar/imagenes/servicios/fabricacion_digital.png",
+    image: "https://www.hlcsac.com/images/sector-industria.jpg",
     excerpt:
       "Nuestro servicio de Fabricación Digital convierte modelos CAD en piezas físicas en cuestión de horas. Combinamos impresión 3D FDM / SLA, corte láser y CNC router para producir prototipos funcionales.",
     content: `Nuestro servicio de **Fabricación Digital** transforma diseños virtuales en piezas físicas funcionales mediante tecnologías avanzadas de producción. Combinamos rapidez, precisión y flexibilidad para acelerar el desarrollo de productos y reducir significativamente los tiempos de entrega.
@@ -153,7 +153,7 @@ export async function seedServices() {
     await editorConfigFactory.default({ config });
 
   for (const [index, service] of servicesData.entries()) {
-    const imageId = await uploadMediaFromUrl(
+    const imageId = await uploadMediaFromExternalUrl(
       payload,
       service.image,
       service.title,

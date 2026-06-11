@@ -35,6 +35,9 @@ Con base en los resultados se validó el espesor de la placa base de **10 mm**, 
 ### Entregables
 
 El informe de memoria de cálculo incluye planos de fabricación, fichas de soldadura *WPS – PQR* y procedimiento de montaje en mina.`,
+    clientSlug: "minera-los-andes",
+    categorySlug: "mineria",
+    tagSlugs: ["ingenieria", "infraestructura"],
   },
   {
     title:
@@ -61,6 +64,9 @@ Todas las uniones son atornilladas con pernos **A325**, lo que permite desmontaj
 * Ficha de pintura epóxica de alto espesor (*DFT 250 µm*) resistente a derrames de diésel
 
 Además, se adjuntó un procedimiento de inspección visual y dimensional que garantiza la conformidad antes de la galvanización en caliente y el envío al sitio.`,
+    clientSlug: "minera-los-andes",
+    categorySlug: "mineria",
+    tagSlugs: ["construccion", "infraestructura"],
   },
   {
     title: "Memoria de cálculo soporte de transformador móvil",
@@ -81,6 +87,9 @@ Se recomendó el uso de pernos de alta resistencia **ASTM A490** de *1 in* para 
 ### Control de calidad
 
 El informe incluye instrucciones de izaje, secuencia de soldadura *SMAW* y criterios de inspección (*VT*, *MT* y pruebas de torsión) que aseguran la integridad del bastidor a lo largo de su vida útil en campo.`,
+    clientSlug: "petroperu-sa",
+    categorySlug: "energia",
+    tagSlugs: ["ingenieria", "tecnologia"],
   },
   {
     title: "Memoria de cálculo andamio colgante para puerto",
@@ -106,10 +115,19 @@ El informe incluye un plan de montaje paso a paso, certificados de soldadura *MI
 ### Protección y durabilidad
 
 Se sugiere recubrimiento epóxico marino de **250 µm** y controles de corrosión bianuales para garantizar una vida útil de **diez años** en ambiente salino.`,
+    clientSlug: "puerto-del-pacifico",
+    categorySlug: "infraestructura-portuaria",
+    tagSlugs: ["construccion", "infraestructura"],
   },
 ];
 
-export async function seedProjects() {
+interface SeedProjectsOptions {
+  tagsBySlug?: Map<string, number>;
+  categoriesBySlug?: Map<string, number>;
+  clientsBySlug?: Map<string, number>;
+}
+
+export async function seedProjects(options: SeedProjectsOptions = {}) {
   const payload = await getPayloadClient();
   const config = await configPromise;
   const editorConfig: SanitizedServerEditorConfig =
@@ -134,12 +152,21 @@ export async function seedProjects() {
       editorConfig,
     }) as Project["content"];
 
+    const tagIds =
+      project.tagSlugs
+        ?.map((slug) => options.tagsBySlug?.get(slug))
+        .filter((id): id is number => id !== undefined) || [];
+
     const data = {
       title: project.title,
       slug: slugify(project.title),
       image: imageId,
       excerpt: project.excerpt,
       content: lexicalContent,
+      client: options.clientsBySlug?.get(project.clientSlug || "") || undefined,
+      category:
+        options.categoriesBySlug?.get(project.categorySlug || "") || undefined,
+      tags: tagIds.length > 0 ? tagIds : undefined,
       order: (index + 1) * 10,
     };
 

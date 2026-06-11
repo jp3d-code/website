@@ -81,6 +81,37 @@ export const Projects: CollectionConfig = {
       },
     },
     {
+      name: "client",
+      type: "relationship",
+      relationTo: "clients",
+      required: false,
+      label: {
+        en: "Client",
+        es: "Cliente",
+      },
+    },
+    {
+      name: "category",
+      type: "relationship",
+      relationTo: "categories",
+      required: false,
+      label: {
+        en: "Category",
+        es: "Categoría",
+      },
+    },
+    {
+      name: "tags",
+      type: "relationship",
+      relationTo: "tags",
+      hasMany: true,
+      required: false,
+      label: {
+        en: "Tags",
+        es: "Etiquetas",
+      },
+    },
+    {
       name: "order",
       type: "number",
       required: true,
