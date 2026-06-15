@@ -18,7 +18,9 @@ export function ServiceDetail({ service }: ServiceDetailProps) {
             <h1 className="text-3xl uppercase tracking-widest md:text-5xl">
               {service.title}
             </h1>
-            <p className="text-muted-foreground text-sm">{service.excerpt}</p>
+            <div className="paragraph text-muted-foreground text-sm">
+              <RichText data={service.excerpt} />
+            </div>
           </header>
 
           {imageUrl && (
