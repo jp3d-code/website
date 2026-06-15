@@ -8,12 +8,12 @@ import { routes } from "@/shared/config/routes";
 import { getMediaUrl } from "@/shared/lib/utils";
 
 interface ServicesGridProps {
-  services: Service[];
+  services: Pick<Service, "id" | "title" | "slug" | "image">[];
 }
 
 export function ServicesGrid({ services }: ServicesGridProps) {
   return (
-    <div className="mt-8 grid gap-6 md:grid-cols-3">
+    <div className="mt-8 grid w-full gap-6 md:grid-cols-3">
       {services.map((service, index) => {
         const imageUrl = getMediaUrl(service.image);
 
@@ -48,7 +48,7 @@ export function ServicesGrid({ services }: ServicesGridProps) {
 
               <div className="grid grid-rows-[0fr] opacity-0 transition-all duration-300 group-hover:grid-rows-[1fr] group-hover:opacity-100">
                 <p className="line-clamp-3 overflow-hidden text-sm text-white/70">
-                  {service.excerpt}
+                  Conoce más sobre este servicio
                 </p>
               </div>
 

@@ -6,6 +6,8 @@ import {
   SectionHeader,
   SectionLink,
   SectionTitle,
+  SectionTitleForeground,
+  SectionTitlePrimary,
 } from "@/shared/components/ui/section";
 import { routes } from "@/shared/config/routes";
 import { ServicesGrid } from "./services-grid";
@@ -22,7 +24,10 @@ export async function ServicesSection() {
     <Section className="">
       <Container>
         <SectionHeader>
-          <SectionTitle first="Nuestros" second="Servicios"></SectionTitle>
+          <SectionTitle>
+            <SectionTitleForeground>Nuestros</SectionTitleForeground>
+            <SectionTitlePrimary>Servicios</SectionTitlePrimary>
+          </SectionTitle>
           <SectionLink href={routes.servicios.path}>Explorar más</SectionLink>
         </SectionHeader>
 

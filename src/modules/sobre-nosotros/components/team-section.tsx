@@ -4,6 +4,8 @@ import {
   SectionDescription,
   SectionHeader,
   SectionTitle,
+  SectionTitleForeground,
+  SectionTitlePrimary,
 } from "@/shared/components/ui/section";
 import { routes } from "@/shared/config/routes";
 
@@ -15,7 +17,10 @@ export function TeamSection() {
       <Container>
         <div className="grid gap-8 md:grid-cols-2 lg:items-center lg:gap-16">
           <SectionHeader className="mb-16 flex-col items-start">
-            <SectionTitle first="Nuestro" second="Equipo" />
+            <SectionTitle>
+              <SectionTitleForeground>Nuestro</SectionTitleForeground>
+              <SectionTitlePrimary>Equipo</SectionTitlePrimary>
+            </SectionTitle>
             <SectionDescription className="text-start">
               JP 3D está formado por ingenieros, diseñadores y educadores que
               unen experiencia y pasión por la fabricación digital.

@@ -7,9 +7,10 @@ import {
   SectionHeader,
   SectionLink,
   SectionTitle,
+  SectionTitleForeground,
+  SectionTitlePrimary,
 } from "@/shared/components/ui/section";
 import { routes } from "@/shared/config/routes";
-import { getMediaUrl } from "@/shared/lib/utils";
 
 export async function ProjectsSection() {
   const payload = await getPayload({ config: configPromise });
@@ -17,30 +18,23 @@ export async function ProjectsSection() {
     collection: "projects",
     limit: 3,
     sort: "order",
-    depth: 1,
+    depth: 2,
   });
 
   return (
     <Section>
       <Container>
         <SectionHeader>
-          <SectionTitle first="Ultimos" second="proyectos"></SectionTitle>
+          <SectionTitle>
+            <SectionTitleForeground>Ultimos</SectionTitleForeground>
+            <SectionTitlePrimary>proyectos</SectionTitlePrimary>
+          </SectionTitle>
           <SectionLink href={routes.proyectos.path}>Ver todos</SectionLink>
         </SectionHeader>
         <div className="mt-8 grid gap-6 sm:grid-cols-2 md:grid-cols-3">
-          {projects.map((project) => {
-            return (
-              <ProjectCard
-                key={project.id}
-                title={project.title}
-                image={getMediaUrl(project.image)}
-                description={project.excerpt}
-                links={{
-                  demo: routes.proyectos.detail.build({ slug: project.slug }),
-                }}
-              />
-            );
-          })}
+          {projects.map((project) => (
+            <ProjectCard key={project.id} project={project} />
+          ))}
         </div>
       </Container>
     </Section>

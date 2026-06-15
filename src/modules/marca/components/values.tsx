@@ -5,6 +5,8 @@ import {
   Container,
   Section,
   SectionTitle,
+  SectionTitleForeground,
+  SectionTitlePrimary,
 } from "@/shared/components/ui/section";
 import { routes } from "@/shared/config/routes";
 
@@ -18,7 +20,10 @@ export async function OurValues() {
   return (
     <Section id={routes.marca.sections.valores.hash} className="bg-card">
       <Container className="grid items-center justify-items-center gap-10 md:grid-cols-2">
-        <SectionTitle first="Nuestros" second="Valores"></SectionTitle>
+        <SectionTitle>
+          <SectionTitleForeground>Nuestros</SectionTitleForeground>
+          <SectionTitlePrimary>Valores</SectionTitlePrimary>
+        </SectionTitle>
         <div className="flex w-full max-w-md flex-col items-start">
           {values.map((value, i) => (
             <motion.div

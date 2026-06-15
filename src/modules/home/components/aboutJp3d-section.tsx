@@ -4,6 +4,8 @@ import {
   Section,
   SectionHeader,
   SectionTitle,
+  SectionTitleForeground,
+  SectionTitlePrimary,
 } from "@/shared/components/ui/section";
 import { routes } from "@/shared/config/routes";
 
@@ -12,7 +14,10 @@ export function AboutJp3d() {
     <Section>
       <Container className="grid gap-14">
         <SectionHeader>
-          <SectionTitle first="Sobre" second="Nostros"></SectionTitle>
+          <SectionTitle>
+            <SectionTitleForeground>Sobre</SectionTitleForeground>
+            <SectionTitlePrimary>Nostros</SectionTitlePrimary>
+          </SectionTitle>
         </SectionHeader>
         <h2 className="text-3xl text-foreground/40 leading-tight md:text-4xl">
           Especialistas en diseño 3D y{" "}

@@ -1,0 +1,78 @@
+"use client";
+
+import { Building2, MapPin, Phone } from "lucide-react";
+import {
+  Map as MapComp,
+  MapMarker,
+  MarkerContent,
+  MarkerPopup,
+  MarkerTooltip,
+} from "@/shared/components/ui/map";
+
+export interface MapLocation {
+  id: number;
+  name: string;
+  address: string;
+  lat: number;
+  lng: number;
+}
+
+interface LocationRowProps {
+  location: MapLocation;
+  phone?: string;
+}
+
+export function LocationRow({ location, phone }: LocationRowProps) {
+  return (
+    <section
+      id={`location-${location.id}`}
+      className="grid w-full items-start gap-10 border-border/60 border-b py-20 md:grid-cols-2 md:gap-16"
+    >
+      <div className="flex flex-col items-start gap-5 md:items-end md:justify-self-end">
+        <div className="flex items-center gap-3">
+          <span className="flex size-10 items-center justify-center rounded-full bg-primary/10 text-primary">
+            <Building2 className="size-5" />
+          </span>
+          <h3 className="font-semibold text-2xl">{location.name}</h3>
+        </div>
+        <p className="text-muted-foreground text-sm leading-relaxed md:text-end">
+          {location.address}
+        </p>
+
+        <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-muted-foreground text-xs">
+          <span className="inline-flex items-center gap-1.5 md:text-end">
+            <MapPin className="size-3.5" />
+            {location.lat.toFixed(4)}, {location.lng.toFixed(4)}
+          </span>
+          {phone && (
+            <span className="inline-flex items-center gap-1.5">
+              <Phone className="size-3.5" />
+              {phone}
+            </span>
+          )}
+        </div>
+      </div>
+      <div className="aspect-4/3 overflow-hidden rounded-3xl border border-border/60 shadow-sm">
+        <MapComp center={[location.lng, location.lat]} zoom={15}>
+          <MapMarker longitude={location.lng} latitude={location.lat}>
+            <MarkerContent>
+              <MapPin className="size-8 text-primary" />
+            </MarkerContent>
+            <MarkerTooltip>{location.name}</MarkerTooltip>
+            <MarkerPopup>
+              <div className="space-y-1">
+                <p className="font-medium text-foreground">{location.name}</p>
+                <p className="text-muted-foreground text-xs">
+                  {location.lat.toFixed(4)}, {location.lng.toFixed(4)}
+                </p>
+                <p className="text-muted-foreground text-xs">
+                  {location.address}
+                </p>
+              </div>
+            </MarkerPopup>
+          </MapMarker>
+        </MapComp>
+      </div>
+    </section>
+  );
+}

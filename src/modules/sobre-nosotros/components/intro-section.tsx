@@ -8,6 +8,8 @@ import {
   SectionDescription,
   SectionHeader,
   SectionTitle,
+  SectionTitleForeground,
+  SectionTitlePrimary,
 } from "@/shared/components/ui/section";
 
 export async function IntroSection() {
@@ -22,11 +24,10 @@ export async function IntroSection() {
       <Container>
         <div className="grid gap-x-8 md:grid-cols-2">
           <SectionHeader className="flex-col items-start justify-center">
-            <SectionTitle
-              first="Nuestra"
-              second="Esencia"
-              className="justify-start"
-            />
+            <SectionTitle className="justify-start">
+              <SectionTitleForeground>Nuestra</SectionTitleForeground>
+              <SectionTitlePrimary>Esencia</SectionTitlePrimary>
+            </SectionTitle>
             <SectionDescription className="w-full max-w-md text-left">
               Un equipo que combina ingeniería, diseño y fabricación digital
               para dar vida a ideas que impulsan a la industria peruana. Creemos
@@ -41,7 +42,7 @@ export async function IntroSection() {
             {testimonials.slice(0, 1).map((t) => (
               <div
                 key={t.id}
-                className="relative rounded-3xl bg-primary/5 p-8 sm:p-10"
+                className="relative rounded-xl bg-primary/5 p-8 sm:p-10"
               >
                 <div className="mb-6 flex gap-2">
                   {[1, 2, 3, 4, 5].map((star) => (

@@ -1,10 +1,13 @@
 import configPromise from "@payload-config";
+import * as motion from "motion/react-client";
 import { getPayload } from "payload";
 import {
   Container,
   Section,
   SectionHeader,
   SectionTitle,
+  SectionTitleForeground,
+  SectionTitlePrimary,
 } from "@/shared/components/ui/section";
 import { routes } from "@/shared/config/routes";
 import { cn } from "@/shared/lib/utils";
@@ -26,7 +29,10 @@ export async function HistorySection() {
     <Section id={historia.hash} className="bg-card">
       <Container>
         <SectionHeader className="mb-16">
-          <SectionTitle first="Nuestra" second="Historia" />
+          <SectionTitle>
+            <SectionTitleForeground>Nuestra</SectionTitleForeground>
+            <SectionTitlePrimary>Historia</SectionTitlePrimary>
+          </SectionTitle>
           <p className="text-muted-foreground text-xs uppercase tracking-[0.2em]">
             Nuestra trayectoria
           </p>
@@ -44,7 +50,11 @@ export async function HistorySection() {
                   <div className="absolute top-1 left-4.5 z-10 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border-2 border-primary bg-background md:left-1/2 md:-translate-x-1/2">
                     <div className="h-3 w-3 rounded-full bg-primary" />
                   </div>
-                  <div
+                  <motion.div
+                    whileInView={{ opacity: 1, x: 0 }}
+                    initial={{ opacity: 0, x: 0 }}
+                    viewport={{ once: true, amount: 0.2 }}
+                    transition={{ duration: 0.3 }}
                     className={cn(
                       "ml-16 w-full md:ml-0",
                       isEven
@@ -65,7 +75,7 @@ export async function HistorySection() {
                         {event.description}
                       </p>
                     </div>
-                  </div>
+                  </motion.div>
                 </div>
               );
             })}

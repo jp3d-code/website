@@ -14,7 +14,7 @@ export function ExploreLinksSection() {
     <Section className="bg-card">
       <Container className="flex justify-between gap-10 md:flex-row">
         <h2 className="text-4xl uppercase tracking-widest md:text-7xl">
-          Sigue explorando
+          Sigue <span className="text-primary">explorando</span>
         </h2>
         <div className="grid gap-2">
           {exploreLinks.map((item) => (

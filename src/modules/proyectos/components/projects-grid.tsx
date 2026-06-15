@@ -2,8 +2,6 @@ import configPromise from "@payload-config";
 import { getPayload } from "payload";
 import { ProjectCard } from "@/shared/components/ui/project-card";
 import { Container, Section } from "@/shared/components/ui/section";
-import { routes } from "@/shared/config/routes";
-import { getMediaUrl } from "@/shared/lib/utils";
 
 export async function ProjectsGrid() {
   const payload = await getPayload({ config: configPromise });
@@ -22,26 +20,9 @@ export async function ProjectsGrid() {
           </h2>
         </div>
         <div className="mt-8 grid gap-6 sm:grid-cols-2 md:grid-cols-3">
-          {projects.map((project) => {
-            const tags =
-              project.tags
-                ?.map((tag) => (typeof tag === "number" ? null : tag.name))
-                .filter((name): name is string => typeof name === "string") ||
-              [];
-
-            return (
-              <ProjectCard
-                key={project.id}
-                title={project.title}
-                image={getMediaUrl(project.image)}
-                description={project.excerpt}
-                tags={tags}
-                links={{
-                  demo: routes.proyectos.detail.build({ slug: project.slug }),
-                }}
-              />
-            );
-          })}
+          {projects.map((project) => (
+            <ProjectCard key={project.id} project={project} />
+          ))}
         </div>
       </Container>
     </Section>
