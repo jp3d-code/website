@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getPayload } from "payload";
 import { ProjectDetail } from "@/modules/proyectos/components/project-detail";
+import { RelatedProjects } from "@/modules/proyectos/components/related-projects";
 
 export const dynamicParams = true;
 
@@ -73,5 +74,10 @@ export default async function ProyectoDetallePage({
     notFound();
   }
 
-  return <ProjectDetail project={project} />;
+  return (
+    <>
+      <ProjectDetail project={project} />
+      <RelatedProjects excludeId={project.id} />
+    </>
+  );
 }
