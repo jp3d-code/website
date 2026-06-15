@@ -10,6 +10,12 @@ export async function seedLocations() {
       lat: -16.4227358,
       lng: -71.5006739,
     },
+    {
+      name: "Oficina en Juliaca",
+      address: "Av. El Sol 123, Juliaca 21101 Puno.",
+      lat: -15.5,
+      lng: -70.1333333,
+    },
   ];
 
   for (const location of locations) {
@@ -37,6 +43,7 @@ export async function seedLocations() {
       collection: "locations",
       data: location,
       overrideAccess: true,
+      draft: true,
     });
   }
 

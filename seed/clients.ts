@@ -4,23 +4,53 @@ import { uploadMediaFromExternalUrl } from "./utils";
 
 const clientsData = [
   {
-    name: "Minera Los Andes",
-    logo: "https://placehold.co/400x200/1a1a2e/FFFFFF?text=Minera+Los+Andes",
+    name: "AgroExport del Sur",
+    logo: "https://placehold.co/400x200/2d6a4f/FFFFFF?text=AgroExport+del+Sur",
     website: "https://ejemplo.com",
   },
   {
-    name: "PetroPerú S.A.",
-    logo: "https://placehold.co/400x200/16213e/FFFFFF?text=PetroPer%C3%BA",
+    name: "Energía Andina",
+    logo: "https://placehold.co/400x200/1b4332/FFFFFF?text=Energia+Andina",
     website: "https://ejemplo.com",
   },
   {
-    name: "Industria del Norte",
-    logo: "https://placehold.co/400x200/0f3460/FFFFFF?text=Industria+del+Norte",
+    name: "Constructora Inca",
+    logo: "https://placehold.co/400x200/6c584c/FFFFFF?text=Constructora+Inca",
     website: "https://ejemplo.com",
   },
   {
-    name: "Puerto del Pacífico",
-    logo: "https://placehold.co/400x200/533483/FFFFFF?text=Puerto+del+Pacifico",
+    name: "Terminal Logístico del Sur",
+    logo: "https://placehold.co/400x200/003049/FFFFFF?text=Terminal+Logistico+del+Sur",
+    website: "https://ejemplo.com",
+  },
+  {
+    name: "Tecnometal Perú",
+    logo: "https://placehold.co/400x200/495057/FFFFFF?text=Tecnometal+Peru",
+    website: "https://ejemplo.com",
+  },
+  {
+    name: "Pesquera Horizonte",
+    logo: "https://placehold.co/400x200/005f73/FFFFFF?text=Pesquera+Horizonte",
+    website: "https://ejemplo.com",
+  },
+  {
+    name: "Cementos del Pacífico",
+    logo: "https://placehold.co/400x200/7f5539/FFFFFF?text=Cementos+del+Pacifico",
+    website: "https://ejemplo.com",
+  },
+  {
+    name: "Transportes Altiplano",
+    logo: "https://placehold.co/400x200/3a0ca3/FFFFFF?text=Transportes+Altiplano",
+    website: "https://ejemplo.com",
+  },
+  {
+    name: "Grupo Industrial Quimera",
+    logo: "https://placehold.co/400x200/4a4e69/FFFFFF?text=Grupo+Industrial+Quimera",
+    website: "https://ejemplo.com",
+  },
+  {
+    name: "Servicios Portuarios del Perú",
+    logo: "https://placehold.co/400x200/264653/FFFFFF?text=Servicios+Portuarios+del+Peru",
     website: "https://ejemplo.com",
   },
 ];
