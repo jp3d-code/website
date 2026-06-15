@@ -1,90 +1,83 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ExternalLink } from "lucide-react";
+import { ArrowUpRight, Tag as TagIcon } from "lucide-react";
+import Link from "next/link";
+import type { Project } from "@/payload-types";
 import { Badge } from "@/shared/components/ui/badge";
 import { Card } from "@/shared/components/ui/card";
-import { cn } from "@/shared/lib/utils";
+import { routes } from "@/shared/config/routes";
+import { cn, getCollections, getMediaUrl } from "@/shared/lib/utils";
+
+type ProjectCardProject = Pick<
+  Project,
+  "title" | "slug" | "image" | "excerpt" | "tags"
+>;
 
 interface ProjectCardProps {
-  title?: string;
-  description?: string;
-  tags?: string[];
-  image?: string;
-  links?: {
-    demo?: string;
-    github?: string;
-  };
+  project: ProjectCardProject;
   className?: string;
 }
 
-const defaultProject = {
-  title: "E-Commerce Platform",
-  description:
-    "Full-stack online store with payment integration and inventory management",
-  tags: ["React", "Node.js", "PostgreSQL", "Stripe"],
-  image:
-    "https://images.unsplash.com/photo-1661956602116-aa6865609028?w=800&q=80",
-  links: { demo: "#", github: "#" },
-};
+export function ProjectCard({ project, className }: ProjectCardProps) {
+  const imageUrl = getMediaUrl(project.image);
+  const tags = getCollections(project.tags);
 
-export function ProjectCard({
-  title = defaultProject.title,
-  description = defaultProject.description,
-  tags = defaultProject.tags,
-  image = defaultProject.image,
-  links = defaultProject.links,
-  className,
-}: ProjectCardProps) {
+  const href = routes.proyectos.detail.build({ slug: project.slug });
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4 }}
-      className={cn("w-full max-w-100", className)}
+      className={cn("w-full", className)}
     >
       <Card className="group relative h-full overflow-hidden rounded-lg border-border/50 bg-card pt-0 backdrop-blur-sm transition-all duration-300 hover:border-primary/50 hover:shadow-primary/10 hover:shadow-xl">
+        <Link
+          href={href}
+          className="absolute inset-0 z-10"
+          aria-label={project.title}
+        />
+
         <div className="relative aspect-video overflow-hidden">
-          <motion.img
-            src={image}
-            alt={title}
-            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
-          />
+          {imageUrl ? (
+            <motion.img
+              src={imageUrl}
+              alt={project.title}
+              className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+            />
+          ) : (
+            <div className="h-full w-full bg-muted" />
+          )}
           <div className="absolute inset-0 bg-linear-to-t from-background/90 via-background/20 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
-          <div className="absolute inset-0 flex items-center justify-center gap-4 opacity-0 transition-all duration-300 group-hover:opacity-100">
-            {links?.demo && (
-              <motion.a
-                href={links.demo}
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-                className="flex h-10 w-10 items-center justify-center rounded-full bg-secondary text-primary-foreground shadow-lg shadow-primary/25 backdrop-blur-md"
-                title="View Demo"
-              >
-                <ExternalLink className="h-5 w-5" />
-              </motion.a>
-            )}
+          <div className="absolute top-3 right-3 z-20 flex h-9 w-9 translate-x-1 -translate-y-1 items-center justify-center rounded-full bg-background/80 text-foreground opacity-0 shadow-md backdrop-blur-md transition-all duration-300 group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100">
+            <ArrowUpRight className="h-4 w-4" />
           </div>
         </div>
 
         <div className="p-5">
-          <h3 className="mb-2 line-clamp-2 text-foreground text-xl tracking-tight transition-colors group-hover:text-primary">
-            {title}
+          <h3 className="mb-2 line-clamp-2 font-semibold text-foreground text-xl tracking-tight transition-colors group-hover:text-primary">
+            {project.title}
           </h3>
           <p className="mb-4 line-clamp-3 text-muted-foreground text-sm">
-            {description}
+            {project.excerpt}
           </p>
-          <div className="flex flex-wrap gap-2">
-            {tags?.map((tag, index) => (
-              <Badge
-                key={index}
-                variant="secondary"
-                className="bg-secondary/50 px-2 py-0.5 font-normal text-xs hover:bg-secondary"
-              >
-                {tag}
-              </Badge>
-            ))}
-          </div>
+
+          {tags.length > 0 && (
+            <div className="flex flex-wrap items-center gap-2 border-border/40 border-t pt-4">
+              <TagIcon className="h-3.5 w-3.5 text-muted-foreground/70" />
+              {tags.map((tag) => (
+                <Badge
+                  key={tag.id}
+                  variant="secondary"
+                  className="bg-secondary/50 px-2 py-0.5 font-normal text-xs"
+                >
+                  {tag.name}
+                </Badge>
+              ))}
+            </div>
+          )}
         </div>
       </Card>
     </motion.div>
