@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Hero } from "@/modules/contacto/components/hero";
+import { LocationsList } from "@/modules/contacto/components/locations-list";
 import { routes } from "@/shared/config/routes";
 
 export const metadata: Metadata = {
@@ -7,5 +8,10 @@ export const metadata: Metadata = {
 };
 
 export default async function ContactoPage() {
-  return <Hero />;
+  return (
+    <>
+      <Hero />
+      <LocationsList />
+    </>
+  );
 }
