@@ -13,8 +13,9 @@ const servicesData = [
   {
     title: "INGENIERÍA",
     image: "https://www.hlcsac.com/images/sector-mineria.jpg",
-    excerpt:
-      "Nuestro servicio de Ingeniería abarca todo el ciclo de desarrollo: conceptualización, modelado 3D y verificación numérica. Trabajamos con SolidWorks y ANSYS para validar esfuerzos, vibraciones y durabilidad.",
+    excerpt: `Nuestro servicio de **Ingeniería** abarca todo el ciclo de desarrollo técnico: desde la conceptualización inicial y el modelado 3D hasta la verificación numérica avanzada y la documentación lista para fabricación. Trabajamos con **SolidWorks** y **ANSYS** como plataformas principales para validar esfuerzos mecánicos, deformaciones estructurales, fatiga de materiales  y durabilidad operativa bajo condiciones reales de servicio.
+
+    Acompañamos a cada cliente durante todas las etapas del proyecto, integrando ingeniería mecánica, estructural y de procesos dentro de un flujo de trabajo colaborativo que reduce errores, minimiza retrabajos. Cada entregable está pensado para ser directamente utilizable por el equipo de fabricación, operaciones o certificación del cliente.`,
     content: `En **JP 3D** entendemos que un proyecto exitoso comienza con una ingeniería sólida. Nuestro servicio integra todas las etapas del desarrollo técnico, desde la conceptualización inicial hasta la generación de documentación lista para fabricación y certificación.
 
 ### ¿Qué hacemos?
@@ -52,8 +53,9 @@ Al trabajar con **JP 3D**, obtienes soluciones optimizadas en rendimiento, costo
   {
     title: "EDUCACIÓN",
     image: "https://www.hlcsac.com/images/sector-oil-gas.jpg",
-    excerpt:
-      "En Educación potenciamos el aprendizaje STEM mediante talleres prácticos de diseño y fabricación digital. Nuestros programas incluyen modelado 3D, impresión aditiva, corte láser y electrónica básica.",
+    excerpt: `En **Educación** potenciamos el aprendizaje STEM mediante talleres prácticos y programas especializados en diseño y fabricación digital. Combinamos teoría y práctica para que estudiantes y profesionales dominen las herramientas que están transformando la **industria moderna**.
+
+Nuestra metodología se basa en el aprender haciendo. Cada programa integra una base teórica clara y concisa con actividades prácticas orientadas a resultados, donde los participantes desarrollan proyectos completos desde la etapa de diseño hasta la fabricación y validación funcional de sus prototipos.`,
     content: `Nuestro servicio de **Educación** está diseñado para impulsar el aprendizaje de tecnologías emergentes mediante experiencias prácticas y proyectos reales. Creemos que la mejor manera de aprender es creando, experimentando y resolviendo problemas concretos.
 
 ### Programas orientados al aprendizaje STEM
@@ -99,8 +101,9 @@ Nuestros programas están dirigidos a instituciones educativas, empresas y centr
   {
     title: "FABRICACIÓN DIGITAL",
     image: "https://www.hlcsac.com/images/sector-industria.jpg",
-    excerpt:
-      "Nuestro servicio de Fabricación Digital convierte modelos CAD en piezas físicas en cuestión de horas. Combinamos impresión 3D FDM / SLA, corte láser y CNC router para producir prototipos funcionales.",
+    excerpt: `Nuestro servicio de **Fabricación Digital** convierte modelos CAD en piezas físicas funcionales en cuestión de horas. Combinamos **impresión 3D FDM y SLA, corte y grabado láser, y CNC router** para producir prototipos, piezas únicas y series cortas con rapidez, precisión y flexibilidad, acelerando el desarrollo de productos y reduciendo significativamente los tiempos de entrega.
+
+Cada proyecto se desarrolla dentro de un entorno completamente digital. Antes de fabricar, optimizamos variables clave como la orientación de las piezas, las estrategias de rebanadoy las trayectorias de mecanizado, maximizando la eficiencia y reduciendo costos sin comprometer la calidad final.`,
     content: `Nuestro servicio de **Fabricación Digital** transforma diseños virtuales en piezas físicas funcionales mediante tecnologías avanzadas de producción. Combinamos rapidez, precisión y flexibilidad para acelerar el desarrollo de productos y reducir significativamente los tiempos de entrega.
 
 ### Tecnologías disponibles
@@ -166,6 +169,11 @@ export async function seedServices() {
       continue;
     }
 
+    const lexicalExcerpt = convertMarkdownToLexical({
+      markdown: service.excerpt,
+      editorConfig,
+    }) as Service["excerpt"];
+
     const lexicalContent = convertMarkdownToLexical({
       markdown: service.content,
       editorConfig,
@@ -175,7 +183,7 @@ export async function seedServices() {
       title: service.title,
       slug: slugify(service.title),
       image: imageId,
-      excerpt: service.excerpt,
+      excerpt: lexicalExcerpt,
       content: lexicalContent,
       order: (index + 1) * 10,
     };
