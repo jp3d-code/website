@@ -18,22 +18,20 @@ interface ClientsCarouselProps {
 export function ClientsCarousel({ clients }: ClientsCarouselProps) {
   const targetRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: targetRef });
-  const x = useTransform(scrollYProgress, [0, 1], ["1%", "-95%"]);
+  const x = useTransform(scrollYProgress, [0, 1], ["10%", "-110%"]);
 
   return (
-    <section
-      ref={targetRef}
-      className="relative h-[300vh] overflow-hidden bg-neutral-900"
-    >
-      <div className="sticky top-0 flex h-screen w-full flex-col justify-center overflow-hidden">
-        <SectionTitle className="absolute top-12 left-10 z-20 flex-col items-start gap-2">
-          <SectionTitleForeground className="text-neutral-400">
-            Nuestros
-          </SectionTitleForeground>
-          <SectionTitlePrimary className="text-white">Clientes</SectionTitlePrimary>
+    <section ref={targetRef} className="relative h-[300vh] bg-neutral-900">
+      <div className="sticky top-0 flex h-screen w-full flex-col items-center justify-center gap-10 overflow-hidden">
+        <SectionTitle className="z-20 flex w-full max-w-6xl items-center justify-start gap-2">
+          <SectionTitleForeground>Nuestros</SectionTitleForeground>
+          <SectionTitlePrimary>Clientes</SectionTitlePrimary>
         </SectionTitle>
 
-        <motion.div style={{ x }} className="flex gap-4 px-10">
+        <motion.div
+          style={{ x }}
+          className="flex w-full items-start justify-start gap-4 px-10"
+        >
           {clients.map((client) => (
             <ClientCard key={client.id} client={client} />
           ))}
@@ -55,7 +53,7 @@ function ClientCard({ client }: ClientCardProps) {
       href={client.website || "#"}
       target="_blank"
       rel="noopener noreferrer"
-      className="group relative h-[450px] w-[450px] shrink-0 overflow-hidden rounded-xl bg-neutral-800"
+      className="group relative aspect-video w-100 shrink-0 overflow-hidden rounded-lg bg-neutral-800"
     >
       <Skeleton className="absolute inset-0 rounded-xl" />
       {logoUrl && (
@@ -78,12 +76,6 @@ function ClientCard({ client }: ClientCardProps) {
       )}
 
       <div className="absolute inset-0 z-20 bg-black/40" />
-
-      <div className="absolute inset-0 z-30 grid place-content-center p-8">
-        <p className="bg-gradient-to-br from-white/20 to-white/0 p-8 text-center font-black text-4xl text-white uppercase tracking-wider backdrop-blur-lg md:text-5xl">
-          {client.name}
-        </p>
-      </div>
     </a>
   );
 }
