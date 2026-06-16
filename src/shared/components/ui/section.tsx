@@ -87,7 +87,7 @@ export function SectionTitle({
   return (
     <h2
       className={cn(
-        "flex flex-wrap items-center justify-center gap-x-2 text-3xl uppercase",
+        "flex w-full flex-wrap items-center justify-start gap-x-2 text-3xl uppercase",
         className,
       )}
       {...props}
