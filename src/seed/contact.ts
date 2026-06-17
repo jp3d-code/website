@@ -3,7 +3,18 @@ import { getPayloadClient } from "./payload";
 export async function seedContact() {
   const payload = await getPayloadClient();
 
-  // Fetch related records to link them
+  const existing = await payload.findGlobal({
+    slug: "contact",
+    depth: 0,
+  });
+
+  if (existing && (existing.email || existing.phone)) {
+    payload.logger.info(
+      "Seed skipped: contact global already populated; preserving existing data.",
+    );
+    return;
+  }
+
   const locationsResult = await payload.find({
     collection: "locations",
     limit: 100,

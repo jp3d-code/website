@@ -3,6 +3,7 @@ import { seedCategories } from "./categories";
 import { seedClients } from "./clients";
 import { seedContact } from "./contact";
 import { seedLocations } from "./locations";
+import { getPayloadClient } from "./payload";
 import { seedProjects } from "./projects";
 import { seedServices } from "./services";
 import { seedSocialMedia } from "./social-media";
@@ -12,7 +13,43 @@ import { seedTimeline } from "./timeline";
 import { seedValues } from "./values";
 import { seedVideos } from "./videos";
 
-async function main() {
+export async function isDatabaseEmpty(): Promise<boolean> {
+  const payload = await getPayloadClient();
+
+  const collections = [
+    "tags",
+    "categories",
+    "clients",
+    "projects",
+    "services",
+    "values",
+    "timeline",
+    "social-media",
+    "testimonials",
+    "videos",
+    "locations",
+  ] as const;
+
+  for (const slug of collections) {
+    const result = await payload.find({ collection: slug, limit: 1, depth: 0 });
+    if (result.totalDocs > 0) {
+      payload.logger.info(
+        `Seed skipped: collection "${slug}" already has ${result.totalDocs} document(s).`,
+      );
+      return false;
+    }
+  }
+
+  return true;
+}
+
+export async function runSeed(): Promise<void> {
+  const empty = await isDatabaseEmpty();
+
+  if (!empty) {
+    return;
+  }
+
   const tagsBySlug = await seedTags();
   const categoriesBySlug = await seedCategories();
   const clientsBySlug = await seedClients();
@@ -26,9 +63,3 @@ async function main() {
   await seedVideos();
   await seedContact();
 }
-
-main().catch((error) => {
-  // biome-ignore lint/suspicious/noConsole: Allow console.error for logging errors
-  console.error("Seed failed:", error);
-  process.exit(1);
-});
