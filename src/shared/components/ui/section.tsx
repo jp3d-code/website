@@ -105,7 +105,7 @@ export function SectionLink({
     <Link
       {...props}
       className={cn(
-        "text-muted-foreground text-xs uppercase tracking-[0.2em] hover:underline",
+        "min-w-fit text-muted-foreground text-xs uppercase tracking-[0.2em] hover:underline",
         className,
       )}
     />

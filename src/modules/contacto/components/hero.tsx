@@ -6,7 +6,6 @@ export async function Hero() {
     <Section className="bg-card">
       <Container className="grid gap-10 md:grid-cols-2">
         <ContactInfo />
-        {/*  NO PONGAS NADA QUI */}
       </Container>
     </Section>
   );
