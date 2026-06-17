@@ -6,6 +6,7 @@ import { en } from "@payloadcms/translations/languages/en";
 import { es } from "@payloadcms/translations/languages/es";
 import { buildConfig } from "payload";
 import sharp from "sharp";
+import { migrations } from "@/migrations";
 import { Categories } from "./collections/Categories";
 import { Clients } from "./collections/Clients";
 import { Locations } from "./collections/Locations";
@@ -56,6 +57,7 @@ export default buildConfig({
     client: {
       url: process.env.DATABASE_URL || "",
     },
+    prodMigrations: migrations,
   }),
   sharp: sharp,
   plugins: [],
