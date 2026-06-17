@@ -4,23 +4,6 @@ import { notFound } from "next/navigation";
 import { getPayload } from "payload";
 import { ServiceDetail } from "@/modules/servicios/components/service-detail";
 
-export const dynamicParams = true;
-
-export async function generateStaticParams() {
-  const payload = await getPayload({ config: configPromise });
-  const { docs: services } = await payload.find({
-    collection: "services",
-    limit: 1000,
-    select: {
-      slug: true,
-    },
-  });
-
-  return services.map((service) => ({
-    slug: service.slug,
-  }));
-}
-
 export async function generateMetadata({
   params,
 }: {

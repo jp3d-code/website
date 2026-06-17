@@ -5,23 +5,6 @@ import { getPayload } from "payload";
 import { ProjectDetail } from "@/modules/proyectos/components/project-detail";
 import { RelatedProjects } from "@/modules/proyectos/components/related-projects";
 
-export const dynamicParams = true;
-
-export async function generateStaticParams() {
-  const payload = await getPayload({ config: configPromise });
-  const { docs: projects } = await payload.find({
-    collection: "projects",
-    limit: 1000,
-    select: {
-      slug: true,
-    },
-  });
-
-  return projects.map((project) => ({
-    slug: project.slug,
-  }));
-}
-
 export async function generateMetadata({
   params,
 }: {
