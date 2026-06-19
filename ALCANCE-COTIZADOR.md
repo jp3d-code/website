@@ -10,6 +10,7 @@ numbersections: true
 
 fontsize: 12pt
 mainfont: "Times New Roman"
+monofont: "DejaVu Sans Mono"
 geometry: margin=2.5cm
 linestretch: 1.5
 
@@ -20,6 +21,8 @@ header-includes:
   - \usepackage{setspace}
   - \usepackage{parskip}
   - \setlength{\parindent}{0pt}
+  - \usepackage{fontspec}
+  - \setmonofont{DejaVu Sans Mono}
 
 ---
 
@@ -392,20 +395,20 @@ precio_final = costo_total × margen
 
 ```text
 Usuario
-   │
-   ▼
+   |
+   v
 Carga STL / GLB
-   │
-   ▼
+   |
+   v
 Three.js (STLLoader / GLTFLoader)
-   │
-   ├── Visualización 3D
-   │
-   ├── Cálculo geométrico
-   │
-   └── Motor de cotización
-           │
-           ▼
+   |
+   +-- Visualizacion 3D
+   |
+   +-- Calculo geometrico
+   |
+   +-- Motor de cotizacion
+           |
+           v
       Precio estimado
 ```
 
