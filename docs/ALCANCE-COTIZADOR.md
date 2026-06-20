@@ -26,16 +26,6 @@ header-includes:
 
 ---
 
-
-# Especificacion de Requisitos de Software
-
-**Proyecto:** Cotizador Web para Impresión 3D
-
-**Fecha:** 19 de junio de 2026
-
-**Responsable:** Yenaro Joel Noa Camino
-
-
 # Introducción
 
 ## Propósito
@@ -66,7 +56,7 @@ Todos los cálculos y el renderizado se ejecutan localmente en el navegador, sin
 - Configuración de escala, relleno, material y cantidad.
 - Motor de cotización local con fórmula parametrizable.
 - Desglose detallado del costo final.
-- Botón de "Solicitar cotización" como placeholder visual.
+- Botón de "Solicitar cotización" que abre un dialog con un mensaje pre-armado y enlace a WhatsApp (`wa.me`) con el resumen de la cotización (placeholder dinámico, no se envía automáticamente).
 
 ### No incluye
 
@@ -126,7 +116,6 @@ Reemplaza la dependencia de plugins de cotización para WordPress con una soluci
 | Rol           | Descripción                                                           |
 | ------------- | --------------------------------------------------------------------- |
 | Visitante     | Usuario anónimo que llega al sitio, carga su modelo y obtiene precio  |
-| Administrador | (Futuro) Mantiene catálogo de materiales, precios y configuración     |
 
 En esta primera versión, todos los visitantes comparten el mismo nivel de acceso y configuración.
 
@@ -134,7 +123,6 @@ En esta primera versión, todos los visitantes comparten el mismo nivel de acces
 
 - Implementación 100 % frontend, sin backend propio.
 - Compatibilidad con navegadores modernos (Chrome, Edge, Firefox, Safari).
-- Tamaño máximo de archivo a definir (propuesta inicial: 25 MB).
 - Renderizado y cálculo limitados por la capacidad del dispositivo del cliente.
 - Catálogo de materiales y precios definidos en el código en esta versión.
 
@@ -143,7 +131,6 @@ En esta primera versión, todos los visitantes comparten el mismo nivel de acces
 - El usuario dispone de un archivo STL o GLB válido exportado desde su software de modelado.
 - El navegador soporta WebGL 2.
 - El catálogo de materiales y precios se mantiene en el código fuente en esta versión.
-- No se requiere conexión a internet después de la carga inicial de la página.
 
 
 # Requisitos funcionales
@@ -346,7 +333,7 @@ El sistema debe permitir reemplazar o eliminar el modelo activo, reiniciando el 
 | CU-007  | Seleccionar material         | Visitante       | Elige entre PLA, PETG, ABS, TPU u otros                     |
 | CU-008  | Modificar cantidad           | Visitante       | Define el número de copias                                  |
 | CU-009  | Consultar cotización         | Visitante       | Visualiza el desglose de costos actualizado                  |
-| CU-010  | Solicitar cotización         | Visitante       | Pulsa el botón final (acción placeholder)                   |
+| CU-010  | Solicitar cotización         | Visitante       | Pulsa "Solicitar cotización", revisa/edita el mensaje en el dialog y lo envía por WhatsApp al número configurado en `shared/config/contact.ts` |
 | CU-011  | Manejar error de carga       | Visitante       | Recibe mensaje de error por archivo inválido o demasiado grande |
 
 
@@ -377,7 +364,7 @@ El sistema debe permitir reemplazar o eliminar el modelo activo, reiniciando el 
 
 # Anexos
 
-## A. Fórmula inicial de cálculo
+## Fórmula inicial de cálculo
 
 ```text
 peso = volumen × densidad
@@ -391,7 +378,7 @@ precio_final = costo_total × margen
 
 > La fórmula podrá evolucionar en futuras versiones. Los valores de `costo_fijo`, `margen`, `factor_ajuste_material` y `precio_por_gramo` se definen en el módulo de configuración.
 
-## B. Arquitectura propuesta
+## Arquitectura propuesta
 
 ```text
 Usuario
@@ -412,7 +399,7 @@ Three.js (STLLoader / GLTFLoader)
       Precio estimado
 ```
 
-## C. Fuera de alcance (No requerido)
+## Fuera de alcance (No requerido)
 
 En esta primera versión no se implementará:
 
@@ -436,7 +423,7 @@ En esta primera versión no se implementará:
 - Persistencia de configuraciones.
 - Carga simultánea de múltiples modelos.
 
-## D. Limitaciones conocidas
+## Limitaciones conocidas
 
 Al no utilizar un motor de slicing, los resultados serán estimaciones aproximadas.
 
@@ -454,7 +441,7 @@ Para archivos GLB se ignorarán materiales, texturas y animaciones embebidas: la
 
 El objetivo es ofrecer una cotización rápida orientativa, no una simulación exacta del proceso de impresión.
 
-## E. Formatos soportados
+## Formatos soportados
 
 | Formato | Soporte | Loader            | Notas                                              |
 | ------- | ------- | ----------------- | -------------------------------------------------- |
@@ -463,7 +450,7 @@ El objetivo es ofrecer una cotización rápida orientativa, no una simulación e
 | OBJ     | Futuro  | OBJLoader         | Previsto en versiones siguientes                   |
 | FBX     | Futuro  | FBXLoader         | Previsto en versiones siguientes, bajo evaluación  |
 
-## F. Glosario visual
+## Glosario visual
 
 - **Panel izquierdo:** carga, configuración, resumen.
 - **Panel derecho:** visor 3D, controles de cámara, información geométrica.
