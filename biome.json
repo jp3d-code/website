@@ -16,7 +16,9 @@
       "!legacy-page",
       "!src/payload-types.ts",
       "!src/app/(payload)",
-      "!src/migrations"
+      "!src/migrations",
+      "!.agents",
+      "!public"
     ]
   },
   "css": {
