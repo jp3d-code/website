@@ -44,10 +44,7 @@ export function SectionHeader({
 }: ComponentProps<"div">) {
   return (
     <div
-      className={cn(
-        "flex w-full items-center justify-between gap-4",
-        className,
-      )}
+      className={cn("flex w-full items-start justify-between gap-4", className)}
       {...props}
     >
       {children}
