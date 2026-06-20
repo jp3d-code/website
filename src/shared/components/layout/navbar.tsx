@@ -18,6 +18,7 @@ const navItems = [
   routes.marca,
   routes.proyectos,
   routes.servicios,
+  routes.cotizador,
   routes.sobreNosotros,
   routes.contacto,
 ];

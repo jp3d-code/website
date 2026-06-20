@@ -94,10 +94,19 @@ const sobreNosotrosSections = defineSections({
   videos: createSection(sobreNosotrosRoute, "videos", "Videos"),
 } as const);
 
+const cotizadorRoute = createStaticRoute({
+  name: "Cotizador",
+  path: "/cotizador",
+  fullPath: `${APP_URL}/cotizador`,
+});
+
 export const routes = {
   ...homeRoute,
   contacto: {
     ...contactoRoute,
+  },
+  cotizador: {
+    ...cotizadorRoute,
   },
   marca: {
     ...marcaRoute,
