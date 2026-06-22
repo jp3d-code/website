@@ -1,9 +1,7 @@
 import configPromise from "@payload-config";
 import { getPayload } from "payload";
-import {
-  LocationRow,
-  type MapLocation,
-} from "@/modules/contacto/components/location-row";
+import { LocationRow } from "@/modules/contacto/components/ui/location-row";
+import type { MapLocation } from "@/modules/contacto/types/map-location";
 import type { Location } from "@/payload-types";
 import {
   Container,
@@ -15,7 +13,7 @@ import {
 } from "@/shared/components/ui/section";
 import { getCollections } from "@/shared/lib/utils";
 
-export async function LocationsList() {
+export async function LocationsListSection() {
   const payload = await getPayload({ config: configPromise });
   const contact = await payload.findGlobal({
     slug: "contact",

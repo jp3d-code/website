@@ -1,17 +1,11 @@
 import type { Metadata } from "next";
-import { Hero } from "@/modules/contacto/components/hero";
-import { LocationsList } from "@/modules/contacto/components/locations-list";
+import ContactoPage from "@/modules/contacto/components/pages/contacto-page";
 import { routes } from "@/shared/config/routes";
 
 export const metadata: Metadata = {
   title: routes.contacto.name,
 };
 
-export default async function ContactoPage() {
-  return (
-    <>
-      <Hero />
-      <LocationsList />
-    </>
-  );
+export default function Page() {
+  return <ContactoPage />;
 }

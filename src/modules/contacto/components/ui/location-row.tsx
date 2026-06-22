@@ -1,6 +1,7 @@
 "use client";
 
 import { Building2, MapPin, Phone } from "lucide-react";
+import type { MapLocation } from "@/modules/contacto/types/map-location";
 import {
   Map as MapComp,
   MapMarker,
@@ -8,14 +9,6 @@ import {
   MarkerPopup,
   MarkerTooltip,
 } from "@/shared/components/ui/map";
-
-export interface MapLocation {
-  id: number;
-  name: string;
-  address: string;
-  lat: number;
-  lng: number;
-}
 
 interface LocationRowProps {
   location: MapLocation;
