@@ -4,7 +4,6 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { STLLoader } from "three/examples/jsm/loaders/STLLoader.js";
 import * as BufferGeometryUtils from "three/examples/jsm/utils/BufferGeometryUtils.js";
 
-// Instancias de cargadores inicializadas perezosamente en el cliente
 let dracoLoader: DRACOLoader | null = null;
 let gltfLoader: GLTFLoader | null = null;
 let stlLoader: STLLoader | null = null;
@@ -32,9 +31,6 @@ function getSTLLoader(): STLLoader {
   return stlLoader;
 }
 
-/**
- * Extrae y fusiona la geometría de una escena GLTF/GLB
- */
 export function extractGLTFGeometry(
   scene: THREE.Object3D,
 ): THREE.BufferGeometry {
@@ -63,18 +59,19 @@ export function extractGLTFGeometry(
   if (!merged) {
     throw new Error("No se pudieron combinar las mallas del archivo GLB.");
   }
+  merged.computeVertexNormals();
   return merged;
 }
 
-/**
- * Carga un archivo STL desde una URL local de objeto (object URL)
- */
 export function loadSTL(url: string): Promise<THREE.BufferGeometry> {
   const loader = getSTLLoader();
   return new Promise((resolve, reject) => {
     loader.load(
       url,
-      (geometry) => resolve(geometry),
+      (geometry) => {
+        geometry.computeVertexNormals();
+        resolve(geometry);
+      },
       undefined,
       (error) => reject(error),
     );
@@ -86,9 +83,6 @@ export interface LoadedGLTF {
   scene: THREE.Group;
 }
 
-/**
- * Carga un archivo GLB desde una URL local de objeto (object URL)
- */
 export function loadGLTF(url: string): Promise<LoadedGLTF> {
   const loader = getGLTFLoader();
   return new Promise((resolve, reject) => {
@@ -110,6 +104,7 @@ export function loadGLTF(url: string): Promise<LoadedGLTF> {
     );
   });
 }
+
 export function disposeLoaders() {
   if (dracoLoader) {
     dracoLoader.dispose();

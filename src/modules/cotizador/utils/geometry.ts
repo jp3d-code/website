@@ -1,11 +1,6 @@
 import * as THREE from "three";
-import type { GeometryStats } from "../types";
+import type { GeometryStats } from "../types/geometry-stats";
 
-/**
- * Calcula las estadísticas geométricas de un modelo a partir de su malla 3D.
- * Retorna dimensiones en milímetros (mm), volumen en centímetros cúbicos (cm³),
- * y área superficial en centímetros cuadrados (cm²).
- */
 export function calculateGeometryStats(
   geometry: THREE.BufferGeometry,
 ): GeometryStats {
@@ -45,7 +40,6 @@ export function calculateGeometryStats(
       p2.fromBufferAttribute(position, idx2);
       p3.fromBufferAttribute(position, idx3);
 
-      // Volumen firmado de un tetraedro desde el origen (0,0,0) hacia el triángulo p1, p2, p3
       const vSigned =
         (p1.x * (p2.y * p3.z - p2.z * p3.y) +
           p1.y * (p2.z * p3.x - p2.x * p3.z) +
@@ -53,7 +47,6 @@ export function calculateGeometryStats(
         6.0;
       totalVolume += vSigned;
 
-      // Área del triángulo en 3D
       v12.subVectors(p2, p1);
       v13.subVectors(p3, p1);
       cross.crossVectors(v12, v13);
@@ -66,7 +59,6 @@ export function calculateGeometryStats(
       p2.fromBufferAttribute(position, i + 1);
       p3.fromBufferAttribute(position, i + 2);
 
-      // Volumen firmado de un tetraedro
       const vSigned =
         (p1.x * (p2.y * p3.z - p2.z * p3.y) +
           p1.y * (p2.z * p3.x - p2.x * p3.z) +
@@ -74,7 +66,6 @@ export function calculateGeometryStats(
         6.0;
       totalVolume += vSigned;
 
-      // Área del triángulo en 3D
       v12.subVectors(p2, p1);
       v13.subVectors(p3, p1);
       cross.crossVectors(v12, v13);
@@ -82,9 +73,6 @@ export function calculateGeometryStats(
     }
   }
 
-  // Las unidades originales de archivos 3D suelen ser milímetros.
-  // Volumen: mm³ -> cm³ (dividir por 1000)
-  // Área: mm² -> cm² (dividir por 100)
   return {
     volume: Math.abs(totalVolume) / 1000.0,
     surfaceArea: totalArea / 100.0,

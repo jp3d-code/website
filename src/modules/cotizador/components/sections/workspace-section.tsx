@@ -8,15 +8,17 @@ import {
   SectionTitleForeground,
   SectionTitlePrimary,
 } from "@/shared/components/ui/section";
-import { useModelLoader } from "../hooks/use-model-loader";
-import { ModelDetails } from "./model-details";
-import { ModelDropzone } from "./model-dropzone";
+import { useQuotation } from "../../hooks/use-quotation";
+import { SidebarPanel } from "../panels/sidebar-panel";
+import { ViewerPanel } from "../panels/viewer-panel";
+import { ModelDropzone } from "../ui/viewer-3d/model-dropzone";
 
-export default function CotizadorPage() {
-  const { model, handleFileSelect, handleRemove } = useModelLoader();
+export function WorkspaceSection() {
+  const { state, loadModel } = useQuotation();
+  const { model } = state;
 
   return (
-    <Section className="flex flex-col">
+    <Section className="flex flex-col py-14">
       <Container className="items-start gap-8">
         <SectionHeader className="flex flex-col items-start gap-2">
           <SectionTitle>
@@ -30,9 +32,17 @@ export default function CotizadorPage() {
         </SectionHeader>
 
         {model ? (
-          <ModelDetails model={model} onRemove={handleRemove} />
+          <div className="grid w-full grid-cols-1 items-start gap-8 md:grid-cols-12">
+            <div className="w-full md:col-span-8">
+              <ViewerPanel />
+            </div>
+
+            <div className="flex w-full flex-col gap-4 md:col-span-4">
+              <SidebarPanel />
+            </div>
+          </div>
         ) : (
-          <ModelDropzone onFileSelect={handleFileSelect} />
+          <ModelDropzone onFileSelect={loadModel} />
         )}
       </Container>
     </Section>

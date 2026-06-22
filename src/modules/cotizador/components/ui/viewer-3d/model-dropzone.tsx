@@ -1,5 +1,5 @@
 import { FileDropzone } from "@/shared/components/ui/dropzone";
-import { PRICING_CONFIG } from "../config/pricing";
+import { PRICING_CONFIG } from "../../../config/pricing";
 
 interface ModelDropzoneProps {
   onFileSelect: (file: File) => void;

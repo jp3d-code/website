@@ -1,4 +1,4 @@
-import type { Material } from "../types";
+import type { Material } from "../types/material";
 
 export const MATERIALS: Material[] = [
   {
