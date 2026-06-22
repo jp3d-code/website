@@ -13,7 +13,7 @@ import {
 import { routes } from "@/shared/config/routes";
 import { getMediaUrl } from "@/shared/lib/utils";
 
-export default async function ServicesSections() {
+export async function ServicesSection() {
   const payload = await getPayload({ config: configPromise });
   const { docs: services } = await payload.find({
     collection: "services",

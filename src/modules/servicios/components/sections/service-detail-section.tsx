@@ -7,7 +7,7 @@ interface ServiceDetailProps {
   service: Service;
 }
 
-export function ServiceDetail({ service }: ServiceDetailProps) {
+export function ServiceDetailSection({ service }: ServiceDetailProps) {
   const imageUrl = getMediaUrl(service.image);
 
   return (

@@ -1,6 +1,6 @@
 import { Container, Section } from "@/shared/components/ui/section";
 
-export function Hero() {
+export function HeroSection() {
   return (
     <Section className="bg-card">
       <Container className="grid items-center gap-12 md:grid-cols-2">

@@ -2,7 +2,7 @@ import configPromise from "@payload-config";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getPayload } from "payload";
-import { ServiceDetail } from "@/modules/servicios/components/service-detail";
+import ServicioDetailPage from "@/modules/servicios/components/pages/servicio-detail-page";
 
 export async function generateMetadata({
   params,
@@ -33,7 +33,7 @@ export async function generateMetadata({
   };
 }
 
-export default async function ServicioDetallePage({
+export default async function Page({
   params,
 }: {
   params: Promise<{ slug: string }>;
@@ -56,5 +56,5 @@ export default async function ServicioDetallePage({
     notFound();
   }
 
-  return <ServiceDetail service={service} />;
+  return <ServicioDetailPage service={service} />;
 }
