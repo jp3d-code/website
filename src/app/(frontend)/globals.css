@@ -2,6 +2,15 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
+@custom-variant data-horizontal (&[data-orientation="horizontal"]);
+@custom-variant data-vertical (&[data-orientation="vertical"]);
+@custom-variant data-disabled (&[data-disabled]);
+@custom-variant data-active (&[data-active],
+&[data-state="active"]);
+@custom-variant data-open (&[data-state="open"]);
+@custom-variant data-closed (&[data-state="closed"]);
+@custom-variant data-popup-open (&[data-state="open"]);
+
 /*@custom-variant dark (&:is(.dark *));*/
 
 :root {
