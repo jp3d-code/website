@@ -1,7 +1,7 @@
 import { Container, Section } from "@/shared/components/ui/section";
 import { routes } from "@/shared/config/routes";
 
-export function Hero() {
+export function HeroSection() {
   return (
     <Section id={routes.marca.sections.intro.hash} className="bg-card">
       <Container className="flex w-full flex-col items-start justify-center justify-items-center gap-6">

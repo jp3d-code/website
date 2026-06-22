@@ -1,7 +1,7 @@
 import { Container, Section } from "@/shared/components/ui/section";
 import { routes } from "@/shared/config/routes";
 
-export function VisionMission() {
+export function VisionMissionSection() {
   return (
     <Section>
       <Container className="grid items-start justify-items-center gap-10 md:grid-cols-2">

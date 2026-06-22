@@ -10,7 +10,7 @@ import {
 } from "@/shared/components/ui/section";
 import { routes } from "@/shared/config/routes";
 
-export async function OurValues() {
+export async function ValuesSection() {
   const payload = await getPayload({ config: configPromise });
   const { docs: values } = await payload.find({
     collection: "values",
