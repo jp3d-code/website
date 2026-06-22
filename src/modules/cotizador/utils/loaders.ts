@@ -51,16 +51,27 @@ export function extractGLTFGeometry(
     throw new Error("El archivo GLB no contiene ninguna malla (mesh) 3D.");
   }
 
+  let finalGeometry: THREE.BufferGeometry;
+
   if (geometries.length === 1) {
-    return geometries[0];
+    finalGeometry = geometries[0];
+  } else {
+    const merged = BufferGeometryUtils.mergeGeometries(geometries, true);
+    if (!merged) {
+      throw new Error("No se pudieron combinar las mallas del archivo GLB.");
+    }
+    finalGeometry = merged;
   }
 
-  const merged = BufferGeometryUtils.mergeGeometries(geometries, true);
-  if (!merged) {
-    throw new Error("No se pudieron combinar las mallas del archivo GLB.");
-  }
-  merged.computeVertexNormals();
-  return merged;
+  if (finalGeometry.attributes.uv) finalGeometry.deleteAttribute("uv");
+  if (finalGeometry.attributes.uv2) finalGeometry.deleteAttribute("uv2");
+  if (finalGeometry.attributes.color) finalGeometry.deleteAttribute("color");
+
+  finalGeometry = BufferGeometryUtils.mergeVertices(finalGeometry);
+
+  finalGeometry.computeVertexNormals();
+
+  return finalGeometry;
 }
 
 export function loadSTL(url: string): Promise<THREE.BufferGeometry> {
@@ -69,8 +80,9 @@ export function loadSTL(url: string): Promise<THREE.BufferGeometry> {
     loader.load(
       url,
       (geometry) => {
-        geometry.computeVertexNormals();
-        resolve(geometry);
+        const weldedGeometry = BufferGeometryUtils.mergeVertices(geometry);
+        weldedGeometry.computeVertexNormals();
+        resolve(weldedGeometry);
       },
       undefined,
       (error) => reject(error),

@@ -1,10 +1,10 @@
 import * as React from "react";
 import { toast } from "sonner";
 import type * as THREE from "three";
-import type { ActiveModel } from "../types/active-model";
-import type { QuotationAction } from "../types/quotation-state";
-import { calculateGeometryStats } from "../utils/geometry";
-import { loadGLTF, loadSTL } from "../utils/loaders";
+import type { ActiveModel } from "@/modules/cotizador/types/active-model";
+import type { QuotationAction } from "@/modules/cotizador/types/quotation-state";
+import { calculateGeometryStats } from "@/modules/cotizador/utils/geometry";
+import { loadGLTF, loadSTL } from "@/modules/cotizador/utils/loaders";
 
 interface UseModelLoaderResult {
   loadModel: (file: File) => Promise<void>;
@@ -40,23 +40,6 @@ export function useModelLoader(
         }
 
         const stats = calculateGeometryStats(geometry);
-
-        // biome-ignore lint/suspicious/noConsole: Requisito de la Fase 1 para exponer los datos de geometría en consola
-        console.log("=== MODELO 3D CARGADO CON ÉXITO ===");
-        // biome-ignore lint/suspicious/noConsole: Requisito de la Fase 1 para exponer los datos de geometría en consola
-        console.log(`Archivo: ${name}`);
-        // biome-ignore lint/suspicious/noConsole: Requisito de la Fase 1 para exponer los datos de geometría en consola
-        console.log(`Tamaño: ${(size / 1024 / 1024).toFixed(2)} MB`);
-        // biome-ignore lint/suspicious/noConsole: Requisito de la Fase 1 para exponer los datos de geometría en consola
-        console.log(
-          `Dimensiones (mm): X=${stats.dimensions.x.toFixed(2)}, Y=${stats.dimensions.y.toFixed(2)}, Z=${stats.dimensions.z.toFixed(2)}`,
-        );
-        // biome-ignore lint/suspicious/noConsole: Requisito de la Fase 1 para exponer los datos de geometría en consola
-        console.log(`Volumen: ${stats.volume.toFixed(4)} cm³`);
-        // biome-ignore lint/suspicious/noConsole: Requisito de la Fase 1 para exponer los datos de geometría en consola
-        console.log(`Área Superficial: ${stats.surfaceArea.toFixed(4)} cm²`);
-        // biome-ignore lint/suspicious/noConsole: Requisito de la Fase 1 para exponer los datos de geometría en consola
-        console.log("===================================");
 
         const payload: ActiveModel = {
           name,
