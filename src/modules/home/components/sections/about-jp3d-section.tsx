@@ -9,7 +9,7 @@ import {
 } from "@/shared/components/ui/section";
 import { routes } from "@/shared/config/routes";
 
-export function AboutJp3d() {
+export function AboutJp3dSection() {
   return (
     <Section>
       <Container className="grid gap-14">

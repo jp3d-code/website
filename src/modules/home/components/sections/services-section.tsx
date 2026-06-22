@@ -1,5 +1,6 @@
 import configPromise from "@payload-config";
 import { getPayload } from "payload";
+import { ServicesGrid } from "@/modules/home/components/ui/services-grid";
 import {
   Container,
   Section,
@@ -10,7 +11,6 @@ import {
   SectionTitlePrimary,
 } from "@/shared/components/ui/section";
 import { routes } from "@/shared/config/routes";
-import { ServicesGrid } from "./services-grid";
 
 export async function ServicesSection() {
   const payload = await getPayload({ config: configPromise });
