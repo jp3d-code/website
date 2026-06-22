@@ -9,7 +9,7 @@ import {
   SectionTitlePrimary,
 } from "@/shared/components/ui/section";
 
-export async function ProjectsGrid() {
+export async function ProjectsGridSection() {
   const payload = await getPayload({ config: configPromise });
   const { docs: projects } = await payload.find({
     collection: "projects",

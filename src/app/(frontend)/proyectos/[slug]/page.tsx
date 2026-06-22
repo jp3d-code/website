@@ -2,8 +2,7 @@ import configPromise from "@payload-config";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getPayload } from "payload";
-import { ProjectDetail } from "@/modules/proyectos/components/project-detail";
-import { RelatedProjects } from "@/modules/proyectos/components/related-projects";
+import ProyectoDetailPage from "@/modules/proyectos/components/pages/proyecto-detail-page";
 
 export async function generateMetadata({
   params,
@@ -34,7 +33,7 @@ export async function generateMetadata({
   };
 }
 
-export default async function ProyectoDetallePage({
+export default async function Page({
   params,
 }: {
   params: Promise<{ slug: string }>;
@@ -57,10 +56,5 @@ export default async function ProyectoDetallePage({
     notFound();
   }
 
-  return (
-    <>
-      <ProjectDetail project={project} />
-      <RelatedProjects excludeId={project.id} />
-    </>
-  );
+  return <ProyectoDetailPage project={project} />;
 }

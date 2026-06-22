@@ -1,6 +1,6 @@
 import configPromise from "@payload-config";
 import { getPayload } from "payload";
-import { ClientsCarousel } from "./clients-carousel";
+import { ClientsCarousel } from "@/modules/proyectos/components/ui/clients-carousel";
 
 export async function ClientsSection() {
   const payload = await getPayload({ config: configPromise });

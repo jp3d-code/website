@@ -15,7 +15,7 @@ interface RelatedProjectsProps {
   tags?: number[];
 }
 
-export async function RelatedProjects({
+export async function RelatedProjectsSection({
   excludeId,
   tags,
 }: RelatedProjectsProps) {

@@ -9,7 +9,7 @@ interface ProjectDetailProps {
   project: Project;
 }
 
-export async function ProjectDetail({ project }: ProjectDetailProps) {
+export async function ProjectDetailSection({ project }: ProjectDetailProps) {
   const imageUrl = getMediaUrl(project.image);
   const tags = getCollections(project.tags);
 

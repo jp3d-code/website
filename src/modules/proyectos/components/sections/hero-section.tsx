@@ -1,6 +1,6 @@
 import { Container, Section } from "@/shared/components/ui/section";
 
-export function Hero() {
+export function HeroSection() {
   return (
     <Section className="bg-card">
       <Container className="flex w-full flex-col items-start justify-center justify-items-center gap-6">
