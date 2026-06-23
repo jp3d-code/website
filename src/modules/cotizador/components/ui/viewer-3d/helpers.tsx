@@ -10,7 +10,7 @@ export function SceneHelpers() {
       <directionalLight
         castShadow
         position={[100, 150, 80]}
-        intensity={1.2}
+        intensity={1.5}
         shadow-mapSize={[1024, 1024]}
         shadow-bias={-0.0005}
         shadow-camera-left={-150}
