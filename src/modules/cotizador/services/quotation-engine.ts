@@ -1,6 +1,6 @@
-import { PRICING_CONFIG } from "../config/pricing";
-import type { Material } from "../types/material";
-import type { QuoteBreakdown } from "../types/quote-breakdown";
+import { PRICING_CONFIG } from "@/modules/cotizador/config/pricing";
+import type { Material } from "@/modules/cotizador/types/material";
+import type { QuoteBreakdown } from "@/modules/cotizador/types/quote-breakdown";
 
 export function calculateQuote({
   baseVolume,

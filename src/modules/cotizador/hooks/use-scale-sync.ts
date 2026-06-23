@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef } from "react";
-import type { PrintConfig } from "../types/print-config";
-import type { QuotationAction } from "../types/quotation-state";
+import type { PrintConfig } from "@/modules/cotizador/types/print-config";
+import type { QuotationAction } from "@/modules/cotizador/types/quotation-state";
 
 export function useScaleSync(
   config: PrintConfig,

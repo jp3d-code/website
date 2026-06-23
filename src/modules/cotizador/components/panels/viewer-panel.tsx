@@ -1,7 +1,7 @@
 "use client";
 
-import { useQuotation } from "../../hooks/use-quotation";
-import { Viewer3D } from "../ui/viewer-3d/viewer-3d";
+import { Viewer3D } from "@/modules/cotizador/components/ui/viewer-3d/viewer-3d";
+import { useQuotation } from "@/modules/cotizador/hooks/use-quotation";
 
 export function ViewerPanel() {
   const { state } = useQuotation();

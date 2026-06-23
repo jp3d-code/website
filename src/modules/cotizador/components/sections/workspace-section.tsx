@@ -1,5 +1,9 @@
 "use client";
 
+import { SidebarPanel } from "@/modules/cotizador/components/panels/sidebar-panel";
+import { ViewerPanel } from "@/modules/cotizador/components/panels/viewer-panel";
+import { ModelDropzone } from "@/modules/cotizador/components/ui/viewer-3d/model-dropzone";
+import { useQuotation } from "@/modules/cotizador/hooks/use-quotation";
 import {
   Container,
   Section,
@@ -8,10 +12,6 @@ import {
   SectionTitleForeground,
   SectionTitlePrimary,
 } from "@/shared/components/ui/section";
-import { useQuotation } from "../../hooks/use-quotation";
-import { SidebarPanel } from "../panels/sidebar-panel";
-import { ViewerPanel } from "../panels/viewer-panel";
-import { ModelDropzone } from "../ui/viewer-3d/model-dropzone";
 
 export function WorkspaceSection() {
   const { state, loadModel } = useQuotation();

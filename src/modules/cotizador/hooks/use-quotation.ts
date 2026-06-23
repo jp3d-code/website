@@ -1,5 +1,5 @@
 import * as React from "react";
-import { QuotationContext } from "../context/quotation-context";
+import { QuotationContext } from "@/modules/cotizador/context/quotation-context";
 
 export function useQuotation() {
   const context = React.useContext(QuotationContext);

@@ -2,14 +2,20 @@
 
 import { createContext, useCallback, useMemo, useReducer } from "react";
 import { toast } from "sonner";
-import { DEFAULT_MATERIAL_ID, MATERIALS } from "../config/materials";
-import { useModelLoader } from "../hooks/use-model-loader";
-import { useScaleSync } from "../hooks/use-scale-sync";
-import { calculateQuote } from "../services/quotation-engine";
-import type { Material } from "../types/material";
-import type { PrintConfig } from "../types/print-config";
-import type { QuotationAction, QuotationState } from "../types/quotation-state";
-import type { QuoteBreakdown } from "../types/quote-breakdown";
+import {
+  DEFAULT_MATERIAL_ID,
+  MATERIALS,
+} from "@/modules/cotizador/config/materials";
+import { useModelLoader } from "@/modules/cotizador/hooks/use-model-loader";
+import { useScaleSync } from "@/modules/cotizador/hooks/use-scale-sync";
+import { calculateQuote } from "@/modules/cotizador/services/quotation-engine";
+import type { Material } from "@/modules/cotizador/types/material";
+import type { PrintConfig } from "@/modules/cotizador/types/print-config";
+import type {
+  QuotationAction,
+  QuotationState,
+} from "@/modules/cotizador/types/quotation-state";
+import type { QuoteBreakdown } from "@/modules/cotizador/types/quote-breakdown";
 
 const initialConfig: PrintConfig = {
   scaleUniform: 100,

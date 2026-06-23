@@ -1,7 +1,7 @@
 "use client";
 
-import { QuotationProvider } from "../../context/quotation-context";
-import { WorkspaceSection } from "../sections/workspace-section";
+import { WorkspaceSection } from "@/modules/cotizador/components/sections/workspace-section";
+import { QuotationProvider } from "@/modules/cotizador/context/quotation-context";
 
 export default function CotizadorPage() {
   return (

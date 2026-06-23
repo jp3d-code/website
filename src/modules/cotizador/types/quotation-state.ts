@@ -1,5 +1,5 @@
-import type { ActiveModel } from "./active-model";
-import type { PrintConfig } from "./print-config";
+import type { ActiveModel } from "@/modules/cotizador/types/active-model";
+import type { PrintConfig } from "@/modules/cotizador/types/print-config";
 
 export interface QuotationState {
   model: ActiveModel | null;

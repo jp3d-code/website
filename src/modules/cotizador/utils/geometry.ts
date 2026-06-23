@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import type { GeometryStats } from "../types/geometry-stats";
+import type { GeometryStats } from "@/modules/cotizador/types/geometry-stats";
 
 export function calculateGeometryStats(
   geometry: THREE.BufferGeometry,
