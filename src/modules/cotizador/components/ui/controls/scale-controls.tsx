@@ -1,10 +1,10 @@
 "use client";
 
 import { RotateCcw } from "lucide-react";
+import { useQuotation } from "@/modules/cotizador/hooks/use-quotation";
 import { Button } from "@/shared/components/ui/button";
 import { Label } from "@/shared/components/ui/label";
 import { Slider } from "@/shared/components/ui/slider";
-import { useQuotation } from "../../../hooks/use-quotation";
 
 export function ScaleControls() {
   const { state, updateConfig, resetScale } = useQuotation();
@@ -24,11 +24,24 @@ export function ScaleControls() {
   };
 
   return (
-    <div className="flex flex-col gap-5 border-border border-t pt-4">
-      <div className="flex items-center justify-between">
-        <h3 className="font-semibold text-foreground text-sm uppercase tracking-wider">
-          Escala del Modelo
-        </h3>
+    <div className="flex flex-col gap-5 px-3 pt-1 pb-8">
+      <div className="flex items-center justify-between gap-4">
+        <div className="flex w-full flex-col gap-2">
+          <div className="flex items-center justify-between text-muted-foreground text-xs">
+            <Label htmlFor="scale-uniform">Uniforme</Label>
+            <span className="font-medium font-mono">
+              {config.scaleUniform}%
+            </span>
+          </div>
+          <Slider
+            id="scale-uniform"
+            min={10}
+            max={1000}
+            step={1}
+            value={[config.scaleUniform]}
+            onValueChange={handleUniformChange}
+          />
+        </div>
         <Button
           variant="outline"
           size="sm"
@@ -38,21 +51,6 @@ export function ScaleControls() {
           <RotateCcw className="h-3 w-3" />
           Restablecer
         </Button>
-      </div>
-
-      <div className="flex flex-col gap-2">
-        <div className="flex items-center justify-between text-muted-foreground text-xs">
-          <Label htmlFor="scale-uniform">Uniforme</Label>
-          <span className="font-medium font-mono">{config.scaleUniform}%</span>
-        </div>
-        <Slider
-          id="scale-uniform"
-          min={10}
-          max={1000}
-          step={1}
-          value={[config.scaleUniform]}
-          onValueChange={handleUniformChange}
-        />
       </div>
 
       <div className="grid grid-cols-3 gap-4">

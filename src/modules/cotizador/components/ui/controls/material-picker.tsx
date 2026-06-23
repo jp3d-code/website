@@ -1,19 +1,15 @@
 "use client";
 
-import { Label } from "@/shared/components/ui/label";
+import { MATERIALS } from "@/modules/cotizador/config/materials";
+import { useQuotation } from "@/modules/cotizador/hooks/use-quotation";
 import { cn } from "@/shared/lib/utils";
-import { MATERIALS } from "../../../config/materials";
-import { useQuotation } from "../../../hooks/use-quotation";
 
 export function MaterialPicker() {
   const { state, updateConfig } = useQuotation();
   const { config } = state;
 
   return (
-    <div className="flex flex-col gap-3 border-border border-t pt-4">
-      <Label className="font-semibold text-foreground text-xs uppercase tracking-wider">
-        Material
-      </Label>
+    <div className="flex flex-col gap-3 px-3 pt-1 pb-8">
       <div className="grid grid-cols-2 gap-2">
         {MATERIALS.map((material) => {
           const isSelected = config.materialId === material.id;
@@ -30,7 +26,7 @@ export function MaterialPicker() {
               )}
             >
               <span
-                className="h-3 w-3 shrink-0 rounded-full border border-black/10 dark:border-white/10"
+                className="h-3 w-3 shrink-0 rounded-full"
                 style={{ backgroundColor: material.color }}
               />
               <span className="truncate">{material.name}</span>

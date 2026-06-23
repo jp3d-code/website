@@ -1,22 +1,15 @@
 "use client";
 
-import { Label } from "@/shared/components/ui/label";
+import { useQuotation } from "@/modules/cotizador/hooks/use-quotation";
 import { Slider } from "@/shared/components/ui/slider";
-import { useQuotation } from "../../../hooks/use-quotation";
 
 export function InfillSlider() {
   const { state, updateConfig } = useQuotation();
   const { config } = state;
 
   return (
-    <div className="flex flex-col gap-3 border-border border-t pt-4">
+    <div className="flex flex-col gap-3 px-3 pt-1 pb-8">
       <div className="flex items-center justify-between text-muted-foreground text-xs">
-        <Label
-          htmlFor="infill-percent"
-          className="font-semibold text-foreground text-xs uppercase tracking-wider"
-        >
-          Relleno (Infill)
-        </Label>
         <span className="font-mono font-semibold text-foreground text-sm">
           {config.infill}%
         </span>
