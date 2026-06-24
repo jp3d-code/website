@@ -3,9 +3,12 @@
 import { Bounds, Center, OrbitControls, Stats } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import * as THREE from "three";
+import { WebGLLoading } from "@/modules/cotizador/components/ui/information/webgl-loading";
+import { WebGLUnsupported } from "@/modules/cotizador/components/ui/information/webgl-unsupported";
 import { SceneHelpers } from "@/modules/cotizador/components/ui/viewer-3d/helpers";
 import { Model } from "@/modules/cotizador/components/ui/viewer-3d/model";
 import { useQuotation } from "@/modules/cotizador/hooks/use-quotation";
+import { useWebGL2Check } from "@/modules/cotizador/hooks/use-webgl2-check";
 
 if (typeof window !== "undefined") {
   // biome-ignore lint/suspicious/noConsole: Interceptor seguro para silenciar advertencias de deprecación
@@ -31,11 +34,20 @@ if (typeof window !== "undefined") {
 export function Viewer3D() {
   const { state, selectedMaterial } = useQuotation();
   const { model, config } = state;
+  const hasWebGL2 = useWebGL2Check();
 
   if (!model) return null;
 
+  if (hasWebGL2 === false) {
+    return <WebGLUnsupported />;
+  }
+
+  if (hasWebGL2 === null) {
+    return <WebGLLoading />;
+  }
+
   return (
-    <div className="relative flex h-100 w-full items-center justify-center rounded-xl border border-border bg-card/30 md:h-125">
+    <div className="relative flex h-72 w-full items-center justify-center rounded-xl border border-border bg-card/30 sm:h-96 md:h-125">
       <Canvas
         shadows={{ type: THREE.PCFShadowMap }}
         camera={{ position: [0, 80, 150], fov: 45 }}
