@@ -24,11 +24,11 @@
   --primary-foreground: oklch(0.18 0 0);
   --secondary: oklch(0.96 0.005 264);
   --secondary-foreground: oklch(0.18 0 0);
-  --muted: oklch(0.25 0.01 264);
+  --muted: oklch(0.3 0.01 264);
   --muted-foreground: oklch(0.75 0 264);
   --accent: oklch(0.28 0.015 264);
   --accent-foreground: oklch(0.96 0.005 264);
-  --destructive: oklch(0.6 0.18 25);
+  --destructive: oklch(0.4 0.18 25);
   --destructive-foreground: oklch(0.99 0 0);
   --border: oklch(0.5 0.015 264);
   --input: oklch(0.28 0.015 264);
