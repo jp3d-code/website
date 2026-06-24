@@ -2,6 +2,7 @@
 
 import { SidebarPanel } from "@/modules/cotizador/components/panels/sidebar-panel";
 import { ViewerPanel } from "@/modules/cotizador/components/panels/viewer-panel";
+import { ModelLoading } from "@/modules/cotizador/components/ui/information/model-loading";
 import { ModelDropzone } from "@/modules/cotizador/components/ui/viewer-3d/model-dropzone";
 import { useQuotation } from "@/modules/cotizador/hooks/use-quotation";
 import {
@@ -14,7 +15,7 @@ import {
 } from "@/shared/components/ui/section";
 
 export function WorkspaceSection() {
-  const { state, loadModel } = useQuotation();
+  const { state, loadModel, isProcessing } = useQuotation();
   const { model } = state;
 
   return (
@@ -31,9 +32,11 @@ export function WorkspaceSection() {
           </p>
         </SectionHeader>
 
-        {model ? (
+        {isProcessing ? (
+          <ModelLoading />
+        ) : model ? (
           <div className="grid w-full grid-cols-1 items-start gap-8 md:grid-cols-12">
-            <div className="w-full md:col-span-8">
+            <div className="sticky top-16 z-20 w-full bg-background/90 pb-4 backdrop-blur-xs md:static md:col-span-8 md:bg-transparent md:pb-0 md:backdrop-blur-none">
               <ViewerPanel />
             </div>
 
