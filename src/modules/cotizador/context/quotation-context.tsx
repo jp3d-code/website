@@ -6,6 +6,7 @@ import {
   DEFAULT_MATERIAL_ID,
   MATERIALS,
 } from "@/modules/cotizador/config/materials";
+import { useModelDisposer } from "@/modules/cotizador/hooks/use-model-disposer";
 import { useModelLoader } from "@/modules/cotizador/hooks/use-model-loader";
 import { useScaleSync } from "@/modules/cotizador/hooks/use-scale-sync";
 import { calculateQuote } from "@/modules/cotizador/services/quotation-engine";
@@ -89,6 +90,7 @@ export function QuotationProvider({ children }: { children: React.ReactNode }) {
   const [state, dispatch] = useReducer(quotationReducer, initialState);
   const { loadModel, isProcessing } = useModelLoader(dispatch);
   const updateConfig = useScaleSync(state.config, dispatch);
+  useModelDisposer(state.model);
 
   const selectedMaterial = useMemo(() => {
     return (
