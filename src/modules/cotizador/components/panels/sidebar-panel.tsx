@@ -24,33 +24,9 @@ export function SidebarPanel() {
   return (
     <div className="flex flex-col gap-4">
       <Card>
-        {/*<CardHeader>
-        <div className="min-w-0 pr-2">
-          <CardTitle
-            className="truncate font-semibold text-foreground text-lg"
-            title={model.name}
-          >
-            {model.name}
-          </CardTitle>
-          <CardDescription className="text-muted-foreground text-xs">
-            {(model.size / 1024 / 1024).toFixed(2)} MB
-          </CardDescription>
-        </div>
-        <CardAction>
-          <Button
-            variant="destructive"
-            size="icon-sm"
-            onClick={removeModel}
-            title="Eliminar modelo"
-            aria-label="Eliminar modelo"
-          >
-            <Trash2 className="h-4 w-4" />
-          </Button>
-        </CardAction>
-      </CardHeader>*/}
-        <CardHeader>
+        <CardHeader className="pt-0">
           <h3 className="font-semibold text-foreground text-sm uppercase tracking-wider">
-            Configuración de Impresións
+            Configuración de Impresión
           </h3>
         </CardHeader>
         <CardContent className="flex flex-col gap-4">
