@@ -42,7 +42,7 @@ header-includes:
 
 # Objetivo del backlog
 
-Traducir los requisitos del documento `ALCANCE-COTIZADOR.md` (RF-001..006, RNF-001..006, RN-001..007, CU-001..011) en historias de usuario, épicas y tareas técnicas implementables, priorizadas por valor de negocio y dependencias técnicas, para guiar el desarrollo iterativo del módulo de cotización en una primera versión 100 % cliente.
+Traducir los requisitos del documento `ALCANCE-COTIZADOR.md` (RF-001..007, RNF-001..009, RN-001..010, CU-001..012) en historias de usuario, épicas y tareas técnicas implementables, priorizadas por valor de negocio y dependencias técnicas, para guiar el desarrollo iterativo del módulo de cotización.
 
 # Épicas
 
@@ -57,7 +57,7 @@ Traducir los requisitos del documento `ALCANCE-COTIZADOR.md` (RF-001..006, RNF-0
 | E-007   | Catálogo de materiales y parámetros globales   | Sección "Modelo de datos"         |
 | E-008   | UI/UX, layout responsive y accesibilidad       | RNF-004, RNF-006                  |
 | E-009   | Performance, seguridad y limpieza de memoria   | RNF-001, RNF-002, RNF-005         |
-| E-010   | Solicitar cotización por WhatsApp              | CU-010, RNF-003                   |
+| E-010   | Enviar cotización por correo con PDF           | RF-007, CU-010/011, RNF-007..009, RN-008..010 |
 
 # Historias de usuario
 
@@ -296,7 +296,9 @@ Traducir los requisitos del documento `ALCANCE-COTIZADOR.md` (RF-001..006, RNF-0
 
 ## HU-012 · Solicitar cotización por WhatsApp
 
-**Como:** visitante
+> **DEPRECADA.** Reemplazada por HU-016 (Enviar cotización por correo con PDF). Se conserva temporalmente solo para trazabilidad histórica.
+
+**Como:** visitante del sitio
 
 **Quiero:** pulsar "Solicitar cotización" y obtener un mensaje pre-armado para enviar por WhatsApp
 
@@ -377,6 +379,55 @@ Traducir los requisitos del documento `ALCANCE-COTIZADOR.md` (RF-001..006, RNF-0
 
 **Trazabilidad:** RNF-004, RNF-002
 
+## HU-016 · Enviar cotización por correo con PDF
+
+**Como:** visitante del sitio
+
+**Quiero:** pulsar "Enviar cotización", ingresar mi email y, opcionalmente, un comentario, y recibir la cotización como PDF en mi correo
+
+**Para:** conservar mi cotización sin tener que tomar capturas ni anotar el precio
+
+**Criterios de aceptación:**
+
+- Botón "Enviar cotización" visible únicamente cuando hay modelo activo y cotización calculada.
+- Al pulsarlo se abre un modal con dos campos: email (obligatorio) y comentario (opcional).
+- El botón "Enviar" del modal permanece deshabilitado mientras el email no tenga formato válido (RN-008).
+- Al enviar, se muestra estado de carga y se bloquea el botón para evitar doble envío.
+- El PDF y los metadatos se envían a un endpoint backend que entrega el correo al negocio y copia al cliente.
+- Tras un envío exitoso, se muestra un toast de confirmación, se cierra el modal y el botón "Enviar cotización" se deshabilita hasta que el cliente modifique al menos un parámetro de la cotización (RN-009).
+- Si el envío falla, se muestra un toast de error y se permite reintentar.
+- El sistema no solicita CAPTCHA ni Turnstile; no se aplica rate limiting.
+- En ningún momento se persiste el email, el comentario ni el PDF en cliente ni servidor.
+
+**Prioridad:** Alta
+
+**Épica:** E-010
+
+**Trazabilidad:** RF-007, CU-010, RN-008, RN-009
+
+## HU-017 · Generar PDF de cotización en el navegador
+
+**Como:** visitante
+
+**Quiero:** que el sistema genere un PDF de mi cotización directamente en mi navegador
+
+**Para:** que el archivo pueda adjuntarse y entregarse de forma confiable al hacer el envío
+
+**Criterios de aceptación:**
+
+- El PDF se genera íntegramente en el cliente con jsPDF, sin round-trip al backend para renderizarlo.
+- El PDF incluye, como mínimo: encabezado con datos del negocio, fecha de emisión, fecha de vigencia calculada desde `quoteValidityDays`, email del cliente, comentario (si fue proporcionado), nombre del archivo, dimensiones, volumen, escala aplicada, material, relleno, cantidad, desglose de costos y precio final formateado en PEN.
+- El PDF no incluye imagen renderizada del modelo 3D.
+- El tamaño del PDF es ≤ 1 MB en condiciones normales (RNF-008).
+- La generación se completa en menos de 2 segundos en equipos de gama media (RNF-009).
+- Si la generación excede 100 ms de cómputo síncrono, se descarga a un Web Worker para no bloquear el hilo principal.
+
+**Prioridad:** Alta
+
+**Épica:** E-010
+
+**Trazabilidad:** RF-007, CU-011, RNF-008, RNF-009
+
 # Tareas técnicas
 
 | ID     | Tarea                                                                 | Épica     | Tipo      | Prioridad | Estado     |
@@ -400,7 +451,7 @@ Traducir los requisitos del documento `ALCANCE-COTIZADOR.md` (RF-001..006, RNF-0
 | T-017  | `quantity-input.tsx`                                                  | E-004     | Frontend  | Alta      | Pendiente  |
 | T-018  | `geometry-info.tsx`                                                   | E-003     | Frontend  | Alta      | Pendiente  |
 | T-019  | `cost-breakdown.tsx`                                                  | E-005     | Frontend  | Alta      | Pendiente  |
-| T-020  | `request-quote-dialog.tsx` + `lib/whatsapp.ts`                         | E-010     | Frontend  | Alta      | Pendiente  |
+| T-020  | `request-quote-dialog.tsx` + `lib/whatsapp.ts` (DEPRECADA, reemplazada por T-034..T-045) | E-010     | Frontend  | Alta      | Deprecada  |
 | T-021  | Crear `src/app/(frontend)/cotizador/page.tsx`                          | Todas     | Setup     | Alta      | Pendiente  |
 | T-022  | Layout split responsive (panel izq + visor der)                       | E-008     | Frontend  | Alta      | Pendiente  |
 | T-023  | Botón "Eliminar modelo" con confirmación                              | E-006     | Frontend  | Alta      | Pendiente  |
@@ -409,29 +460,49 @@ Traducir los requisitos del documento `ALCANCE-COTIZADOR.md` (RF-001..006, RNF-0
 | T-026  | Limpieza de geometría y dispose de materiales al reemplazar/eliminar   | E-009     | Lógica    | Alta      | Pendiente  |
 | T-027  | Pruebas manuales cross-browser (Chrome, Edge, Firefox, Safari)         | E-008     | QA        | Media     | Pendiente  |
 | T-028  | Metadatos SEO de `/cotizador` (title, description, OG)                 | E-008     | Setup     | Baja      | Pendiente  |
-| T-029  | Configurar número de WhatsApp en `shared/config/constants.ts`          | E-010     | Setup     | Alta      | Pendiente  |
+| T-029  | Configurar número de WhatsApp en `shared/config/constants.ts` (DEPRECADA, reemplazada por T-043) | E-010     | Setup     | Alta      | Deprecada  |
 | T-030  | `lib/format.ts` (Intl.NumberFormat PEN → "S/ 12.50")                   | E-005     | Lógica    | Alta      | Pendiente  |
 | T-031  | Indicador de carga mientras se parsea el archivo                       | E-001     | Frontend  | Media     | Pendiente  |
+| T-032  | Instalar `jspdf` y `@types/jspdf` en frontend                          | E-010     | Setup     | Alta      | Pendiente  |
+| T-033  | Instalar `nodemailer` y `@types/nodemailer` en backend                  | E-010     | Setup     | Alta      | Pendiente  |
+| T-034  | Crear `lib/pdf.ts` con `generateQuotePDF(snapshot): Blob` usando jsPDF   | E-010     | Frontend  | Alta      | Pendiente  |
+| T-035  | Implementar plantilla del PDF: encabezado del negocio, datos del cliente (email, comentario), parámetros del modelo, desglose, fecha de emisión y fecha de vigencia | E-010     | Frontend  | Alta      | Pendiente  |
+| T-036  | Crear `lib/email-validation.ts` con validación de formato RFC 5322 simplificada | E-010     | Lógica    | Alta      | Pendiente  |
+| T-037  | Componente `send-quote-modal.tsx` con formulario (email + comentario), estado de carga y botón Enviar | E-010     | Frontend  | Alta      | Pendiente  |
+| T-038  | Integrar validación de email con habilitación del botón Enviar (RN-008) | E-010     | Frontend  | Alta      | Pendiente  |
+| T-039  | Lógica de bloqueo de reenvío en el context: deshabilitar tras envío exitoso hasta cambio de parámetro (RN-009) | E-010     | Lógica    | Alta      | Pendiente  |
+| T-040  | Toasts de éxito y error con `sonner` para el flujo de envío             | E-010     | Frontend  | Alta      | Pendiente  |
+| T-041  | Crear Route Handler `src/app/api/quote/send/route.ts` (POST, recibe PDF + metadatos) | E-010     | Backend   | Alta      | Pendiente  |
+| T-042  | Integrar Nodemailer con SMTP en el endpoint; envío a dirección del negocio y copia al cliente | E-010     | Backend   | Alta      | Pendiente  |
+| T-043  | Configurar variables de entorno: `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS`, `BUSINESS_EMAIL`, `FROM_EMAIL` | E-010     | Setup     | Alta      | Pendiente  |
+| T-044  | Agregar `quoteValidityDays` (default 15) a `config/pricing.ts`          | E-007     | Datos     | Alta      | Pendiente  |
+| T-045  | Reemplazar el botón "Solicitar cotización" en el orquestador por "Enviar cotización" y conectarlo al nuevo modal | E-010     | Frontend  | Alta      | Pendiente  |
+| T-046  | Pruebas manuales del flujo email con SMTP de pruebas (Ethereal / Mailtrap / Gmail) | E-010     | QA        | Alta      | Pendiente  |
+| T-047  | Documentar checklist de go-live: SPF, DKIM, DNS, variables de entorno en producción | E-010     | Setup     | Media     | Pendiente  |
 
 # Priorización (MoSCoW)
 
 **Must (imprescindible para v1):**
 
-HU-001, HU-002, HU-003, HU-004, HU-005, HU-007, HU-008, HU-009, HU-010, HU-011, HU-012, HU-013
-T-001..T-012, T-014..T-022, T-024, T-026, T-029, T-030
+HU-001, HU-002, HU-003, HU-004, HU-005, HU-007, HU-008, HU-009, HU-010, HU-011, HU-013, HU-016, HU-017
+T-001..T-012, T-014..T-019, T-021, T-022, T-024, T-026, T-030, T-032, T-033, T-034, T-035, T-036, T-037, T-038, T-039, T-040, T-041, T-042, T-043, T-044, T-045, T-046
 
 **Should (importante, deseable en v1):**
 
 HU-006, HU-014, HU-015
-T-013, T-023, T-025, T-027, T-031
+T-013, T-023, T-025, T-027, T-031, T-047
 
 **Could (mejoras, post-v1):**
 
 T-028 (SEO avanzado, schema.org Offer)
 
+**Deprecadas (reemplazadas, conservadas solo para trazabilidad):**
+
+HU-012, T-020, T-029
+
 **Won't (fuera de v1, ya en ALCANCE):**
 
-Multi-modelo, persistencia, autenticación, slicing real, OBJ/FBX, integración WooCommerce/OctoPrint, pasarela de pago.
+Multi-modelo, persistencia, autenticación, slicing real, OBJ/FBX, integración WooCommerce/OctoPrint, pasarela de pago, anti-spam en el endpoint de envío, webhooks de respuesta del servicio de email, plantillas configurables del PDF, múltiples destinatarios por envío.
 
 ## Hitos sugeridos
 
@@ -440,7 +511,7 @@ Multi-modelo, persistencia, autenticación, slicing real, OBJ/FBX, integración 
 | H1     | T-001..T-005, T-024 → carga STL/GLB funcional con cálculo geométrico (sin UI bonita)     |
 | H2     | T-006..T-012, T-014..T-019, T-030 → visor + controles + cotización reactiva en pantalla |
 | H3     | T-013, T-022, T-023, T-025, T-026, T-031 → pulido UI, responsive, limpieza memoria       |
-| H4     | T-020, T-029 → flujo de "Solicitar cotización" por WhatsApp                              |
+| H4     | T-032, T-033, T-034, T-035, T-036, T-037, T-038, T-039, T-040, T-041, T-042, T-043, T-044, T-045, T-046 → flujo de "Enviar cotización" por correo con PDF |
 | H5     | T-027, T-028 → QA cross-browser + SEO                                                   |
 
 # Dependencias
@@ -451,20 +522,25 @@ Multi-modelo, persistencia, autenticación, slicing real, OBJ/FBX, integración 
 - `@react-three/fiber` ^9 (declarativo React sobre Three.js).
 - `@react-three/drei` ^10 (OrbitControls, Environment, Center, Bounds, Grid, Axes, useGLTF).
 - `@types/three` (dev).
+- `jspdf` (frontend, generación de PDF en navegador).
+- `@types/jspdf` (dev).
+- `nodemailer` (backend, envío SMTP).
+- `@types/nodemailer` (dev).
 - Decoders Draco en `public/draco/` (descargados del repo Khronos).
 
 ## Librerías existentes reutilizadas
 
-- shadcn/ui: `button`, `input`, `slider`, `dialog`, `card`, `label`, `select`, `separator`, `tabs`, `tooltip`, `badge`, `sonner` (notificaciones de error).
-- `lucide-react` (iconos: Upload, Trash2, RotateCcw, MessageCircle, etc.).
+- shadcn/ui: `button`, `input`, `slider`, `dialog`, `card`, `label`, `select`, `separator`, `tabs`, `tooltip`, `badge`, `sonner` (notificaciones de error y feedback de envío).
+- `lucide-react` (iconos: Upload, Trash2, RotateCcw, Send, Mail, etc.).
 - `framer-motion` (transiciones suaves en panels).
 - `tailwind-merge` + `clsx` (`cn` utility de `@/shared/lib/utils`).
 - `Intl.NumberFormat` nativo (sin librería para formato PEN).
 
 ## Externas (no agregar en v1)
 
+- Servicio SMTP (Gmail, Zoho, Mailgun u otro): configurado vía variables de entorno, no instalado en el repositorio. La elección concreta del proveedor se documenta en el plan de implementación.
 - Payload: el módulo no usa Payload en v1 (catálogo en TS). Migrable a Global en v2.
-- Backend, base de datos, auth, etc.: fuera de alcance.
+- Backend, base de datos, auth, etc.: fuera de alcance. El único endpoint backend permitido es el de envío de cotización descrito en T-041.
 
 ## Assets
 
@@ -483,6 +559,11 @@ Multi-modelo, persistencia, autenticación, slicing real, OBJ/FBX, integración 
 | R-005 | Catálogo de materiales desactualizado                                | Medio   | Alta         | T-007 centralizado en `config/materials.ts`; changelog documentado; migración a Global v2  |
 | R-006 | Fórmula de cotización inexacta vs competencia                         | Medio   | Media        | Documentar fórmula y limitaciones; permitir override por constante                        |
 | R-007 | Cambio de API en Three.js / R3F                                       | Bajo    | Baja         | Fijar versiones en `package.json`; pruebas cross-browser en cada release                  |
-| R-008 | Número de WhatsApp mal configurado o ausente                          | Alto    | Media        | Variable de entorno validada al build; el dialog deshabilita el botón si falta            |
+| R-008 | DEPRECADO. Reemplazado por R-011..R-015. La constante de WhatsApp ya no se usa. | N/A     | N/A         | N/A                                                                                       |
 | R-009 | Memory leak al reemplazar modelo                                      | Alto    | Media        | T-026 `dispose()` explícito de geometría, materiales y texturas antes de cargar nuevo     |
 | R-010 | Cálculo de volumen inexacto en mallas no cerradas o no manifold       | Medio   | Media        | Documentar limitación en UI; advertir si la malla parece no ser manifold                   |
+| R-011 | Servicio SMTP caído o con incidentes                                  | Alto    | Media        | T-046 pruebas manuales; toast de error claro al cliente (RF-007); reintento habilitado    |
+| R-012 | SPF/DKIM mal configurados y correos caen en spam                      | Alto    | Media        | T-047 checklist de go-live bloqueante; variables de entorno validadas al build             |
+| R-013 | Endpoint de envío abusado por terceros (spam)                        | Medio   | Alta         | Decisión explícita: sin anti-spam en esta versión; riesgo documentado; reevaluar en v2    |
+| R-014 | Límite de tamaño de adjunto del servicio SMTP                         | Medio   | Baja         | RNF-008: PDF ≤ 1 MB; medir tamaño real y ajustar plantilla si se acerca al límite         |
+| R-015 | Email del cliente con formato válido pero no entregable               | Bajo    | Media        | Solo se valida formato (RN-008); los rebotes llegan al buzón del negocio                  |

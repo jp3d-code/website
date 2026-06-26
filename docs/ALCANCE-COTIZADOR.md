@@ -30,7 +30,7 @@ header-includes:
 
 ## Propósito
 
-Describir el objetivo, alcance y requisitos del módulo web de cotización para impresión 3D, que permita a los usuarios cargar modelos 3D en formatos estándar, configurar parámetros básicos de impresión y obtener una cotización estimada en tiempo real, ejecutada completamente en el navegador.
+Describir el objetivo, alcance y requisitos del módulo web de cotización para impresión 3D, que permita a los usuarios cargar modelos 3D en formatos estándar, configurar parámetros básicos de impresión, obtener una cotización estimada en tiempo real ejecutada completamente en el navegador, y enviar dicha cotización por correo electrónico en formato PDF al propio cliente y al negocio.
 
 El documento busca servir como referencia contractual y funcional para las fases de diseño, implementación, pruebas y aceptación del módulo.
 
@@ -56,21 +56,26 @@ Todos los cálculos y el renderizado se ejecutan localmente en el navegador, sin
 - Configuración de escala, relleno, material y cantidad.
 - Motor de cotización local con fórmula parametrizable.
 - Desglose detallado del costo final.
-- Botón de "Solicitar cotización" que abre un dialog con un mensaje pre-armado y enlace a WhatsApp (`wa.me`) con el resumen de la cotización (placeholder dinámico, no se envía automáticamente).
+- Botón de "Enviar cotización" que abre un modal con campos de email y comentario.
+- Generación del PDF de la cotización en el navegador (cliente) con jsPDF o pdf-lib.
+- Envío del PDF por correo electrónico a una dirección fija del negocio y copia al correo del cliente que dejó en el modal, mediante un endpoint backend mínimo.
+- Bloqueo del reenvío inmediato de la misma cotización hasta que el cliente modifique algún parámetro.
 
 ### No incluye
 
 - Carga simultánea de varios modelos.
-- Backend, base de datos ni persistencia.
+- Persistencia de cotizaciones enviadas (no se guardan en base de datos, KV, D1 ni R2).
 - Autenticación de usuarios.
 - Almacenamiento remoto de archivos.
-- Historial de cotizaciones.
+- Historial de cotizaciones consultable.
 - Generación de G-Code ni motores de slicing.
 - Integración con WooCommerce, WordPress u OctoPrint.
 - Pasarelas de pago.
 - Soportes automáticos ni patrones avanzados de infill.
 - Cálculo exacto del tiempo de impresión.
 - Conversión entre formatos 3D.
+- Configuración de SPF/DKIM del dominio (responsabilidad de operaciones del negocio).
+- Protección anti-spam (CAPTCHA, Turnstile, honeypot o rate limiting) en el envío.
 
 ## Definiciones y acrónimos
 
@@ -121,16 +126,20 @@ En esta primera versión, todos los visitantes comparten el mismo nivel de acces
 
 ## Restricciones
 
-- Implementación 100 % frontend, sin backend propio.
+- Implementación mayoritariamente frontend. Se admite **un único endpoint backend** cuyo único propósito es recibir los datos de cotización y el PDF generados en el cliente, y reenviarlos por correo. No se expone ningún otro recurso backend.
 - Compatibilidad con navegadores modernos (Chrome, Edge, Firefox, Safari).
 - Renderizado y cálculo limitados por la capacidad del dispositivo del cliente.
 - Catálogo de materiales y precios definidos en el código en esta versión.
+- El servicio de envío de correo (SMTP, Gmail, Cloudflare Email Service u otro) debe estar configurado y operativo en el entorno de despliegue; no es parte del código del módulo.
 
 ## Supuestos y dependencias
 
 - El usuario dispone de un archivo STL o GLB válido exportado desde su software de modelado.
 - El navegador soporta WebGL 2.
 - El catálogo de materiales y precios se mantiene en el código fuente en esta versión.
+- El negocio dispone de un dominio propio con un buzón remitente (por ejemplo `no-reply@jp3d.com`) y los registros SPF y DKIM correctamente configurados para que los correos no caigan en spam.
+- El endpoint backend de envío de correo está desplegado, accesible desde el frontend y configurado con las credenciales del servicio de email elegido.
+- El servicio de email soporta el envío de un PDF adjunto por mensaje y se mantiene dentro de sus límites de tamaño y volumen.
 
 
 # Requisitos funcionales
@@ -249,6 +258,38 @@ El sistema debe permitir reemplazar o eliminar el modelo activo, reiniciando el 
 - Restablecer la configuración a sus valores por defecto al cambiar de modelo.
 - Mantener el visor en estado vacío (sin modelo) tras la eliminación.
 
+## RF-007 Envío de cotización por correo con PDF
+
+**Descripción:**
+
+El sistema debe permitir al cliente enviar su cotización por correo electrónico. Al pulsar el botón "Enviar cotización", se abre un modal donde el cliente ingresa su email y, opcionalmente, un comentario. El frontend genera localmente un PDF con el detalle de la cotización y lo envía, mediante un endpoint backend, al negocio y al propio cliente como copia.
+
+**Prioridad:** Alta
+
+**Criterios de aceptación:**
+
+- Existe un botón "Enviar cotización" visible únicamente cuando hay un modelo activo y una cotización calculada.
+- Al pulsar el botón, se abre un modal con dos campos: **email** (obligatorio) y **comentario** (opcional).
+- El campo email valida formato (estructura RFC 5322 simplificada) antes de habilitar el botón "Enviar".
+- El botón "Enviar" permanece deshabilitado mientras el email no tenga formato válido.
+- Al pulsar "Enviar", se muestra estado de carga (spinner o equivalente) y se deshabilita el botón para evitar doble envío.
+- El PDF se genera íntegramente en el cliente, sin round-trip al backend para renderizarlo, usando una librería de generación de PDF en navegador.
+- El PDF debe incluir, como mínimo:
+  - Encabezado con datos del negocio (nombre, logo si aplica, datos de contacto básicos).
+  - Fecha de emisión y fecha de vigencia calculada a partir de `quoteValidityDays`.
+  - Datos del cliente: email y comentario (si fue proporcionado).
+  - Datos del modelo: nombre del archivo, dimensiones, volumen, escala aplicada.
+  - Parámetros de impresión: material, porcentaje de relleno, cantidad.
+  - Desglose de costos: volumen con relleno, peso estimado, costo de material, costo fijo, margen, precio final.
+  - Moneda y formato local (PEN por defecto).
+- El PDF y los metadatos del envío (email, comentario, snapshot de parámetros) se envían al endpoint backend configurado.
+- El endpoint backend entrega el correo a la dirección fija del negocio (configurable) y envía copia al email del cliente que dejó en el modal.
+- Tras un envío exitoso, se muestra un toast de confirmación, se cierra el modal y el botón "Enviar cotización" se deshabilita hasta que el cliente modifique al menos un parámetro de la cotización.
+- Si el envío falla (respuesta no exitosa del endpoint, error de red, timeout), se muestra un toast de error claro y se re-habilita el botón "Enviar" para que el cliente pueda reintentar.
+- En ningún momento se persiste la cotización, el email, el comentario ni el PDF en almacenamiento del cliente ni del servidor. El envío es transaccional.
+- No se incluye ninguna protección anti-spam (CAPTCHA, Turnstile, honeypot ni rate limiting) en el frontend ni en el endpoint.
+- El FROM del correo debe ser una dirección `no-reply` del dominio del negocio, configurable en el código del endpoint backend.
+
 
 # Requisitos no funcionales
 
@@ -286,6 +327,23 @@ El sistema debe permitir reemplazar o eliminar el modelo activo, reiniciando el 
 - Tipado fuerte mediante TypeScript para reducir errores en evolución futura.
 - Código documentado y preparado para extensión a multi-modelo en versiones siguientes.
 
+## RNF-007 Privacidad y seguridad del envío por correo
+
+- La comunicación entre el frontend y el endpoint backend de envío debe realizarse sobre HTTPS.
+- El email, el comentario y el PDF viajan cifrados en tránsito; no se almacenan en disco en el backend ni en el frontend tras completarse el envío.
+- El endpoint backend no debe loguear en claro el contenido del email, el comentario ni el PDF.
+- La dirección de destino del negocio debe estar definida en configuración del backend, nunca en el cliente, para evitar que sea manipulada.
+
+## RNF-008 Tamaño del PDF generado
+
+- El PDF generado en el cliente no debe superar **1 MB** de tamaño en condiciones normales (modelo único, parámetros por defecto).
+- El PDF debe ser legible e imprimible en formato A4.
+
+## RNF-009 Tiempo de generación del PDF
+
+- La generación local del PDF debe completarse en menos de **2 segundos** en equipos de gama media.
+- La generación no debe bloquear el hilo principal más de **100 ms** en un solo ciclo; si se requiere más, debe realizarse en un Web Worker.
+
 
 # Modelo de datos
 
@@ -295,14 +353,16 @@ El sistema debe permitir reemplazar o eliminar el modelo activo, reiniciando el 
 - **Material:** identificador, nombre, densidad, precio por kilogramo, color, factor de ajuste.
 - **Configuración de impresión:** escala uniforme, escala por eje (X, Y, Z), porcentaje de relleno, material seleccionado, cantidad.
 - **Cotización:** volumen total, volumen con relleno, peso estimado, costo de material, costo fijo, margen, precio final, marca de tiempo de cálculo.
-- **Parámetros globales:** costo fijo de impresión, margen de ganancia por defecto, unidad de trabajo, límite de tamaño de archivo.
+- **Parámetros globales:** costo fijo de impresión, margen de ganancia por defecto, unidad de trabajo, límite de tamaño de archivo, `quoteValidityDays` (vigencia en días de la cotización enviada).
+- **Solicitud de envío de cotización (QuoteRequest):** email del cliente, comentario (opcional), marca de tiempo de envío, snapshot inmutable de los parámetros de cotización al momento del envío. Esta entidad **no se persiste**: solo se transmite al endpoint backend en el cuerpo del POST y se descarta tras el envío del correo.
 
 
 # Integraciones
 
-| Sistema         | Descripción                                                    | Responsable |
-| --------------- | -------------------------------------------------------------- | ----------- |
-| (ninguna)       | Esta versión no integra sistemas externos                       | N/A         |
+| Sistema                        | Descripción                                                                                  | Responsable |
+| ------------------------------ | -------------------------------------------------------------------------------------------- | ----------- |
+| Endpoint backend de envío      | Recibe el PDF y los metadatos de cotización desde el frontend y los entrega vía SMTP o servicio de email al negocio y al cliente. | Backend del proyecto (Next.js / Payload) |
+| Servicio de email (SMTP / API) | Servicio concreto (SMTP genérico, Gmail, Cloudflare Email Service, Resend u otro) usado por el endpoint backend para remitir el correo. Configurado en variables de entorno / secrets, no en el código del frontend. | Operaciones / infraestructura |
 
 > Las integraciones con ERP, CRM, pasarelas de pago u OctoPrint quedan fuera de alcance y se documentarán en versiones posteriores.
 
@@ -318,6 +378,9 @@ El sistema debe permitir reemplazar o eliminar el modelo activo, reiniciando el 
 | RN-005  | El precio final siempre se redondea a 2 decimales                              |
 | RN-006  | El factor de ajuste de costo del material modifica el costo del material antes del margen |
 | RN-007  | Al cambiar de modelo se reinicia configuración y cotización                   |
+| RN-008  | El botón "Enviar cotización" solo se habilita cuando el email del cliente tiene formato válido |
+| RN-009  | Tras un envío exitoso, el botón "Enviar cotización" se deshabilita hasta que el cliente modifique al menos un parámetro (escala, relleno, material, cantidad o reemplazo/eliminación del modelo) |
+| RN-010  | El PDF de cotización incluye la fecha de emisión y la fecha de vigencia, calculada como `fecha_emision + quoteValidityDays` (configurable) |
 
 
 # Casos de uso
@@ -333,8 +396,9 @@ El sistema debe permitir reemplazar o eliminar el modelo activo, reiniciando el 
 | CU-007  | Seleccionar material         | Visitante       | Elige entre PLA, PETG, ABS, TPU u otros                     |
 | CU-008  | Modificar cantidad           | Visitante       | Define el número de copias                                  |
 | CU-009  | Consultar cotización         | Visitante       | Visualiza el desglose de costos actualizado                  |
-| CU-010  | Solicitar cotización         | Visitante       | Pulsa "Solicitar cotización", revisa/edita el mensaje en el dialog y lo envía por WhatsApp al número configurado en `shared/config/contact.ts` |
-| CU-011  | Manejar error de carga       | Visitante       | Recibe mensaje de error por archivo inválido o demasiado grande |
+| CU-010  | Enviar cotización por correo | Visitante       | Pulsa "Enviar cotización", completa email y comentario opcional, y el sistema genera un PDF y lo envía por correo al cliente y al negocio |
+| CU-011  | Generar PDF de cotización    | Visitante       | El sistema arma el PDF en el navegador con el desglose, los datos del cliente y la vigencia, a partir del snapshot de parámetros |
+| CU-012  | Manejar error de carga       | Visitante       | Recibe mensaje de error por archivo inválido o demasiado grande |
 
 
 # Criterios de aceptación del proyecto
@@ -346,8 +410,14 @@ El sistema debe permitir reemplazar o eliminar el modelo activo, reiniciando el 
 - El usuario puede eliminar o reemplazar el modelo activo en cualquier momento.
 - La cotización se recalcula automáticamente ante cualquier cambio.
 - El visor mantiene un rendimiento fluido (≥ 30 FPS) en equipos de gama media.
-- Todo el proceso funciona sin conexión a servicios externos tras la carga inicial.
 - El módulo es responsive y usable en dispositivos móviles.
+- Al pulsar "Enviar cotización" se muestra un modal con email obligatorio y comentario opcional.
+- El sistema valida el formato del email antes de habilitar el botón "Enviar".
+- Se genera un PDF en el cliente con el desglose completo, los datos del cliente (email y comentario) y la vigencia.
+- El PDF y los metadatos se envían a un endpoint backend, que entrega el correo a la dirección del negocio y copia al cliente.
+- Tras un envío exitoso, el botón "Enviar cotización" se deshabilita hasta que el cliente cambie un parámetro.
+- Si el envío falla, se muestra un toast de error claro y se permite reintentar.
+- Ningún dato del envío (email, comentario, PDF) queda persistido en cliente ni servidor.
 - La documentación técnica y de uso queda entregada y versionada.
 
 # Riesgos
@@ -360,6 +430,12 @@ El sistema debe permitir reemplazar o eliminar el modelo activo, reiniciando el 
 | Precios de materiales desactualizados                       | Medio   | Alta         | Centralizar catálogo de materiales en un módulo de configuración fácil de actualizar     |
 | Fórmula de cotización inexacta frente a competencia        | Medio   | Media        | Documentar limitaciones conocidas y permitir evolución de la fórmula en versiones futuras |
 | Cambio de API de Three.js o React Three Fiber              | Bajo    | Baja         | Fijar versiones en package.json y planificar actualización periódica                     |
+| Servicio de email caído o con incidentes                   | Alto    | Media        | Mostrar toast de error claro y permitir reintento; documentar dependencias operativas   |
+| SPF/DKIM mal configurados y correos caen en spam           | Alto    | Media        | Bloquear el despliegue hasta verificar configuración DNS; documentar checklist de go-live  |
+| Límite de tamaño de adjunto del servicio de email          | Medio   | Baja         | Restricción de RNF-008: PDF ≤ 1 MB; medir y ajustar template si se acerca al límite      |
+| Endpoint backend de envío es abusado por terceros (spam)   | Medio   | Alta         | Decisión explícita de no incluir protección anti-spam en esta versión; el riesgo queda documentado para reevaluar en versiones futuras |
+| Email del cliente con formato válido pero no entregable    | Bajo    | Media        | Validar formato (RN-008); el correo rebotado se maneja fuera del módulo (buzón del negocio) |
+| Cambio de datos del negocio en el PDF (logo, contacto)     | Bajo    | Alta         | Centralizar datos del negocio en un módulo de configuración editable sin tocar el PDF   |
 
 
 # Anexos
@@ -399,15 +475,29 @@ Three.js (STLLoader / GLTFLoader)
       Precio estimado
 ```
 
+## Flujo de envío de cotización por correo
+
+El envío de la cotización sigue la siguiente secuencia de pasos:
+
+1. El usuario, con un modelo activo y una cotización calculada, pulsa el botón "Enviar cotización".
+2. Se abre un modal con dos campos: email (obligatorio) y comentario (opcional).
+3. El sistema valida el formato del email en tiempo real (RN-008). El botón "Enviar" permanece deshabilitado hasta que el formato sea válido.
+4. Al pulsar "Enviar", el frontend genera localmente el PDF de la cotización con jsPDF o pdf-lib, incluyendo encabezado del negocio, datos del cliente, parámetros del modelo, desglose de costos, fecha de emisión y fecha de vigencia.
+5. El frontend realiza un POST al endpoint backend con el PDF binario y los metadatos del envío (email del cliente, comentario y snapshot inmutable de los parámetros de cotización).
+6. El endpoint backend entrega el correo mediante el servicio de email configurado, con la dirección fija del negocio como destinatario principal y el email del cliente como copia.
+7. Si la respuesta es exitosa (HTTP 2xx), el frontend muestra un toast de confirmación, cierra el modal y deshabilita el botón "Enviar cotización" hasta que el cliente modifique al menos un parámetro (RN-009).
+8. Si la respuesta no es exitosa o se produce un error de red, el frontend muestra un toast de error y vuelve a habilitar el botón "Enviar" para que el cliente pueda reintentar.
+
+El PDF y los datos del envío no se persisten ni en el cliente ni en el servidor. El endpoint procesa la solicitud y la descarta una vez entregado el correo.
+
 ## Fuera de alcance (No requerido)
 
 En esta primera versión no se implementará:
 
-- Backend.
-- Base de datos.
+- Base de datos ni cualquier otra forma de persistencia de cotizaciones, emails, comentarios o PDFs.
 - Autenticación de usuarios.
 - Almacenamiento remoto de archivos.
-- Historial de cotizaciones.
+- Historial de cotizaciones consultable.
 - Integración con WooCommerce.
 - Integración con WordPress.
 - Pasarelas de pago.
@@ -422,6 +512,14 @@ En esta primera versión no se implementará:
 - Conversión entre formatos 3D.
 - Persistencia de configuraciones.
 - Carga simultánea de múltiples modelos.
+- Configuración de SPF/DKIM del dominio del negocio (responsabilidad de operaciones).
+- Anti-spam (CAPTCHA, Turnstile, honeypot, rate limiting) en el envío de cotización.
+- Webhooks de respuesta del servicio de email (rebotes, abiertas, clics).
+- Plantillas personalizables del PDF: el template es fijo y vive en el código del frontend.
+- Múltiples destinatarios en el envío: solo una dirección de negocio y copia al cliente.
+- Reenvío de la misma cotización sin que el cliente cambie un parámetro (RN-009).
+
+> El único endpoint backend permitido en esta versión es el de envío de cotización por correo, descrito en RF-007. Cualquier otro endpoint, integración, almacenamiento o lógica de negocio del lado del servidor queda fuera de alcance.
 
 ## Limitaciones conocidas
 
@@ -441,6 +539,13 @@ Para archivos GLB se ignorarán materiales, texturas y animaciones embebidas: la
 
 El objetivo es ofrecer una cotización rápida orientativa, no una simulación exacta del proceso de impresión.
 
+Sobre el envío por correo:
+
+- No se valida que la dirección de email del cliente sea entregable, solo se valida su formato (RN-008). Los rebotes o respuestas de no-entregable llegan al buzón del negocio.
+- No se garantiza que el correo no caiga en la carpeta de spam del cliente; depende de la configuración SPF/DKIM del dominio y de la reputación del remitente, que son responsabilidades de operaciones.
+- El PDF no incluye imagen renderizada del modelo 3D; contiene solo texto y el desglose.
+- El template del PDF es fijo y no configurable desde el panel del negocio en esta versión.
+
 ## Formatos soportados
 
 | Formato | Soporte | Loader            | Notas                                              |
@@ -454,4 +559,5 @@ El objetivo es ofrecer una cotización rápida orientativa, no una simulación e
 
 - **Panel izquierdo:** carga, configuración, resumen.
 - **Panel derecho:** visor 3D, controles de cámara, información geométrica.
-- **Sección inferior:** desglose de costos, precio total, botón de solicitar cotización.
+- **Sección inferior:** desglose de costos, precio total, botón de "Enviar cotización".
+- **Modal de envío:** formulario con email y comentario, botón "Enviar" y estado de carga.
