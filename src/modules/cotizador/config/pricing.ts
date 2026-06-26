@@ -4,4 +4,5 @@ export const PRICING_CONFIG = {
   maxFileSizeMB: 50,
   currency: "PEN",
   currencySymbol: "S/",
+  quoteValidityDays: 15,
 };

@@ -51,6 +51,7 @@ export function Viewer3D() {
       <Canvas
         shadows={{ type: THREE.PCFShadowMap }}
         camera={{ position: [0, 80, 150], fov: 45 }}
+        gl={{ preserveDrawingBuffer: true }}
       >
         <SceneHelpers />
         <Stats />
