@@ -1,11 +1,14 @@
 "use client";
 
+import { Mail } from "lucide-react";
+import { useState } from "react";
 import { InfillSlider } from "@/modules/cotizador/components/ui/controls/infill-slider";
 import { MaterialPicker } from "@/modules/cotizador/components/ui/controls/material-picker";
 import { QuantityInput } from "@/modules/cotizador/components/ui/controls/quantity-input";
 import { ScaleControls } from "@/modules/cotizador/components/ui/controls/scale-controls";
 import { CostBreakdown } from "@/modules/cotizador/components/ui/details/cost-breakdown";
 import { GeometryInfo } from "@/modules/cotizador/components/ui/details/geometry-info";
+import { SendQuoteModal } from "@/modules/cotizador/components/ui/dialogs/send-quote-dialog";
 import { useQuotation } from "@/modules/cotizador/hooks/use-quotation";
 import {
   Accordion,
@@ -13,13 +16,25 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/shared/components/ui/accordion";
+import { Button } from "@/shared/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/shared/components/ui/card";
 
 export function SidebarPanel() {
   const { state, selectedMaterial } = useQuotation();
-  const { model, config } = state;
+  const { model, config, lastSentConfig } = state;
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   if (!model) return null;
+
+  const isAlreadySent =
+    lastSentConfig !== null &&
+    config.scaleUniform === lastSentConfig.scaleUniform &&
+    config.scaleX === lastSentConfig.scaleX &&
+    config.scaleY === lastSentConfig.scaleY &&
+    config.scaleZ === lastSentConfig.scaleZ &&
+    config.infill === lastSentConfig.infill &&
+    config.materialId === lastSentConfig.materialId &&
+    config.quantity === lastSentConfig.quantity;
 
   return (
     <div className="flex flex-col gap-4">
@@ -97,6 +112,7 @@ export function SidebarPanel() {
           </Accordion>
         </CardContent>
       </Card>
+
       <Card>
         <CardHeader>
           <h3 className="font-semibold text-foreground text-sm uppercase tracking-wider">
@@ -105,8 +121,24 @@ export function SidebarPanel() {
         </CardHeader>
         <CardContent className="flex flex-col gap-4">
           <CostBreakdown />
+          <Button
+            onClick={() => setIsModalOpen(true)}
+            disabled={isAlreadySent}
+            className="mt-2 w-full gap-2"
+          >
+            <Mail className="size-4" />
+            {isAlreadySent ? "Cotización Enviada" : "Enviar Cotización"}
+          </Button>
+          {isAlreadySent && (
+            <p className="mt-1 text-center text-[10px] text-muted-foreground">
+              Esta cotización ya fue enviada. Modifica algún parámetro para
+              habilitar un nuevo envío.
+            </p>
+          )}
         </CardContent>
       </Card>
+
+      <SendQuoteModal open={isModalOpen} onOpenChange={setIsModalOpen} />
     </div>
   );
 }

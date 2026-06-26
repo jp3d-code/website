@@ -31,6 +31,7 @@ const initialConfig: PrintConfig = {
 const initialState: QuotationState = {
   model: null,
   config: initialConfig,
+  lastSentConfig: null,
 };
 
 function quotationReducer(
@@ -43,12 +44,14 @@ function quotationReducer(
         ...state,
         model: action.payload,
         config: initialConfig,
+        lastSentConfig: null,
       };
     case "REMOVE_MODEL":
       return {
         ...state,
         model: null,
         config: initialConfig,
+        lastSentConfig: null,
       };
     case "UPDATE_CONFIG":
       return {
@@ -66,6 +69,11 @@ function quotationReducer(
           scaleZ: 1.0,
         },
       };
+    case "SET_LAST_SENT_CONFIG":
+      return {
+        ...state,
+        lastSentConfig: action.payload,
+      };
     default:
       return state;
   }
@@ -80,6 +88,7 @@ export interface QuotationContextProps {
   removeModel: () => void;
   updateConfig: (config: Partial<PrintConfig>) => void;
   resetScale: () => void;
+  setLastSentConfig: (config: PrintConfig) => void;
 }
 
 export const QuotationContext = createContext<
@@ -122,6 +131,10 @@ export function QuotationProvider({ children }: { children: React.ReactNode }) {
     dispatch({ type: "RESET_SCALE" });
   }, []);
 
+  const setLastSentConfig = useCallback((config: PrintConfig) => {
+    dispatch({ type: "SET_LAST_SENT_CONFIG", payload: config });
+  }, []);
+
   return (
     <QuotationContext.Provider
       value={{
@@ -133,6 +146,7 @@ export function QuotationProvider({ children }: { children: React.ReactNode }) {
         removeModel,
         updateConfig,
         resetScale,
+        setLastSentConfig,
       }}
     >
       {children}
