@@ -1,6 +1,7 @@
 "use client";
 
 import { SidebarPanel } from "@/modules/cotizador/components/panels/sidebar-panel";
+import TitlePanel from "@/modules/cotizador/components/panels/title-panel";
 import { ViewerPanel } from "@/modules/cotizador/components/panels/viewer-panel";
 import { ModelLoading } from "@/modules/cotizador/components/ui/information/model-loading";
 import { ModelDropzone } from "@/modules/cotizador/components/ui/viewer-3d/model-dropzone";
@@ -36,7 +37,8 @@ export function WorkspaceSection() {
           <ModelLoading />
         ) : model ? (
           <div className="grid w-full grid-cols-1 items-start gap-8 md:grid-cols-12">
-            <div className="sticky top-16 z-20 w-full bg-background/90 pb-4 backdrop-blur-xs md:static md:col-span-8 md:bg-transparent md:pb-0 md:backdrop-blur-none">
+            <div className="sticky top-16 z-20 flex w-full flex-col gap-4 bg-background/90 pb-4 backdrop-blur-xs md:static md:col-span-8 md:bg-transparent md:pb-0 md:backdrop-blur-none">
+              <TitlePanel model={model} />
               <ViewerPanel />
             </div>
 

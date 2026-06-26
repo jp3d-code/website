@@ -1,5 +1,6 @@
 "use client";
 
+import { Trash2 } from "lucide-react";
 import { useQuotation } from "@/modules/cotizador/hooks/use-quotation";
 import { Button } from "@/shared/components/ui/button";
 import {
@@ -12,7 +13,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/shared/components/ui/dialog";
-import { Trash2 } from "lucide-react";
 
 export function DeleteModelDialog() {
   const { removeModel } = useQuotation();
@@ -40,13 +40,11 @@ export function DeleteModelDialog() {
           </DialogDescription>
         </DialogHeader>
         <DialogFooter className="mt-4">
-          <DialogClose render={<Button variant="outline" />}>
+          <DialogClose render={<Button variant="ghost" />}>
             Cancelar
           </DialogClose>
           <DialogClose
-            render={
-              <Button variant="destructive" onClick={removeModel} />
-            }
+            render={<Button variant="destructive" onClick={removeModel} />}
           >
             Confirmar
           </DialogClose>
