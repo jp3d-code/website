@@ -47,7 +47,7 @@ export function QuoteEmail({
           <Container className="mx-auto my-10 max-w-110 rounded-lg border border-[#e5e7eb] border-solid bg-white p-5">
             <Section className="mt-8">
               <div className="mb-6 flex items-center gap-2.5">
-                <span className="block h-6 w-1.5 rounded-sm bg-[#10b981]" />
+                <span className="block h-6 w-1.5 rounded-sm bg-[#b58709]" />
                 <span className="font-bold text-[#1f2937] text-[22px] tracking-tight">
                   JP3D
                 </span>
@@ -90,10 +90,10 @@ export function QuoteEmail({
               <Hr className="my-3 border-[#e5e7eb] border-t" />
 
               <div className="flex items-baseline justify-between">
-                <Text className="m-0 font-bold text-[#10b981] text-[14px]">
+                <Text className="m-0 font-bold text-[#b58709] text-[14px]">
                   Precio Estimado Total:
                 </Text>
-                <Text className="m-0 font-bold font-mono text-[#10b981] text-[18px]">
+                <Text className="m-0 font-bold font-mono text-[#b58709] text-[18px]">
                   {formattedPrice}
                 </Text>
               </div>
@@ -111,7 +111,7 @@ export function QuoteEmail({
                 <strong>Email:</strong>{" "}
                 <Link
                   href={`mailto:${email}`}
-                  className="text-[#10b981] underline"
+                  className="text-[#b58709] underline"
                 >
                   {email}
                 </Link>
@@ -134,7 +134,7 @@ export function QuoteEmail({
               contáctenos en{" "}
               <Link
                 href={`mailto:${businessEmail}`}
-                className="text-[#10b981] underline"
+                className="text-[#b58709] underline"
               >
                 {businessEmail}
               </Link>

@@ -1,6 +1,6 @@
 "use client";
 
-import { Bounds, Center, OrbitControls, Stats } from "@react-three/drei";
+import { Bounds, Center, OrbitControls } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import * as THREE from "three";
 import { WebGLLoading } from "@/modules/cotizador/components/ui/information/webgl-loading";
@@ -54,7 +54,6 @@ export function Viewer3D() {
         gl={{ preserveDrawingBuffer: true }}
       >
         <SceneHelpers />
-        <Stats />
         <Bounds fit clip observe margin={1.25}>
           <group
             position={[0, (model.stats.dimensions.y * config.scaleY) / 2, 0]}

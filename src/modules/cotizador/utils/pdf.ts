@@ -38,7 +38,7 @@ export function generateQuotePDF(snapshot: QuoteSnapshot): Blob {
   const pageWidth = doc.internal.pageSize.getWidth();
   const pageHeight = doc.internal.pageSize.getHeight();
 
-  const primaryColor = [16, 185, 129];
+  const primaryColor = [181, 135, 9];
   const secondaryColor = [31, 41, 55];
   const textColor = [55, 65, 81];
   const lightGray = [243, 244, 246];
