@@ -16,6 +16,7 @@ export const Categories: CollectionConfig = {
   admin: {
     useAsTitle: "name",
     defaultColumns: ["name"],
+    hidden: true,
     group: {
       en: "Content",
       es: "Contenido",

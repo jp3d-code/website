@@ -15,6 +15,7 @@ export const SocialMedia: CollectionConfig = {
   admin: {
     useAsTitle: "label",
     defaultColumns: ["label", "url", "order"],
+    hidden: true,
     group: {
       en: "Settings",
       es: "Configuración",

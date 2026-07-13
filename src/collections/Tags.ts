@@ -1,3 +1,4 @@
+import { revalidatePath } from "next/cache";
 import type { CollectionConfig } from "payload";
 import { slugify } from "@/shared/lib/utils";
 
@@ -15,6 +16,7 @@ export const Tags: CollectionConfig = {
   },
   admin: {
     useAsTitle: "name",
+    hidden: true,
     group: {
       en: "Content",
       es: "Contenido",
@@ -79,6 +81,9 @@ export const Tags: CollectionConfig = {
             name: data.name.slice(0, 1).toUpperCase() + data.name.slice(1),
           };
         }
+      },
+      async () => {
+        revalidatePath("/");
       },
     ],
   },

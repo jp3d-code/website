@@ -28,6 +28,7 @@ const dirname = path.dirname(filename);
 export default buildConfig({
   admin: {
     user: Users.slug,
+    theme: "light",
     importMap: {
       baseDir: path.resolve(dirname),
     },
@@ -62,7 +63,7 @@ export default buildConfig({
   sharp: sharp,
   plugins: [],
   i18n: {
-    fallbackLanguage: "en",
+    fallbackLanguage: "es",
     supportedLanguages: { en, es },
   },
 });

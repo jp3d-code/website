@@ -15,6 +15,7 @@ export const Locations: CollectionConfig = {
   admin: {
     useAsTitle: "name",
     defaultColumns: ["name", "address"],
+    hidden: true,
     group: {
       en: "Settings",
       es: "Configuración",
