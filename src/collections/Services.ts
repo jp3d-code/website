@@ -1,3 +1,4 @@
+import { revalidatePath } from "next/cache";
 import type { CollectionConfig } from "payload";
 import { slugify } from "@/shared/lib/utils";
 
@@ -105,6 +106,12 @@ export const Services: CollectionConfig = {
         }
 
         return data;
+      },
+    ],
+    afterChange: [
+      async () => {
+        revalidatePath("/");
+        revalidatePath("/servicios");
       },
     ],
   },

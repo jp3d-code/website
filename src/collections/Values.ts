@@ -1,3 +1,4 @@
+import { revalidatePath } from "next/cache";
 import type { CollectionConfig } from "payload";
 
 export const Values: CollectionConfig = {
@@ -74,4 +75,11 @@ export const Values: CollectionConfig = {
       },
     },
   ],
+  hooks: {
+    afterChange: [
+      async () => {
+        revalidatePath("/marca");
+      },
+    ],
+  },
 };

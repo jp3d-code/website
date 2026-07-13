@@ -1,3 +1,4 @@
+import { revalidatePath } from "next/cache";
 import type { GlobalConfig } from "payload";
 
 export const Contact: GlobalConfig = {
@@ -83,4 +84,12 @@ export const Contact: GlobalConfig = {
       },
     },
   ],
+  hooks: {
+    afterChange: [
+      async () => {
+        revalidatePath("/");
+        revalidatePath("/contacto");
+      },
+    ],
+  },
 };

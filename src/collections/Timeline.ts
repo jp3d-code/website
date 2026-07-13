@@ -1,15 +1,16 @@
+import { revalidatePath } from "next/cache";
 import type { CollectionConfig } from "payload";
 
 export const Timeline: CollectionConfig = {
   slug: "timeline",
   labels: {
     singular: {
-      en: "Timeline Event",
-      es: "Evento de línea de tiempo",
+      en: "Milestone",
+      es: "Hito",
     },
     plural: {
-      en: "Timeline Events",
-      es: "Eventos de línea de tiempo",
+      en: "History",
+      es: "Historia",
     },
   },
   admin: {
@@ -55,4 +56,11 @@ export const Timeline: CollectionConfig = {
       },
     },
   ],
+  hooks: {
+    afterChange: [
+      async () => {
+        revalidatePath("/sobre-nosotros");
+      },
+    ],
+  },
 };

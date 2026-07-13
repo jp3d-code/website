@@ -1,3 +1,4 @@
+import { revalidatePath } from "next/cache";
 import type { CollectionConfig } from "payload";
 
 export const Videos: CollectionConfig = {
@@ -114,4 +115,12 @@ export const Videos: CollectionConfig = {
       },
     },
   ],
+  hooks: {
+    afterChange: [
+      async () => {
+        revalidatePath("/");
+        revalidatePath("/sobre-nosotros");
+      },
+    ],
+  },
 };
