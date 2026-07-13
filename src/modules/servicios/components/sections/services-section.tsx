@@ -1,5 +1,6 @@
 import configPromise from "@payload-config";
 import { RichText } from "@payloadcms/richtext-lexical/react";
+import Image from "next/image";
 import { getPayload } from "payload";
 import { LinkBtm } from "@/shared/components/ui/link";
 import {
@@ -11,7 +12,7 @@ import {
   SectionTitlePrimary,
 } from "@/shared/components/ui/section";
 import { routes } from "@/shared/config/routes";
-import { getMediaUrl } from "@/shared/lib/utils";
+import { getMediaImageProps } from "@/shared/lib/utils";
 
 export async function ServicesSection() {
   const payload = await getPayload({ config: configPromise });
@@ -23,7 +24,7 @@ export async function ServicesSection() {
   return (
     <>
       {services.map((service, index) => {
-        const imageUrl = getMediaUrl(service.image);
+        const imageProps = getMediaImageProps(service.image);
         const reversed = index % 2 === 1;
         return (
           <Section
@@ -56,11 +57,13 @@ export async function ServicesSection() {
                   Ver más
                 </LinkBtm>
               </div>
-              {imageUrl && (
+              {imageProps && (
                 <div className={reversed ? "md:order-1" : ""}>
-                  <img
-                    src={imageUrl}
-                    alt={service.title}
+                  <Image
+                    src={imageProps.src}
+                    alt={imageProps.alt}
+                    width={imageProps.width}
+                    height={imageProps.height}
                     className="aspect-4/3 w-full rounded-lg border border-border/60 object-cover"
                   />
                 </div>

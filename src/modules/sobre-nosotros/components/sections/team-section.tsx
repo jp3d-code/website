@@ -1,3 +1,4 @@
+import Image from "next/image";
 import {
   Container,
   Section,
@@ -32,9 +33,11 @@ export function TeamSection() {
               tangible para nuestros clientes.
             </SectionDescription>
           </SectionHeader>
-          <img
+          <Image
             src="https://jp3doficial.com/editar/imagenes/sobre-nosotros/equipo_jp3d.png"
             alt="Nuestro Equipo"
+            width={800}
+            height={600}
             className="w-full max-w-md justify-self-end rounded-lg object-cover"
           />
         </div>

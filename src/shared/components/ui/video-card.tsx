@@ -1,7 +1,8 @@
+import Image from "next/image";
 import Link from "next/link";
 import type { Media } from "@/payload-types";
 import { Skeleton } from "@/shared/components/ui/skeleton";
-import { cn, getMediaUrl } from "@/shared/lib/utils";
+import { cn, getMediaImageProps } from "@/shared/lib/utils";
 
 interface VideoCardProps {
   title: string;
@@ -20,7 +21,7 @@ export function VideoCard({
   label = "Video",
   className,
 }: VideoCardProps) {
-  const imageUrl = getMediaUrl(image);
+  const imageProps = getMediaImageProps(image);
 
   return (
     <Link
@@ -29,10 +30,12 @@ export function VideoCard({
       rel="noopener noreferrer"
       className={cn("overflow-hidden rounded-lg bg-card", className)}
     >
-      {imageUrl ? (
-        <img
-          src={imageUrl}
-          alt={title}
+      {imageProps ? (
+        <Image
+          src={imageProps.src}
+          alt={imageProps.alt}
+          width={imageProps.width}
+          height={imageProps.height}
           className="aspect-video w-full object-cover"
         />
       ) : (

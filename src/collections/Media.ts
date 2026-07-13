@@ -4,15 +4,19 @@ export const Media: CollectionConfig = {
   slug: "media",
   labels: {
     singular: {
-      en: "Media",
-      es: "Medio",
+      en: "File",
+      es: "Archivo",
     },
     plural: {
-      en: "Media",
-      es: "Medios",
+      en: "Files",
+      es: "Archivos",
     },
   },
   admin: {
+    description: {
+      en: "Images and documents used across the site",
+      es: "Imágenes y documentos utilizados en el sitio",
+    },
     group: {
       en: "Settings",
       es: "Configuración",
@@ -38,5 +42,19 @@ export const Media: CollectionConfig = {
       },
     },
   ],
-  upload: true,
+  upload: {
+    imageSizes: [
+      {
+        name: "hero",
+        width: 1920,
+        formatOptions: {
+          format: "webp",
+        },
+      },
+    ],
+    resizeOptions: {
+      width: 1920,
+      withoutEnlargement: true,
+    },
+  },
 };

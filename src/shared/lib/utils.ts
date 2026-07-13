@@ -23,6 +23,19 @@ export function getMediaUrl(media?: Media | number | null): string {
   return media.url ?? "";
 }
 
+export function getMediaImageProps(media?: Media | number | null) {
+  if (!media || typeof media === "number") {
+    return null;
+  }
+
+  return {
+    src: media.url ?? "",
+    alt: media.alt ?? "",
+    width: media.width ?? 1920,
+    height: media.height ?? 1080,
+  };
+}
+
 export function formatDate(value?: string | null): string {
   if (!value) {
     return "";

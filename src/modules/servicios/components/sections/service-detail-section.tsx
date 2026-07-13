@@ -1,14 +1,15 @@
 import { RichText } from "@payloadcms/richtext-lexical/react";
+import Image from "next/image";
 import type { Service } from "@/payload-types";
 import { Container, Section } from "@/shared/components/ui/section";
-import { getMediaUrl } from "@/shared/lib/utils";
+import { getMediaImageProps } from "@/shared/lib/utils";
 
 interface ServiceDetailProps {
   service: Service;
 }
 
 export function ServiceDetailSection({ service }: ServiceDetailProps) {
-  const imageUrl = getMediaUrl(service.image);
+  const imageProps = getMediaImageProps(service.image);
 
   return (
     <Section>
@@ -23,10 +24,12 @@ export function ServiceDetailSection({ service }: ServiceDetailProps) {
             </div>
           </header>
 
-          {imageUrl && (
-            <img
-              src={imageUrl}
-              alt={service.title}
+          {imageProps && (
+            <Image
+              src={imageProps.src}
+              alt={imageProps.alt}
+              width={imageProps.width}
+              height={imageProps.height}
               className="aspect-video w-full rounded-lg object-cover"
             />
           )}

@@ -1,16 +1,17 @@
 import { RichText } from "@payloadcms/richtext-lexical/react";
 import { Tag as TagIcon } from "lucide-react";
+import Image from "next/image";
 import type { Project } from "@/payload-types";
 import { Badge } from "@/shared/components/ui/badge";
 import { Container, Section } from "@/shared/components/ui/section";
-import { getCollections, getMediaUrl } from "@/shared/lib/utils";
+import { getCollections, getMediaImageProps } from "@/shared/lib/utils";
 
 interface ProjectDetailProps {
   project: Project;
 }
 
 export async function ProjectDetailSection({ project }: ProjectDetailProps) {
-  const imageUrl = getMediaUrl(project.image);
+  const imageProps = getMediaImageProps(project.image);
   const tags = getCollections(project.tags);
 
   return (
@@ -38,10 +39,12 @@ export async function ProjectDetailSection({ project }: ProjectDetailProps) {
             )}
           </header>
 
-          {imageUrl && (
-            <img
-              src={imageUrl}
-              alt={project.title}
+          {imageProps && (
+            <Image
+              src={imageProps.src}
+              alt={imageProps.alt}
+              width={imageProps.width}
+              height={imageProps.height}
               className="aspect-video w-full rounded-lg object-cover"
             />
           )}
