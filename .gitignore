@@ -43,3 +43,4 @@ yarn-error.log*
 next-env.d.ts
 /dist/
 .vinext
+src/payload-generated-schema.ts
