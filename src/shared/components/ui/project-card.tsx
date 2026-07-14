@@ -2,12 +2,13 @@
 
 import { motion } from "framer-motion";
 import { ArrowUpRight, Tag as TagIcon } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import type { Project } from "@/payload-types";
 import { Badge } from "@/shared/components/ui/badge";
 import { Card } from "@/shared/components/ui/card";
 import { routes } from "@/shared/config/routes";
-import { cn, getCollections, getMediaUrl } from "@/shared/lib/utils";
+import { cn, getCollections, getMediaImageProps } from "@/shared/lib/utils";
 
 type ProjectCardProject = Pick<
   Project,
@@ -20,7 +21,7 @@ interface ProjectCardProps {
 }
 
 export function ProjectCard({ project, className }: ProjectCardProps) {
-  const imageUrl = getMediaUrl(project.image);
+  const imageProps = getMediaImageProps(project.image);
   const tags = getCollections(project.tags);
 
   const href = routes.proyectos.detail.build({ slug: project.slug });
@@ -40,10 +41,13 @@ export function ProjectCard({ project, className }: ProjectCardProps) {
         />
 
         <div className="relative aspect-video overflow-hidden">
-          {imageUrl ? (
-            <motion.img
-              src={imageUrl}
-              alt={project.title}
+          {imageProps ? (
+            <Image
+              src={imageProps.src}
+              alt={imageProps.alt}
+              width={600}
+              height={338}
+              sizes="(max-width: 768px) 100vw, 33vw"
               className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
             />
           ) : (

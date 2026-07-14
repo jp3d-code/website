@@ -36,6 +36,7 @@ export function VideoCard({
           alt={imageProps.alt}
           width={imageProps.width}
           height={imageProps.height}
+          sizes="(max-width: 768px) 100vw, 33vw"
           className="aspect-video w-full object-cover"
         />
       ) : (

@@ -64,6 +64,7 @@ export async function ServicesSection() {
                     alt={imageProps.alt}
                     width={imageProps.width}
                     height={imageProps.height}
+                    sizes="(max-width: 768px) 100vw, 50vw"
                     className="aspect-4/3 w-full rounded-lg border border-border/60 object-cover"
                   />
                 </div>

@@ -30,6 +30,7 @@ export function ServiceDetailSection({ service }: ServiceDetailProps) {
               alt={imageProps.alt}
               width={imageProps.width}
               height={imageProps.height}
+              sizes="(max-width: 896px) 100vw, 896px"
               className="aspect-video w-full rounded-lg object-cover"
             />
           )}
