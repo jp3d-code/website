@@ -8,6 +8,7 @@ import { seedProjects } from "./projects";
 import { seedServices } from "./services";
 import { seedSocialMedia } from "./social-media";
 import { seedTags } from "./tags";
+import { seedTeamMembers } from "./team-members";
 import { seedTestimonials } from "./testimonials";
 import { seedTimeline } from "./timeline";
 import { seedValues } from "./values";
@@ -28,6 +29,7 @@ export async function isDatabaseEmpty(): Promise<boolean> {
     "testimonials",
     "videos",
     "locations",
+    "team-members",
   ] as const;
 
   for (const slug of collections) {
@@ -61,5 +63,6 @@ export async function runSeed(): Promise<void> {
   await seedTestimonials();
   await seedValues();
   await seedVideos();
+  await seedTeamMembers();
   await seedContact();
 }
