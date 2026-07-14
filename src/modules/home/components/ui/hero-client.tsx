@@ -2,6 +2,7 @@
 
 import * as motion from "motion/react-client";
 import { useLayoutEffect, useRef, useState } from "react";
+import { preload } from "react-dom";
 import type { Contact, Location, SocialMedia } from "@/payload-types";
 import { LinkBtm } from "@/shared/components/ui/link";
 import { Section } from "@/shared/components/ui/section";
@@ -51,6 +52,10 @@ export function HeroSectionClient({
 
     return () => resize.disconnect();
   }, []);
+
+  preload("/videos/hero.mp4", {
+    as: "video",
+  });
 
   return (
     <Section
@@ -115,6 +120,9 @@ export function HeroSectionClient({
           muted
           playsInline
           className="absolute z-10 object-cover"
+          preload="auto"
+          // @ts-expect-error
+          fetchPriority="high"
           initial={{
             left: videoRect.left,
             top: videoRect.top,
