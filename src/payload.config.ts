@@ -15,6 +15,7 @@ import { Projects } from "./collections/Projects";
 import { Services } from "./collections/Services";
 import { SocialMedia } from "./collections/SocialMedia";
 import { Tags } from "./collections/Tags";
+import { TeamMembers } from "./collections/TeamMembers";
 import { Testimonials } from "./collections/Testimonials";
 import { Timeline } from "./collections/Timeline";
 import { Users } from "./collections/Users";
@@ -37,6 +38,7 @@ export default buildConfig({
     Users,
     Media,
     Tags,
+    TeamMembers,
     Categories,
     Clients,
     Projects,

@@ -70,6 +70,7 @@ export interface Config {
     users: User;
     media: Media;
     tags: Tag;
+    'team-members': TeamMember;
     categories: Category;
     clients: Client;
     projects: Project;
@@ -90,6 +91,7 @@ export interface Config {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     tags: TagsSelect<false> | TagsSelect<true>;
+    'team-members': TeamMembersSelect<false> | TeamMembersSelect<true>;
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     clients: ClientsSelect<false> | ClientsSelect<true>;
     projects: ProjectsSelect<false> | ProjectsSelect<true>;
@@ -207,6 +209,23 @@ export interface Tag {
   id: number;
   name: string;
   slug: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "team-members".
+ */
+export interface TeamMember {
+  id: number;
+  name: string;
+  role: string;
+  /**
+   * Academic background and qualifications
+   */
+  education?: string | null;
+  image?: (number | null) | Media;
+  order: number;
   updatedAt: string;
   createdAt: string;
 }
@@ -451,6 +470,10 @@ export interface PayloadLockedDocument {
         value: number | Tag;
       } | null)
     | ({
+        relationTo: 'team-members';
+        value: number | TeamMember;
+      } | null)
+    | ({
         relationTo: 'categories';
         value: number | Category;
       } | null)
@@ -593,6 +616,19 @@ export interface MediaSelect<T extends boolean = true> {
 export interface TagsSelect<T extends boolean = true> {
   name?: T;
   slug?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "team-members_select".
+ */
+export interface TeamMembersSelect<T extends boolean = true> {
+  name?: T;
+  role?: T;
+  education?: T;
+  image?: T;
+  order?: T;
   updatedAt?: T;
   createdAt?: T;
 }
