@@ -4,13 +4,19 @@ import type { ComponentProps } from "react";
 import { buttonVariants } from "@/shared/components/ui/button";
 import { cn } from "@/shared/lib/utils";
 
-type Props = ComponentProps<typeof NextLink> &
+export type LinkBtmProps = ComponentProps<typeof NextLink> &
   VariantProps<typeof buttonVariants> & {
     tooltip?: React.ReactNode;
     className?: string;
   };
 
-function LinkBtm({ className, variant, size, children, ...props }: Props) {
+function LinkBtm({
+  className,
+  variant,
+  size,
+  children,
+  ...props
+}: LinkBtmProps) {
   return (
     <NextLink
       {...props}

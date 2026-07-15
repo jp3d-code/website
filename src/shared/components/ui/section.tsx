@@ -1,6 +1,6 @@
-import Link from "next/link";
 import { type ComponentProps, forwardRef } from "react";
 import { cn } from "@/shared/lib/utils";
+import { LinkBtm } from "./link";
 
 export const Section = forwardRef<HTMLElement, ComponentProps<"section">>(
   function Section({ className, children, ...props }, ref) {
@@ -8,7 +8,7 @@ export const Section = forwardRef<HTMLElement, ComponentProps<"section">>(
       <section
         ref={ref}
         className={cn(
-          "flex w-full items-center justify-center border-border/60 border-b px-6 pt-32 pb-36",
+          "flex w-full items-center justify-center border-primary/15 border-b px-6 pt-32 pb-36",
           className,
         )}
         {...props}
@@ -44,7 +44,7 @@ export function SectionHeader({
 }: ComponentProps<"div">) {
   return (
     <div
-      className={cn("flex w-full items-start justify-between gap-4", className)}
+      className={cn("flex w-full items-end justify-between gap-4", className)}
       {...props}
     >
       {children}
@@ -52,25 +52,34 @@ export function SectionHeader({
   );
 }
 
-export function SectionTitleForeground({
+export function SectionEyebrow({
   children,
   className,
   ...props
 }: ComponentProps<"span">) {
   return (
-    <span className={cn("text-secondary", className)} {...props}>
-      {children}
+    <span
+      className={cn(
+        "font-mono text-base text-primary uppercase tracking-wider",
+        className,
+      )}
+      {...props}
+    >
+      [ {children} ]
     </span>
   );
 }
 
-export function SectionTitlePrimary({
+export function SectionMainTitle({
   children,
   className,
   ...props
 }: ComponentProps<"span">) {
   return (
-    <span className={cn("text-primary", className)} {...props}>
+    <span
+      className={cn("font-bold text-5xl text-secondary", className)}
+      {...props}
+    >
       {children}
     </span>
   );
@@ -84,7 +93,7 @@ export function SectionTitle({
   return (
     <h2
       className={cn(
-        "flex w-full flex-wrap items-center justify-start gap-x-2 text-3xl uppercase",
+        "flex w-full flex-col flex-wrap items-start justify-center gap-2",
         className,
       )}
       {...props}
@@ -97,12 +106,13 @@ export function SectionTitle({
 export function SectionLink({
   className,
   ...props
-}: ComponentProps<typeof Link>) {
+}: ComponentProps<typeof LinkBtm>) {
   return (
-    <Link
+    <LinkBtm
       {...props}
+      variant={"outline"}
       className={cn(
-        "min-w-fit text-muted-foreground text-xs uppercase tracking-[0.2em] hover:underline",
+        "min-w-fit text-muted-foreground text-xs uppercase tracking-[0.2em]",
         className,
       )}
     />
