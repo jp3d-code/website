@@ -6,10 +6,10 @@ import { LinkBtm } from "@/shared/components/ui/link";
 import {
   Container,
   Section,
+  SectionEyebrow,
   SectionHeader,
+  SectionMainTitle,
   SectionTitle,
-  SectionTitleForeground,
-  SectionTitlePrimary,
 } from "@/shared/components/ui/section";
 import { routes } from "@/shared/config/routes";
 import { getMediaImageProps } from "@/shared/lib/utils";
@@ -40,10 +40,10 @@ export async function ServicesSection() {
               >
                 <SectionHeader>
                   <SectionTitle>
-                    <SectionTitlePrimary>{`0${index + 1}`}</SectionTitlePrimary>
-                    <SectionTitleForeground>
-                      {service.title}
-                    </SectionTitleForeground>
+                    <SectionEyebrow>Servicios</SectionEyebrow>
+                    <SectionMainTitle>
+                      {`0${index + 1}`} {service.title}
+                    </SectionMainTitle>
                   </SectionTitle>
                 </SectionHeader>
                 <div className="paragraph w-full max-w-xl text-muted-foreground">

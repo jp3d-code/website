@@ -4,9 +4,9 @@ import { motion, useScroll, useTransform } from "motion/react";
 import { useRef } from "react";
 import type { Client } from "@/payload-types";
 import {
+  SectionEyebrow,
+  SectionMainTitle,
   SectionTitle,
-  SectionTitleForeground,
-  SectionTitlePrimary,
 } from "@/shared/components/ui/section";
 import { Skeleton } from "@/shared/components/ui/skeleton";
 import { getMediaUrl } from "@/shared/lib/utils";
@@ -24,8 +24,8 @@ export function ClientsCarousel({ clients }: ClientsCarouselProps) {
     <section ref={targetRef} className="relative h-[300vh] bg-neutral-900">
       <div className="sticky top-0 flex h-screen w-full flex-col items-center justify-center gap-10 overflow-hidden">
         <SectionTitle className="z-20 flex w-full max-w-6xl items-center justify-start gap-2">
-          <SectionTitleForeground>Nuestros</SectionTitleForeground>
-          <SectionTitlePrimary>Clientes</SectionTitlePrimary>
+          <SectionEyebrow>Confianza</SectionEyebrow>
+          <SectionMainTitle>Nuestros Clientes</SectionMainTitle>
         </SectionTitle>
 
         <motion.div

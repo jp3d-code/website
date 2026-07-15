@@ -4,10 +4,10 @@ import { ProjectCard } from "@/shared/components/ui/project-card";
 import {
   Container,
   Section,
+  SectionEyebrow,
   SectionHeader,
+  SectionMainTitle,
   SectionTitle,
-  SectionTitleForeground,
-  SectionTitlePrimary,
 } from "@/shared/components/ui/section";
 
 interface RelatedProjectsProps {
@@ -46,8 +46,8 @@ export async function RelatedProjectsSection({
       <Container className="max-w-4xl">
         <SectionHeader className="mb-12">
           <SectionTitle>
-            <SectionTitleForeground>Proyectos</SectionTitleForeground>
-            <SectionTitlePrimary>relacionados</SectionTitlePrimary>
+            <SectionEyebrow>Similares</SectionEyebrow>
+            <SectionMainTitle>Proyectos Relacionados</SectionMainTitle>
           </SectionTitle>
         </SectionHeader>
 

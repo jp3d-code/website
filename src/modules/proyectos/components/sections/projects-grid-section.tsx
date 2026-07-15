@@ -4,9 +4,9 @@ import { ProjectCard } from "@/shared/components/ui/project-card";
 import {
   Container,
   Section,
+  SectionEyebrow,
+  SectionMainTitle,
   SectionTitle,
-  SectionTitleForeground,
-  SectionTitlePrimary,
 } from "@/shared/components/ui/section";
 
 export async function ProjectsGridSection() {
@@ -21,8 +21,8 @@ export async function ProjectsGridSection() {
     <Section>
       <Container>
         <SectionTitle>
-          <SectionTitleForeground>Nuestros</SectionTitleForeground>
-          <SectionTitlePrimary>Proyectos</SectionTitlePrimary>
+          <SectionEyebrow>Portafolio</SectionEyebrow>
+          <SectionMainTitle>Nuestros Proyectos</SectionMainTitle>
         </SectionTitle>
         <div className="mt-8 grid gap-6 sm:grid-cols-2 md:grid-cols-3">
           {projects.map((project) => (

@@ -4,10 +4,10 @@ import { getPayload } from "payload";
 import {
   Container,
   Section,
+  SectionEyebrow,
   SectionHeader,
+  SectionMainTitle,
   SectionTitle,
-  SectionTitleForeground,
-  SectionTitlePrimary,
 } from "@/shared/components/ui/section";
 import { routes } from "@/shared/config/routes";
 import { cn } from "@/shared/lib/utils";
@@ -30,8 +30,8 @@ export async function HistorySection() {
       <Container>
         <SectionHeader className="mb-16">
           <SectionTitle>
-            <SectionTitleForeground>Nuestra</SectionTitleForeground>
-            <SectionTitlePrimary>Historia</SectionTitlePrimary>
+            <SectionEyebrow>Trayectoria</SectionEyebrow>
+            <SectionMainTitle>Nuestra Historia</SectionMainTitle>
           </SectionTitle>
           <p className="text-muted-foreground text-xs uppercase tracking-[0.2em]">
             Nuestra trayectoria

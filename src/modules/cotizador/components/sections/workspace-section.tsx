@@ -9,10 +9,10 @@ import { useQuotation } from "@/modules/cotizador/hooks/use-quotation";
 import {
   Container,
   Section,
+  SectionEyebrow,
   SectionHeader,
+  SectionMainTitle,
   SectionTitle,
-  SectionTitleForeground,
-  SectionTitlePrimary,
 } from "@/shared/components/ui/section";
 
 export function WorkspaceSection() {
@@ -24,8 +24,8 @@ export function WorkspaceSection() {
       <Container className="items-start gap-8">
         <SectionHeader className="flex flex-col items-start gap-2">
           <SectionTitle>
-            <SectionTitleForeground>Cotizador de</SectionTitleForeground>
-            <SectionTitlePrimary>Impresión 3D</SectionTitlePrimary>
+            <SectionEyebrow>Cotización</SectionEyebrow>
+            <SectionMainTitle>Cotizador de Impresión 3D</SectionMainTitle>
           </SectionTitle>
           <p className="mt-2 w-full text-lg text-muted-foreground">
             Carga tu modelo STL o GLB para analizar su geometría y estimar los

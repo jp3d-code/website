@@ -4,11 +4,11 @@ import { ServicesGrid } from "@/modules/home/components/ui/services-grid";
 import {
   Container,
   Section,
+  SectionEyebrow,
   SectionHeader,
   SectionLink,
+  SectionMainTitle,
   SectionTitle,
-  SectionTitleForeground,
-  SectionTitlePrimary,
 } from "@/shared/components/ui/section";
 import { routes } from "@/shared/config/routes";
 
@@ -25,8 +25,8 @@ export async function ServicesSection() {
       <Container>
         <SectionHeader>
           <SectionTitle>
-            <SectionTitleForeground>Nuestros</SectionTitleForeground>
-            <SectionTitlePrimary>Servicios</SectionTitlePrimary>
+            <SectionEyebrow>Ecosistema Tecnológico</SectionEyebrow>
+            <SectionMainTitle>Nuestros Servicios</SectionMainTitle>
           </SectionTitle>
           <SectionLink href={routes.servicios.path}>Explorar más</SectionLink>
         </SectionHeader>

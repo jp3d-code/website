@@ -5,10 +5,10 @@ import {
   Container,
   Section,
   SectionDescription,
+  SectionEyebrow,
   SectionHeader,
+  SectionMainTitle,
   SectionTitle,
-  SectionTitleForeground,
-  SectionTitlePrimary,
 } from "@/shared/components/ui/section";
 import { routes } from "@/shared/config/routes";
 
@@ -26,8 +26,8 @@ export async function TeamSection() {
       <Container>
         <SectionHeader className="mb-10 flex-col items-start">
           <SectionTitle>
-            <SectionTitleForeground>Nuestro</SectionTitleForeground>
-            <SectionTitlePrimary>Equipo</SectionTitlePrimary>
+            <SectionEyebrow>Equipo</SectionEyebrow>
+            <SectionMainTitle>Nuestro Equipo</SectionMainTitle>
           </SectionTitle>
           <SectionDescription className="text-start">
             Un equipo de profesionales con experiencia en ingeniería, minería,

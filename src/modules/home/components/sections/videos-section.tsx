@@ -3,11 +3,11 @@ import { getPayload } from "payload";
 import {
   Container,
   Section,
+  SectionEyebrow,
   SectionHeader,
   SectionLink,
+  SectionMainTitle,
   SectionTitle,
-  SectionTitleForeground,
-  SectionTitlePrimary,
 } from "@/shared/components/ui/section";
 import { VideoCard } from "@/shared/components/ui/video-card";
 import { routes } from "@/shared/config/routes";
@@ -25,8 +25,8 @@ export async function VideosSection() {
       <Container>
         <SectionHeader>
           <SectionTitle>
-            <SectionTitleForeground>Ultimos</SectionTitleForeground>
-            <SectionTitlePrimary>Videos</SectionTitlePrimary>
+            <SectionEyebrow>Contenido</SectionEyebrow>
+            <SectionMainTitle>Últimos Videos</SectionMainTitle>
           </SectionTitle>
           <SectionLink href={routes.contacto.path}>Descubre mas</SectionLink>
         </SectionHeader>

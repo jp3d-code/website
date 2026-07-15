@@ -39,7 +39,7 @@ export function MarqueeSection() {
   return (
     <Section
       ref={ref}
-      className="bg-card"
+      className="grid-background"
       {...({ ref } as React.ComponentProps<typeof Section>)}
     >
       <div className="mask-edge mx-auto flex w-full flex-col gap-16 overflow-hidden px-4">

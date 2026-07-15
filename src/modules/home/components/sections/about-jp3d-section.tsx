@@ -2,10 +2,10 @@ import { LinkBtm } from "@/shared/components/ui/link";
 import {
   Container,
   Section,
+  SectionEyebrow,
   SectionHeader,
+  SectionMainTitle,
   SectionTitle,
-  SectionTitleForeground,
-  SectionTitlePrimary,
 } from "@/shared/components/ui/section";
 import { routes } from "@/shared/config/routes";
 
@@ -15,8 +15,8 @@ export function AboutJp3dSection() {
       <Container className="grid gap-14">
         <SectionHeader>
           <SectionTitle>
-            <SectionTitleForeground>Sobre</SectionTitleForeground>
-            <SectionTitlePrimary>Nostros</SectionTitlePrimary>
+            <SectionEyebrow>Quiénes Somos</SectionEyebrow>
+            <SectionMainTitle>Sobre Nosotros</SectionMainTitle>
           </SectionTitle>
         </SectionHeader>
         <h2 className="text-3xl text-foreground/40 leading-tight md:text-4xl">
@@ -28,11 +28,7 @@ export function AboutJp3dSection() {
           <span className="text-secondary">tecnología</span>.
         </h2>
         <div className="flex flex-wrap gap-4">
-          <LinkBtm
-            href={routes.sobreNosotros.path}
-            variant="secondary"
-            className="rounded-full"
-          >
+          <LinkBtm href={routes.sobreNosotros.path} variant="secondary">
             Más sobre la empresa
           </LinkBtm>
           <LinkBtm href={routes.proyectos.path} variant="outline">

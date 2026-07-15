@@ -3,10 +3,10 @@ import { getPayload } from "payload";
 import {
   Container,
   Section,
+  SectionEyebrow,
   SectionHeader,
+  SectionMainTitle,
   SectionTitle,
-  SectionTitleForeground,
-  SectionTitlePrimary,
 } from "@/shared/components/ui/section";
 import { VideoCard } from "@/shared/components/ui/video-card";
 import { routes } from "@/shared/config/routes";
@@ -30,8 +30,8 @@ export async function VideosSection() {
       <Container>
         <SectionHeader className="mb-16">
           <SectionTitle>
-            <SectionTitleForeground>Nuestros</SectionTitleForeground>
-            <SectionTitlePrimary>Videos</SectionTitlePrimary>
+            <SectionEyebrow>Multimedia</SectionEyebrow>
+            <SectionMainTitle>Nuestros Videos</SectionMainTitle>
           </SectionTitle>
           <p className="text-muted-foreground text-xs uppercase tracking-[0.2em]">
             Conoce más sobre nuestro proceso

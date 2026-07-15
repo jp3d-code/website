@@ -4,9 +4,9 @@ import { getPayload } from "payload";
 import {
   Container,
   Section,
+  SectionEyebrow,
+  SectionMainTitle,
   SectionTitle,
-  SectionTitleForeground,
-  SectionTitlePrimary,
 } from "@/shared/components/ui/section";
 import { routes } from "@/shared/config/routes";
 
@@ -21,8 +21,8 @@ export async function ValuesSection() {
     <Section id={routes.marca.sections.valores.hash} className="bg-card">
       <Container className="grid items-center justify-items-center gap-10 md:grid-cols-2">
         <SectionTitle>
-          <SectionTitleForeground>Nuestros</SectionTitleForeground>
-          <SectionTitlePrimary>Valores</SectionTitlePrimary>
+          <SectionEyebrow>Principios</SectionEyebrow>
+          <SectionMainTitle>Nuestros Valores</SectionMainTitle>
         </SectionTitle>
         <div className="flex w-full max-w-md flex-col items-start">
           {values.map((value, i) => (

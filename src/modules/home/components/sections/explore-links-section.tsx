@@ -11,7 +11,7 @@ const exploreLinks = [
 
 export function ExploreLinksSection() {
   return (
-    <Section className="bg-card">
+    <Section className="">
       <Container className="flex justify-between gap-10 md:flex-row">
         <h2 className="text-4xl uppercase tracking-widest md:text-7xl">
           Sigue <span className="text-primary">explorando</span>

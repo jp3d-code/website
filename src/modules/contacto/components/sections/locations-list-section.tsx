@@ -6,10 +6,10 @@ import type { Location } from "@/payload-types";
 import {
   Container,
   Section,
+  SectionEyebrow,
   SectionHeader,
+  SectionMainTitle,
   SectionTitle,
-  SectionTitleForeground,
-  SectionTitlePrimary,
 } from "@/shared/components/ui/section";
 import { getCollections } from "@/shared/lib/utils";
 
@@ -29,8 +29,8 @@ export async function LocationsListSection() {
       <Container>
         <SectionHeader className="mb-4">
           <SectionTitle>
-            <SectionTitleForeground>Nuestras</SectionTitleForeground>
-            <SectionTitlePrimary>Ubicaciones</SectionTitlePrimary>
+            <SectionEyebrow>Encuéntranos</SectionEyebrow>
+            <SectionMainTitle>Nuestras Ubicaciones</SectionMainTitle>
           </SectionTitle>
         </SectionHeader>
       </Container>
