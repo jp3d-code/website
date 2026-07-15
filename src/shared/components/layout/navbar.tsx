@@ -1,17 +1,13 @@
+"use client";
+
 import { MenuIcon } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Button } from "@/shared/components/ui/button";
 import { LinkBtm } from "@/shared/components/ui/link";
 import { routes } from "@/shared/config/routes";
-import type { SectionRoute } from "@/shared/types/routes";
-import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-} from "../ui/navigation-menu";
+import { cn } from "@/shared/lib/utils";
 import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet";
 
 const navItems = [
@@ -24,71 +20,50 @@ const navItems = [
 ];
 
 function HeaderDesktop() {
+  const pathname = usePathname();
+
   return (
     <div className="mx-auto hidden h-16 w-full max-w-6xl items-center justify-between px-4 md:flex">
-      <Link href={routes.path} className="flex flex-col items-baseline">
-        <span className="0.5 text-2xl uppercase tracking-widest">JP3D</span>
-        <span className="text-muted-foreground text-xs leading-1.5">
-          Ingenieria y fabricacion
-        </span>
+      <Link href={routes.path} className="flex items-center">
+        <Image src="/logo.webp" width={50} height={50} alt="logo jp3d" />
+        <div className="flex flex-col items-start justify-center gap-1">
+          <span className="0.5 font-bold text-2xl text-primary uppercase tracking-widest">
+            JP3D
+          </span>
+          <span className="text-muted-foreground text-xs leading-1.5">
+            Ingenieria y fabricacion
+          </span>
+        </div>
       </Link>
-      <NavigationMenu>
-        <NavigationMenuList className="gap-2">
-          {navItems.map((route) => {
-            const hasSections = "order" in route;
-            const sections = hasSections ? (route.order as SectionRoute[]) : [];
+      <nav className="flex items-center gap-2">
+        {navItems.map((route) => {
+          const isActive =
+            route.path === "/"
+              ? pathname === "/"
+              : pathname.startsWith(route.path);
 
-            return (
-              <NavigationMenuItem key={route.path}>
-                {hasSections ? (
-                  <>
-                    <NavigationMenuTrigger
-                      render={<Link href={route.path} />}
-                      className="bg-transparent hover:bg-transparent focus:bg-transparent data-open:bg-transparent data-popup-open:bg-transparent"
-                    >
-                      {route.name}
-                    </NavigationMenuTrigger>
-                    <NavigationMenuContent className="min-w-48 bg-popover/90 backdrop-blur-md">
-                      <div className="flex flex-col gap-1 p-2">
-                        {sections.map((section) => (
-                          <NavigationMenuLink
-                            key={section.hash}
-                            render={
-                              <Link
-                                href={section.path}
-                                className="block rounded-md px-3 py-2 text-sm transition-colors hover:bg-accent hover:text-accent-foreground"
-                              />
-                            }
-                          >
-                            {section.name}
-                          </NavigationMenuLink>
-                        ))}
-                      </div>
-                    </NavigationMenuContent>
-                  </>
-                ) : (
-                  <NavigationMenuLink
-                    render={
-                      <Link
-                        href={route.path}
-                        className="inline-flex h-9 w-max items-center justify-center rounded-lg px-2.5 py-1.5 font-medium text-sm transition-colors hover:text-foreground/80"
-                      />
-                    }
-                  >
-                    {route.name}
-                  </NavigationMenuLink>
-                )}
-              </NavigationMenuItem>
-            );
-          })}
-        </NavigationMenuList>
-      </NavigationMenu>
+          return (
+            <Link
+              key={route.path}
+              href={route.path}
+              className={cn(
+                "inline-flex h-9 w-max items-center justify-center rounded-lg px-2.5 py-1.5 font-medium text-sm transition-colors hover:text-foreground/80",
+                {
+                  "text-primary underline underline-offset-4": isActive,
+                },
+              )}
+            >
+              {route.name}
+            </Link>
+          );
+        })}
+      </nav>
       <LinkBtm
-        variant="outline"
+        variant="default"
         href={routes.contacto.path}
-        className="rounded-full text-xs uppercase tracking-[0.2em]"
+        className="text-xs"
       >
-        Hablemos
+        Cotizar Ahora
       </LinkBtm>
     </div>
   );
