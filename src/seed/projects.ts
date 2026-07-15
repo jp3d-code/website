@@ -12,8 +12,7 @@ import { uploadMediaFromUrl } from "./utils";
 const projectsData = [
   {
     title: "Memoria de cálculo base de tanque para mina",
-    image:
-      "editar/imagenes/proyectos/memoria_de_calculo_base_de_tanque_para_mina.png",
+    image: "https://ynoa-uploader.ynoacamino.me/uploads/1784211162_screen.webp",
     excerpt:
       "Diseño y verificación de una base metálica para tanque rectangular de combustible de 3 000 L en condiciones de operación minera, considerando cargas estáticas, sísmicas y de mantenimiento.",
     content: `El objetivo del proyecto fue diseñar y verificar una base metálica capaz de soportar un tanque rectangular de combustible de **3 000 L** en condiciones de operación minera. Para ello se definieron las combinaciones de carga que incluyen peso propio, llenado completo del tanque, empuje sísmico zona 3 según la **NTE E.030**, y acciones de mantenimiento (trabajos de soldadura y acceso de personal).
@@ -43,7 +42,7 @@ El informe de memoria de cálculo incluye planos de fabricación, fichas de sold
     title:
       "Planos de fabricación de escalera de acceso a poza de estación de combustible para mina",
     image:
-      "editar/imagenes/proyectos/planos_de_fabricacion_de_escalera_de_acceso_a_poza_de_estacion_de_combustible_para_mina.png",
+      "https://ynoa-uploader.ynoacamino.me/uploads/1784211334_screen%20%281%29.webp",
     excerpt:
       "El proyecto consistió en el diseño y elaboración de planos de fabricación para una escalera metálica modular destinada a proporcionar acceso seguro a la poza de abastecimiento de combustible en una unidad minera, cumpliendo con normativas de seguridad laboral y resistencia estructural.",
     content: `El encargo consistió en elaborar los planos de fabricación de una escalera metálica modular que permite el acceso seguro a la poza de abastecimiento de combustible de una unidad minera. Se definió una inclinación de **35°** para cumplir con la **NTP 399.010** (equivalente a *OSHA 1910 Subpart D*) y facilitar el ascenso con botas y equipo de protección personal.
@@ -70,8 +69,7 @@ Además, se adjuntó un procedimiento de inspección visual y dimensional que ga
   },
   {
     title: "Memoria de cálculo soporte de transformador móvil",
-    image:
-      "editar/imagenes/proyectos/memoria_de_calculo_soporte_de_transformador_movil.png",
+    image: "https://ynoa-uploader.ynoacamino.me/uploads/1784211162_screen.webp",
     excerpt:
       "Diseño y verificación de un bastidor portante para un transformador móvil de 5 MVA, considerando cargas dinámicas de transporte en rutas no pavimentadas, con énfasis en la integridad estructural y la seguridad durante el izaje y la descarga.",
     content: `Este estudio aborda el diseño y la verificación de un bastidor portante para un transformador móvil de **5 MVA** que será transportado sobre cama baja en rutas no pavimentadas. Se definieron los casos de carga correspondientes a frenado de emergencia, aceleración lateral en curvas de radio reducido y la combinación vertical de peso propio + sobrecarga dinámica de *1.4 g* según la norma **AASHTO LRFD 2017** para puentes móviles.

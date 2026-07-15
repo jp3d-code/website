@@ -7,7 +7,9 @@ export async function uploadMediaFromUrl(
   urlPath: string,
   alt: string,
 ): Promise<number | undefined> {
-  const fullUrl = `${imageBaseUrl}${urlPath}`;
+  const fullUrl = urlPath.startsWith("http")
+    ? urlPath
+    : `${imageBaseUrl}${urlPath.startsWith("/") ? urlPath.slice(1) : urlPath}`;
   const filename = urlPath.split("/").pop() || "image.png";
 
   return uploadMedia(payload, fullUrl, filename, alt);

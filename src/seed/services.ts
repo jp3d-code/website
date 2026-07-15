@@ -51,54 +51,6 @@ Nuestro equipo multidisciplinario está conformado por profesionales con experie
 Al trabajar con **JP 3D**, obtienes soluciones optimizadas en rendimiento, costo y seguridad. Cada diseño es evaluado bajo criterios de factibilidad técnica y económica, garantizando proyectos confiables, escalables y preparados para cumplir con los estándares regulatorios más exigentes del mercado.`,
   },
   {
-    title: "EDUCACIÓN",
-    image: "https://www.hlcsac.com/images/sector-oil-gas.jpg",
-    excerpt: `En **Educación** potenciamos el aprendizaje STEM mediante talleres prácticos y programas especializados en diseño y fabricación digital. Combinamos teoría y práctica para que estudiantes y profesionales dominen las herramientas que están transformando la **industria moderna**.
-
-Nuestra metodología se basa en el aprender haciendo. Cada programa integra una base teórica clara y concisa con actividades prácticas orientadas a resultados, donde los participantes desarrollan proyectos completos desde la etapa de diseño hasta la fabricación y validación funcional de sus prototipos.`,
-    content: `Nuestro servicio de **Educación** está diseñado para impulsar el aprendizaje de tecnologías emergentes mediante experiencias prácticas y proyectos reales. Creemos que la mejor manera de aprender es creando, experimentando y resolviendo problemas concretos.
-
-### Programas orientados al aprendizaje STEM
-
-Desarrollamos talleres y cursos especializados que combinan ciencia, tecnología, ingeniería y manufactura digital. Los participantes adquieren competencias altamente demandadas en entornos académicos e industriales.
-
-Entre las áreas de formación destacan:
-
-* Modelado y diseño 3D
-* Impresión 3D FDM y SLA
-* Fabricación digital
-* Corte láser
-* Prototipado rápido
-* Electrónica básica
-* Introducción a la automatización
-
-### Aprender haciendo
-
-Cada programa combina una base teórica clara y concisa con actividades prácticas orientadas a resultados. Los estudiantes desarrollan proyectos completos desde la etapa de diseño hasta la fabricación y validación funcional de sus prototipos.
-
-Durante el proceso, los participantes aprenden a:
-
-1. Identificar necesidades y desafíos.
-2. Diseñar soluciones mediante herramientas digitales.
-3. Fabricar componentes utilizando tecnologías modernas.
-4. Evaluar el desempeño de sus diseños.
-5. Mejorar iterativamente sus propuestas.
-
-### Competencias para la Industria 4.0
-
-La metodología fomenta habilidades técnicas y competencias transversales fundamentales para el mundo laboral actual:
-
-* Pensamiento crítico
-* Resolución de problemas
-* Trabajo colaborativo
-* Innovación
-* Comunicación técnica
-
-### Impacto educativo
-
-Nuestros programas están dirigidos a instituciones educativas, empresas y centros de capacitación que buscan preparar a estudiantes y profesionales para los desafíos de la transformación digital. Con **JP 3D**, el aprendizaje se convierte en una experiencia práctica, dinámica y alineada con las necesidades de la industria moderna.`,
-  },
-  {
     title: "FABRICACIÓN DIGITAL",
     image: "https://www.hlcsac.com/images/sector-industria.jpg",
     excerpt: `Nuestro servicio de **Fabricación Digital** convierte modelos CAD en piezas físicas funcionales en cuestión de horas. Combinamos **impresión 3D FDM y SLA, corte y grabado láser, y CNC router** para producir prototipos, piezas únicas y series cortas con rapidez, precisión y flexibilidad, acelerando el desarrollo de productos y reduciendo significativamente los tiempos de entrega.
