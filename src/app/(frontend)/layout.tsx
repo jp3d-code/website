@@ -1,4 +1,4 @@
-import { Aleo, JetBrains_Mono, Merriweather } from "next/font/google";
+import { JetBrains_Mono, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import type { Metadata } from "next";
 import { Footer } from "@/shared/components/layout/footer";
@@ -8,12 +8,12 @@ import metadataConfig from "@/shared/config/metadata";
 
 export const metadata: Metadata = metadataConfig;
 
-const fontSans = Aleo({
+const fontSans = Space_Grotesk({
   subsets: ["latin"],
   variable: "--font-sans",
 });
 
-const fontSerif = Merriweather({
+const fontSerif = Space_Grotesk({
   subsets: ["latin"],
   variable: "--font-serif",
 });
