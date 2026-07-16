@@ -69,7 +69,7 @@ export default buildConfig({
       collections: {
         media: true,
       },
-      bucket: process.env.S3_BUCKET,
+      bucket: process.env.S3_BUCKET || "",
       config: {
         credentials: {
           accessKeyId: process.env.S3_ACCESS_KEY_ID || "",
