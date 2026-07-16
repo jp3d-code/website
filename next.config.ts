@@ -7,20 +7,19 @@ const __filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(__filename);
 
 const nextConfig: NextConfig = {
-  output: "standalone",
   images: {
-    localPatterns: [
-      {
-        pathname: "/api/media/file/**",
-      },
-      {
-        pathname: "/logo.webp",
-      },
-    ],
     remotePatterns: [
       {
         protocol: "https",
         hostname: "jp3doficial.com",
+      },
+      {
+        protocol: "https",
+        hostname: "*.supabase.co",
+      },
+      {
+        protocol: "https",
+        hostname: "*.supabase.in",
       },
     ],
   },

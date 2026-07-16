@@ -1,9 +1,6 @@
 export const {
   APP_URL = "http://localhost:3000",
-  SMTP_HOST = "",
-  SMTP_PORT = "587",
-  SMTP_USER = "",
-  SMTP_PASS = "",
+  RESEND_API_KEY = "",
   BUSINESS_EMAIL = "cotizaciones@jp3d.com",
   FROM_EMAIL = "no-reply@jp3d.com",
 } = process.env;
