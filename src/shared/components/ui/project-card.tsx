@@ -1,12 +1,11 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowUpRight, Tag as TagIcon } from "lucide-react";
+import { Tag as TagIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import type { Project } from "@/payload-types";
 import { Badge } from "@/shared/components/ui/badge";
-import { Card } from "@/shared/components/ui/card";
 import { routes } from "@/shared/config/routes";
 import { cn, getCollections, getMediaImageProps } from "@/shared/lib/utils";
 
@@ -33,14 +32,14 @@ export function ProjectCard({ project, className }: ProjectCardProps) {
       transition={{ duration: 0.4 }}
       className={cn("w-full", className)}
     >
-      <Card className="group relative h-full overflow-hidden rounded-lg border-border/50 bg-card pt-0 backdrop-blur-sm transition-all duration-300 hover:border-primary/50 hover:shadow-primary/10 hover:shadow-xl">
+      <div className="group relative h-full overflow-hidden rounded-sm pt-0 backdrop-blur-sm transition-all duration-300 hover:border-primary/50">
         <Link
           href={href}
           className="absolute inset-0 z-10"
           aria-label={project.title}
         />
 
-        <div className="relative aspect-video overflow-hidden">
+        <div className="relative aspect-video overflow-hidden rounded-sm border border-transparent transition-colors duration-500 group-hover:border-primary">
           {imageProps ? (
             <Image
               src={imageProps.src}
@@ -54,14 +53,10 @@ export function ProjectCard({ project, className }: ProjectCardProps) {
             <div className="h-full w-full bg-muted" />
           )}
           <div className="absolute inset-0 bg-linear-to-t from-background/90 via-background/20 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-
-          <div className="absolute top-3 right-3 z-20 flex h-9 w-9 translate-x-1 -translate-y-1 items-center justify-center rounded-full bg-background/80 text-foreground opacity-0 shadow-md backdrop-blur-md transition-all duration-300 group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100">
-            <ArrowUpRight className="h-4 w-4" />
-          </div>
         </div>
 
-        <div className="p-5">
-          <h3 className="mb-2 line-clamp-2 font-semibold text-foreground text-xl tracking-tight transition-colors group-hover:text-primary">
+        <div className="py-4">
+          <h3 className="mb-2 line-clamp-1 font-medium text-foreground text-xl tracking-tight transition-colors group-hover:text-primary">
             {project.title}
           </h3>
           <p className="mb-4 line-clamp-3 text-muted-foreground text-sm">
@@ -83,7 +78,7 @@ export function ProjectCard({ project, className }: ProjectCardProps) {
             </div>
           )}
         </div>
-      </Card>
+      </div>
     </motion.div>
   );
 }
