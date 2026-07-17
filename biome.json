@@ -17,6 +17,7 @@
       "!src/payload-types.ts",
       "!src/app/(payload)",
       "!src/migrations",
+      "!migrations",
       "!.agents",
       "!public"
     ]

@@ -1,35 +1,12 @@
 "use client";
 
-import { motion, useScroll, useSpring, useTransform } from "motion/react";
-import { useRef } from "react";
+import { motion } from "motion/react";
 import { Section } from "@/shared/components/ui/section";
 import { cn } from "@/shared/lib/utils";
 
 const movingWords = ["EDUCACIÓN", "INGENIERÍA", "FABRICACIÓN", "DIGITAL"];
 
 export function MarqueeSection() {
-  const ref = useRef<HTMLElement>(null);
-
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"],
-  });
-
-  const rawX = useTransform(scrollYProgress, [0, 1], ["0%", "-90%"]);
-  const rawRevertX = useTransform(scrollYProgress, [0, 1], ["-90%", "0%"]);
-
-  const x = useSpring(rawX, {
-    stiffness: 20,
-    damping: 20,
-    mass: 1,
-  });
-
-  const revertX = useSpring(rawRevertX, {
-    stiffness: 20,
-    damping: 20,
-    mass: 1,
-  });
-
   const marqueeWords = [
     movingWords[movingWords.length - 1],
     ...movingWords,
@@ -37,15 +14,19 @@ export function MarqueeSection() {
   ];
 
   return (
-    <Section
-      ref={ref}
-      className="grid-background"
-      {...({ ref } as React.ComponentProps<typeof Section>)}
-    >
+    <Section className="grid-background">
       <div className="mask-edge mx-auto flex w-full flex-col gap-16 overflow-hidden px-4">
         <motion.div
           className="flex gap-10 font-medium text-3xl text-foreground uppercase tracking-[0.2em] md:text-7xl"
-          style={{ x }}
+          animate={{ x: ["0%", "-50%"] }}
+          transition={{
+            x: {
+              repeat: Number.POSITIVE_INFINITY,
+              repeatType: "loop",
+              duration: 20,
+              ease: "linear",
+            },
+          }}
         >
           {marqueeWords.map((word, index) => (
             <span
@@ -61,7 +42,15 @@ export function MarqueeSection() {
 
         <motion.div
           className="flex gap-10 font-medium text-3xl text-foreground uppercase tracking-[0.2em] md:text-7xl"
-          style={{ x: revertX }}
+          animate={{ x: ["-50%", "0%"] }}
+          transition={{
+            x: {
+              repeat: Number.POSITIVE_INFINITY,
+              repeatType: "loop",
+              duration: 20,
+              ease: "linear",
+            },
+          }}
         >
           {marqueeWords.map((word, index) => (
             <span

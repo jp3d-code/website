@@ -1,14 +1,15 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "motion/react";
-import { useRef } from "react";
+import { motion } from "motion/react";
+import Image from "next/image";
 import type { Client } from "@/payload-types";
 import {
+  Container,
+  Section,
   SectionEyebrow,
   SectionMainTitle,
   SectionTitle,
 } from "@/shared/components/ui/section";
-import { Skeleton } from "@/shared/components/ui/skeleton";
 import { getMediaUrl } from "@/shared/lib/utils";
 
 interface ClientsCarouselProps {
@@ -16,36 +17,47 @@ interface ClientsCarouselProps {
 }
 
 export function ClientsCarousel({ clients }: ClientsCarouselProps) {
-  const targetRef = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({ target: targetRef });
-  const x = useTransform(scrollYProgress, [0, 1], ["10%", "-110%"]);
+  const duplicatedClients = [...clients, ...clients];
 
   return (
-    <section ref={targetRef} className="relative h-[300vh] bg-neutral-900">
-      <div className="sticky top-0 flex h-screen w-full flex-col items-center justify-center gap-10 overflow-hidden">
-        <SectionTitle className="z-20 flex w-full max-w-6xl items-center justify-start gap-2">
+    <Section>
+      <Container>
+        <SectionTitle className="mb-12">
           <SectionEyebrow>Confianza</SectionEyebrow>
           <SectionMainTitle>Nuestros Clientes</SectionMainTitle>
         </SectionTitle>
 
-        <motion.div
-          style={{ x }}
-          className="flex w-full items-start justify-start gap-4 px-10"
-        >
-          {clients.map((client) => (
-            <ClientCard key={client.id} client={client} />
-          ))}
-        </motion.div>
-      </div>
-    </section>
+        <div className="relative w-full overflow-hidden">
+          <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-32 bg-gradient-to-r from-background to-transparent" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-32 bg-gradient-to-l from-background to-transparent" />
+
+          <motion.div
+            className="flex w-max gap-12"
+            animate={{ x: ["0%", "-50%"] }}
+            transition={{
+              x: {
+                repeat: Number.POSITIVE_INFINITY,
+                repeatType: "loop",
+                duration: 25,
+                ease: "linear",
+              },
+            }}
+          >
+            {duplicatedClients.map((client, index) => (
+              <ClientLogo key={`${client.id}-${index}`} client={client} />
+            ))}
+          </motion.div>
+        </div>
+      </Container>
+    </Section>
   );
 }
 
-interface ClientCardProps {
+interface ClientLogoProps {
   client: Client;
 }
 
-function ClientCard({ client }: ClientCardProps) {
+function ClientLogo({ client }: ClientLogoProps) {
   const logoUrl = getMediaUrl(client.logo);
 
   return (
@@ -53,29 +65,21 @@ function ClientCard({ client }: ClientCardProps) {
       href={client.website || "#"}
       target="_blank"
       rel="noopener noreferrer"
-      className="group relative aspect-video w-100 shrink-0 overflow-hidden rounded-lg bg-neutral-800"
+      className="flex h-24 w-40 shrink-0 items-center justify-center opacity-50 grayscale transition-all duration-300 hover:opacity-100 hover:grayscale-0"
     >
-      <Skeleton className="absolute inset-0 rounded-xl" />
-      {logoUrl && (
-        <div
-          style={{
-            backgroundImage: `url(${logoUrl})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}
-          className="absolute inset-0 z-10 opacity-60 grayscale transition-all duration-300 group-hover:scale-110 group-hover:opacity-100 group-hover:grayscale-0"
+      {logoUrl ? (
+        <Image
+          src={logoUrl}
+          alt={client.name}
+          width={300}
+          height={96}
+          className="object-contain"
         />
+      ) : (
+        <span className="font-semibold text-muted-foreground text-sm">
+          {client.name}
+        </span>
       )}
-
-      {!logoUrl && (
-        <div className="absolute inset-0 z-10 flex items-center justify-center bg-neutral-700">
-          <span className="font-semibold text-lg text-neutral-300">
-            {client.name}
-          </span>
-        </div>
-      )}
-
-      <div className="absolute inset-0 z-20 bg-black/40" />
     </a>
   );
 }
