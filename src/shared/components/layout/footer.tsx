@@ -1,4 +1,5 @@
 import configPromise from "@payload-config";
+import Image from "next/image";
 import Link from "next/link";
 import { getPayload } from "payload";
 import type { Location, SocialMedia } from "@/payload-types";
@@ -29,11 +30,16 @@ export async function Footer() {
   return (
     <footer className="flex items-center justify-center border-foreground/20 border-t bg-background/5 px-6 py-20">
       <Container className="grid items-start gap-y-15 md:grid-cols-4">
-        <Link href={routes.path} className="flex flex-col items-baseline">
-          <span className="0.5 text-4xl uppercase tracking-widest">JP3D</span>
-          <span className="text-muted-foreground leading-3.5">
-            Ingenieria y fabricacion
-          </span>
+        <Link href={routes.path} className="flex items-center">
+          <Image src="/logo.webp" width={50} height={50} alt="logo jp3d" />
+          <div className="flex flex-col items-start justify-center gap-1">
+            <span className="font-bold text-2xl text-primary uppercase tracking-widest">
+              JP3D
+            </span>
+            <span className="text-muted-foreground text-xs leading-1.5">
+              Ingenieria y fabricacion
+            </span>
+          </div>
         </Link>
 
         <div className="space-y-5">

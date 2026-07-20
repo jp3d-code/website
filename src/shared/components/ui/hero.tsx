@@ -21,7 +21,7 @@ export const Hero = forwardRef<HTMLElement, HeroProps>(function Hero(
       {...props}
     >
       <Container className="flex flex-col items-start gap-6">
-        <h1 className="flex w-full flex-col flex-wrap items-start justify-center gap-2">
+        <h1 className="flex w-full max-w-xl flex-col flex-wrap items-start justify-center gap-2">
           <SectionEyebrow>{eyebrow}</SectionEyebrow>
           <span className="font-bold text-5xl text-secondary">{title}</span>
         </h1>

@@ -1,4 +1,8 @@
-import { JetBrains_Mono, Space_Grotesk } from "next/font/google";
+import {
+  JetBrains_Mono,
+  Montserrat_Alternates,
+  Space_Grotesk,
+} from "next/font/google";
 import "./globals.css";
 import type { Metadata } from "next";
 import { Footer } from "@/shared/components/layout/footer";
@@ -8,8 +12,9 @@ import metadataConfig from "@/shared/config/metadata";
 
 export const metadata: Metadata = metadataConfig;
 
-const fontSans = Space_Grotesk({
+const fontSans = Montserrat_Alternates({
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
   variable: "--font-sans",
 });
 
