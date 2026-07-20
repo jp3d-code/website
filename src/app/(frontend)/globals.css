@@ -46,7 +46,7 @@
   --sidebar-accent-foreground: oklch(0.96 0.005 264);
   --sidebar-border: oklch(0.28 0.015 264);
   --sidebar-ring: oklch(0.78 0.14 70);
-  --font-sans: Montserrat Alternates, ui-sans-serif, sans-serif, system-ui;
+  --font-sans: Space Grotesk, ui-sans-serif, sans-serif, system-ui;
   --font-serif: Space Grotesk, ui-serif, serif;
   --font-mono: JetBrains Mono, ui-monospace, monospace;
   --radius: 0.3rem;
