@@ -79,6 +79,7 @@ export default buildConfig({
         endpoint: process.env.S3_ENDPOINT,
         forcePathStyle: true,
       },
+      clientUploads: true,
     }),
   ],
   i18n: {

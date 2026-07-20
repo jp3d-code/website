@@ -43,15 +43,10 @@ export const Media: CollectionConfig = {
     },
   ],
   upload: {
-    imageSizes: [
-      {
-        name: "hero",
-        width: 1920,
-        formatOptions: {
-          format: "webp",
-        },
-      },
-    ],
+    formatOptions: {
+      format: "webp",
+      options: { quality: 80 },
+    },
     resizeOptions: {
       width: 1920,
       withoutEnlargement: true,
