@@ -239,6 +239,17 @@
   }
 }
 
+@keyframes intro {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  100% {
+    opacity: 0.14;
+    transform: scale(1);
+  }
+}
+
 @layer utilities {
   .grid-background {
     background-image:
@@ -286,5 +297,25 @@
       transparent 80%
     );
     animation: glow-sweep 6s ease-in-out infinite;
+  }
+  .bg-grad {
+    position: absolute;
+    top: -50%;
+    left: 50%;
+    width: 150vh;
+    height: 150vh;
+    background: radial-gradient(circle, var(--primary) 0%, transparent 70%);
+    opacity: 0.14;
+    animation: 6s intro;
+  }
+  .bg-grad-white {
+    position: absolute;
+    top: 0%;
+    left: -50%;
+    width: 150vh;
+    height: 150vh;
+    background: radial-gradient(circle, white 0%, transparent 70%);
+    opacity: 0.14;
+    animation: 14s intro;
   }
 }

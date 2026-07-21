@@ -42,7 +42,7 @@ export async function RelatedProjectsSection({
   }
 
   return (
-    <Section className="bg-card">
+    <Section className="">
       <Container className="max-w-4xl">
         <SectionHeader className="mb-12">
           <SectionTitle>

@@ -26,7 +26,7 @@ export async function HistorySection() {
   }
 
   return (
-    <Section id={historia.hash} className="bg-card">
+    <Section id={historia.hash} className="grid-background">
       <Container>
         <SectionHeader className="mb-16">
           <SectionTitle>

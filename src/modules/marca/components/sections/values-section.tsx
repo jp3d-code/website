@@ -21,7 +21,7 @@ export async function ValuesSection() {
   });
 
   return (
-    <Section id={routes.marca.sections.valores.hash} className="bg-card">
+    <Section id={routes.marca.sections.valores.hash} className="grid-background">
       <Container className="flex flex-col items-center gap-10">
         <SectionTitle>
           <SectionEyebrow>Principios</SectionEyebrow>

@@ -31,7 +31,6 @@ export function VisionMissionSection() {
             flujo 100% digital, reduciendo tiempos de desarrollo y elevando el
             estándar de calidad para nuestros clientes.
           </blockquote>
-          <Crosshair className="absolute right-6 bottom-6 size-24 -rotate-12 text-primary/5" />
         </div>
 
         <div
@@ -59,7 +58,6 @@ export function VisionMissionSection() {
             acelerando la adopción de tecnologías aditivas y fortaleciendo la
             competitividad regional.
           </blockquote>
-          <Eye className="absolute right-6 bottom-6 size-24 -rotate-12 text-primary/5" />
         </div>
       </Container>
     </Section>

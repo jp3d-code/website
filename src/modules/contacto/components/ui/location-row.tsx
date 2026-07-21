@@ -1,6 +1,6 @@
 "use client";
 
-import { Building2, MapPin, Phone } from "lucide-react";
+import { Building2, ExternalLink, MapPin } from "lucide-react";
 import type { MapLocation } from "@/modules/contacto/types/map-location";
 import {
   Map as MapComp,
@@ -9,6 +9,7 @@ import {
   MarkerPopup,
   MarkerTooltip,
 } from "@/shared/components/ui/map";
+import { Button } from "@/shared/components/ui/button";
 
 interface LocationRowProps {
   location: MapLocation;
@@ -28,22 +29,35 @@ export function LocationRow({ location, phone }: LocationRowProps) {
           </span>
           <h3 className="font-semibold text-2xl">{location.name}</h3>
         </div>
-        <p className="text-muted-foreground text-sm leading-relaxed md:text-end">
-          {location.address}
-        </p>
 
-        <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-muted-foreground text-xs">
-          <span className="inline-flex items-center gap-1.5 md:text-end">
-            <MapPin className="size-3.5" />
-            {location.lat.toFixed(4)}, {location.lng.toFixed(4)}
-          </span>
-          {phone && (
-            <span className="inline-flex items-center gap-1.5">
-              <Phone className="size-3.5" />
-              {phone}
-            </span>
-          )}
+        <div className="space-y-1 md:text-end">
+          <p className="text-muted-foreground text-[10px] uppercase tracking-widest">
+            Dirección
+          </p>
+          <p className="text-muted-foreground text-sm leading-relaxed">
+            {location.address}
+          </p>
         </div>
+
+        <div className="space-y-1 md:text-end">
+          <p className="text-muted-foreground text-[10px] uppercase tracking-widest">
+            Teléfono
+          </p>
+          <span className="inline-flex items-center gap-1.5 text-muted-foreground text-sm">
+            {phone}
+          </span>
+        </div>
+
+        <a
+          href={`https://www.google.com/maps?q=${location.lat},${location.lng}`}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Button variant="default" size="default">
+            <ExternalLink className="size-4" />
+            Cómo llegar
+          </Button>
+        </a>
       </div>
       <div className="aspect-4/3 overflow-hidden rounded-3xl border border-border/60 shadow-sm">
         <MapComp center={[location.lng, location.lat]} zoom={15}>

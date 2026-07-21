@@ -14,9 +14,9 @@ const navItems = [
   routes.marca,
   routes.proyectos,
   routes.servicios,
-  routes.cotizador,
   routes.sobreNosotros,
   routes.contacto,
+  routes.cotizador,
 ];
 
 function HeaderDesktop() {

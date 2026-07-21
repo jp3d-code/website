@@ -33,6 +33,10 @@ export async function LocationsListSection() {
             <SectionMainTitle>Nuestras Ubicaciones</SectionMainTitle>
           </SectionTitle>
         </SectionHeader>
+        <p className="mb-12 max-w-xl text-muted-foreground text-sm">
+          Visítanos en cualquiera de nuestras sedes. Nuestro equipo está listo
+          para atenderte.
+        </p>
       </Container>
 
       {locations.map((location) => {

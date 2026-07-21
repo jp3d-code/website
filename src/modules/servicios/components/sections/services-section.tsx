@@ -30,7 +30,6 @@ export async function ServicesSection() {
           <Section
             key={service.id}
             id={service.slug}
-            className={index % 2 === 0 ? "bg-card" : ""}
           >
             <Container className="grid items-center gap-10 md:grid-cols-2">
               <div

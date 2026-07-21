@@ -18,12 +18,6 @@ export async function ContactInfo() {
 
   return (
     <div className="space-y-6">
-      <p className="text-muted-foreground text-xs uppercase tracking-[0.35em]">
-        {contact.smallTitle}
-      </p>
-      <h1 className="font-medium text-3xl uppercase tracking-widest md:text-6xl">
-        Ponte en contacto con <span className="text-primary">nosotros</span>
-      </h1>
       <div className="space-y-2 text-muted-foreground text-sm">
         {firstLocation && <p>{firstLocation.address}</p>}
         <p>{contact.phone}</p>
