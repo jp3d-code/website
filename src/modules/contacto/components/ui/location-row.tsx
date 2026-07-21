@@ -2,6 +2,7 @@
 
 import { Building2, ExternalLink, MapPin } from "lucide-react";
 import type { MapLocation } from "@/modules/contacto/types/map-location";
+import { Button } from "@/shared/components/ui/button";
 import {
   Map as MapComp,
   MapMarker,
@@ -9,7 +10,6 @@ import {
   MarkerPopup,
   MarkerTooltip,
 } from "@/shared/components/ui/map";
-import { Button } from "@/shared/components/ui/button";
 
 interface LocationRowProps {
   location: MapLocation;
@@ -31,7 +31,7 @@ export function LocationRow({ location, phone }: LocationRowProps) {
         </div>
 
         <div className="space-y-1 md:text-end">
-          <p className="text-muted-foreground text-[10px] uppercase tracking-widest">
+          <p className="text-[10px] text-muted-foreground uppercase tracking-widest">
             Dirección
           </p>
           <p className="text-muted-foreground text-sm leading-relaxed">
@@ -40,7 +40,7 @@ export function LocationRow({ location, phone }: LocationRowProps) {
         </div>
 
         <div className="space-y-1 md:text-end">
-          <p className="text-muted-foreground text-[10px] uppercase tracking-widest">
+          <p className="text-[10px] text-muted-foreground uppercase tracking-widest">
             Teléfono
           </p>
           <span className="inline-flex items-center gap-1.5 text-muted-foreground text-sm">

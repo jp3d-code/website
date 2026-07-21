@@ -27,10 +27,7 @@ export async function ServicesSection() {
         const imageProps = getMediaImageProps(service.image);
         const reversed = index % 2 === 1;
         return (
-          <Section
-            key={service.id}
-            id={service.slug}
-          >
+          <Section key={service.id} id={service.slug}>
             <Container className="grid items-center gap-10 md:grid-cols-2">
               <div
                 className={`flex w-full flex-col items-start gap-4 ${

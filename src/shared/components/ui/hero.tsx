@@ -1,5 +1,5 @@
-import { type ComponentProps, forwardRef } from "react";
 import Image from "next/image";
+import { type ComponentProps, forwardRef } from "react";
 import { cn } from "@/shared/lib/utils";
 import {
   Container,
@@ -21,8 +21,8 @@ export const Hero = forwardRef<HTMLElement, HeroProps>(function Hero(
       )}
       {...props}
     >
-      <div className="bg-grad pointer-events-none " />
-      <div className="bg-grad-white pointer-events-none" />
+      <div className="pointer-events-none bg-grad" />
+      <div className="pointer-events-none bg-grad-white" />
       <Container
         className={cn(
           "flex flex-col items-start gap-6",
@@ -48,7 +48,7 @@ export const Hero = forwardRef<HTMLElement, HeroProps>(function Hero(
               alt={title}
               width={500}
               height={500}
-              className="object-contain w-full max-h-140"
+              className="max-h-140 w-full object-contain"
             />
           </div>
         )}
