@@ -4,6 +4,7 @@ import { MenuIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useState } from "react";
 import { Button } from "@/shared/components/ui/button";
 import { LinkBtm } from "@/shared/components/ui/link";
 import { routes } from "@/shared/config/routes";
@@ -70,6 +71,8 @@ function HeaderDesktop() {
 }
 
 function HeaderMobile() {
+  const [open, setOpen] = useState(false);
+
   return (
     <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-4 md:hidden">
       <Link href={routes.path} className="flex flex-col items-baseline">
@@ -85,7 +88,7 @@ function HeaderMobile() {
         >
           Hablemos
         </Link>
-        <Sheet>
+        <Sheet open={open} onOpenChange={setOpen}>
           <SheetTrigger
             render={
               <Button
@@ -101,6 +104,7 @@ function HeaderMobile() {
           <SheetContent side="right" className="w-72 py-10">
             <Link
               href={routes.path}
+              onClick={() => setOpen(false)}
               className="flex w-full items-center justify-center p-6 font-condensed font-semibold text-xl uppercase"
             >
               HYGACON
@@ -112,6 +116,7 @@ function HeaderMobile() {
                   href={route.path}
                   variant="outline"
                   className="text-xs uppercase"
+                  onClick={() => setOpen(false)}
                 >
                   {route.name}
                 </LinkBtm>
@@ -122,6 +127,7 @@ function HeaderMobile() {
                   size={"lg"}
                   href={routes.contacto.path}
                   className="font-semibold text-sm uppercase"
+                  onClick={() => setOpen(false)}
                 >
                   {routes.contacto.name}
                 </LinkBtm>

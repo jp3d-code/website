@@ -1,6 +1,6 @@
 import { AboutJp3dSection } from "@/modules/home/components/sections/about-jp3d-section";
 import { ClientsSection } from "@/modules/home/components/sections/clients-section";
-import { ExploreLinksSection } from "@/modules/home/components/sections/explore-links-section";
+// import { ExploreLinksSection } from "@/modules/home/components/sections/explore-links-section";
 import { HeroSection } from "@/modules/home/components/sections/hero-section";
 import { MarqueeSection } from "@/modules/home/components/sections/marquee-section";
 import { ProjectsSection } from "@/modules/home/components/sections/projects-section";
@@ -17,7 +17,7 @@ export default function HomePage() {
       <ClientsSection />
       <VideosSection />
       <MarqueeSection />
-      <ExploreLinksSection />
+      {/*<ExploreLinksSection />*/}
     </>
   );
 }

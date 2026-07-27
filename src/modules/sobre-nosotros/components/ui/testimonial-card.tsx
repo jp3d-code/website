@@ -10,7 +10,7 @@ interface TestimonialCardProps {
 
 export function TestimonialCard({ testimonial }: TestimonialCardProps) {
   return (
-    <div className="group flex aspect-[3/2] w-[420px] shrink-0 flex-col gap-4 rounded-lg border border-border bg-background p-6 transition-all duration-300 hover:border-primary/50 hover:shadow-md">
+    <div className="group flex aspect-[3/2] w-80 shrink-0 flex-col gap-4 rounded-lg border border-border bg-background p-6 transition-all duration-300 hover:border-primary/50 hover:shadow-md md:w-105">
       <Quote className="h-8 w-8 text-primary/40" />
       <div className="paragraph flex-1 text-sm">
         <RichText data={testimonial.quote} />

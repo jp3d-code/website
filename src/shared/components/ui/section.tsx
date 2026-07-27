@@ -77,7 +77,7 @@ export function SectionMainTitle({
 }: ComponentProps<"span">) {
   return (
     <span
-      className={cn("font-bold text-5xl text-secondary", className)}
+      className={cn("font-bold text-4xl text-secondary md:text-5xl", className)}
       {...props}
     >
       {children}

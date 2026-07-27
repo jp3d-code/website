@@ -14,10 +14,10 @@ export function MarqueeSection() {
   ];
 
   return (
-    <Section className="grid-background">
+    <Section className="grid-background hidden md:flex">
       <div className="mask-edge mx-auto flex w-full flex-col gap-16 overflow-hidden px-4">
         <motion.div
-          className="flex gap-10 font-medium text-3xl text-foreground uppercase tracking-[0.2em] md:text-7xl"
+          className="flex gap-10 font-medium text-5xl text-foreground uppercase tracking-[0.2em] md:text-7xl"
           animate={{ x: ["0%", "-50%"] }}
           transition={{
             x: {
@@ -41,7 +41,7 @@ export function MarqueeSection() {
         </motion.div>
 
         <motion.div
-          className="flex gap-10 font-medium text-3xl text-foreground uppercase tracking-[0.2em] md:text-7xl"
+          className="flex gap-10 font-medium text-5xl text-foreground uppercase tracking-[0.2em] md:text-7xl"
           animate={{ x: ["-50%", "0%"] }}
           transition={{
             x: {

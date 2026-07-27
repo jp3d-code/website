@@ -12,7 +12,7 @@ const exploreLinks = [
 export function ExploreLinksSection() {
   return (
     <Section className="">
-      <Container className="flex justify-between gap-10 md:flex-row">
+      <Container className="flex items-start justify-between gap-10 md:flex-row md:items-center">
         <h2 className="text-4xl uppercase tracking-widest md:text-7xl">
           Sigue <span className="text-primary">explorando</span>
         </h2>
@@ -23,7 +23,7 @@ export function ExploreLinksSection() {
               href={item.href}
               className="group flex items-center gap-2 py-1 text-muted-foreground transition-all duration-150 hover:translate-x-2 hover:text-foreground"
             >
-              <h3 className="font-medium text-lg">{item.title}</h3>
+              <h3 className="font-medium text-xl md:text-lg">{item.title}</h3>
               <ArrowRight className="stroke-2 opacity-0 transition-all group-hover:opacity-100" />
             </Link>
           ))}

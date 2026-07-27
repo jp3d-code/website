@@ -11,7 +11,7 @@ interface TeamGridProps {
 
 export function TeamGrid({ members }: TeamGridProps) {
   return (
-    <div className="grid w-full gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+    <div className="grid w-full grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
       {members.map((member, index) => (
         <motion.div
           key={member.id}
