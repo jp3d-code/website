@@ -4,6 +4,7 @@ import { routes } from "@/shared/config/routes";
 
 export const metadata: Metadata = {
   title: routes.cotizador.name,
+  description: routes.cotizador.description,
 };
 
 export default async function Page() {

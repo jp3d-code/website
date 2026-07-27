@@ -37,9 +37,7 @@ export async function ServicesSection() {
                 <SectionHeader>
                   <SectionTitle>
                     <SectionEyebrow>Servicios</SectionEyebrow>
-                    <SectionMainTitle>
-                      {`0${index + 1}`} {service.title}
-                    </SectionMainTitle>
+                    <SectionMainTitle>{service.title}</SectionMainTitle>
                   </SectionTitle>
                 </SectionHeader>
                 <div className="paragraph w-full max-w-xl text-muted-foreground">

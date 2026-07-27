@@ -21,7 +21,6 @@ export function HeroSectionClient({
       eyebrow="Precisión en cada capa"
       title="JP 3D / Ingeniería & Fabricación"
       description="Especialistas en diseño 3D y fabricación digital, fusionando innovación, creatividad, ingeniería y tecnología para el sector industrial y minero."
-      image="/hero.webp"
       className="min-h-[90vh]"
     >
       <div className="flex flex-wrap gap-6 text-muted-foreground text-sm">

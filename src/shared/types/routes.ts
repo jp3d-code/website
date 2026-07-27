@@ -2,6 +2,7 @@ export type BaseRoute = {
   name: string;
   path: string;
   fullPath: string;
+  description: string;
 };
 
 export type StaticRoute = BaseRoute & {

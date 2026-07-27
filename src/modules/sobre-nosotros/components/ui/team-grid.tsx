@@ -15,10 +15,10 @@ export function TeamGrid({ members }: TeamGridProps) {
       {members.map((member, index) => (
         <motion.div
           key={member.id}
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-50px" }}
-          transition={{ duration: 0.5, delay: index * 0.08 }}
+          viewport={{ once: true, amount: 0.5 }}
+          transition={{ duration: 0.4, delay: index * 0.2 }}
         >
           <TeamCard member={member} />
         </motion.div>

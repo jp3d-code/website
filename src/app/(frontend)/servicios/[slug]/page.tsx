@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getPayload } from "payload";
 import ServicioDetailPage from "@/modules/servicios/components/pages/servicio-detail-page";
+import { routes } from "@/shared/config/routes";
 
 export async function generateMetadata({
   params,
@@ -29,7 +30,7 @@ export async function generateMetadata({
 
   return {
     title: service.title,
-    description: service.title,
+    description: routes.servicios.description,
   };
 }
 

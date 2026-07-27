@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getPayload } from "payload";
 import ProyectoDetailPage from "@/modules/proyectos/components/pages/proyecto-detail-page";
+import { routes } from "@/shared/config/routes";
 
 export async function generateMetadata({
   params,
@@ -29,7 +30,7 @@ export async function generateMetadata({
 
   return {
     title: project.title,
-    description: project.excerpt,
+    description: project.excerpt || routes.proyectos.description,
   };
 }
 

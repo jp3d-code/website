@@ -4,6 +4,7 @@ import { routes } from "@/shared/config/routes";
 
 export const metadata: Metadata = {
   title: routes.sobreNosotros.name,
+  description: routes.sobreNosotros.description,
 };
 
 export default function Page() {

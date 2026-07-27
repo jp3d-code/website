@@ -26,7 +26,7 @@ export async function HistorySection() {
   }
 
   return (
-    <Section id={historia.hash} className="grid-background">
+    <Section id={historia.hash} className="">
       <Container>
         <SectionHeader className="mb-16">
           <SectionTitle>
@@ -51,9 +51,9 @@ export async function HistorySection() {
                     <div className="h-3 w-3 rounded-full bg-primary" />
                   </div>
                   <motion.div
-                    whileInView={{ opacity: 1, x: 0 }}
-                    initial={{ opacity: 0, x: 0 }}
-                    viewport={{ once: true, amount: 0.2 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    initial={{ opacity: 0, y: 10 }}
+                    viewport={{ once: true, amount: 0.9 }}
                     transition={{ duration: 0.3 }}
                     className={cn(
                       "ml-16 w-full md:ml-0",

@@ -9,14 +9,14 @@ import {
 } from "./section";
 
 export const Hero = forwardRef<HTMLElement, HeroProps>(function Hero(
-  { eyebrow, title, description, image, children, className, ...props },
+  { eyebrow, title, description, children, className, ...props },
   ref,
 ) {
   return (
     <Section
       ref={ref}
       className={cn(
-        "grid-background relative min-h-[80vh] overflow-hidden pt-20 md:pt-30 md:pb-30",
+        "grid-background relative min-h-[75vh] overflow-hidden pt-20 md:pt-30 md:pb-30",
         className,
       )}
       {...props}
@@ -25,8 +25,7 @@ export const Hero = forwardRef<HTMLElement, HeroProps>(function Hero(
       <div className="pointer-events-none bg-grad-white" />
       <Container
         className={cn(
-          "flex flex-col items-start gap-6",
-          image && "md:flex-row md:items-center md:justify-between",
+          "flex flex-col items-start gap-6 md:flex-row md:items-center md:justify-between",
         )}
       >
         <div className="flex flex-col items-start gap-6">
@@ -41,17 +40,15 @@ export const Hero = forwardRef<HTMLElement, HeroProps>(function Hero(
           )}
           {children}
         </div>
-        {image && (
-          <div className="hidden w-full max-w-md md:block">
-            <Image
-              src={image}
-              alt={title}
-              width={500}
-              height={500}
-              className="max-h-140 w-full object-contain"
-            />
-          </div>
-        )}
+        <div className="hidden w-full max-w-lg md:block">
+          <Image
+            src="/logo.webp"
+            alt={title}
+            width={800}
+            height={800}
+            className="max-h-160 w-full object-contain opacity-85"
+          />
+        </div>
       </Container>
     </Section>
   );
@@ -61,5 +58,4 @@ interface HeroProps extends ComponentProps<"section"> {
   eyebrow: string;
   title: string;
   description?: string;
-  image?: string;
 }
