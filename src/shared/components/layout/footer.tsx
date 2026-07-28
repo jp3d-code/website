@@ -6,6 +6,7 @@ import type { Location, SocialMedia } from "@/payload-types";
 import { LinkBtm } from "@/shared/components/ui/link";
 import { Container } from "@/shared/components/ui/section";
 import { routes } from "@/shared/config/routes";
+import { socialIcons } from "@/shared/config/social-icons";
 import { getCollections } from "@/shared/lib/utils";
 
 const quickLinks = [
@@ -57,17 +58,21 @@ export async function Footer() {
         <div className="space-y-3">
           <p className="text-xs uppercase tracking-[0.25em]">Redes</p>
           <div className="flex flex-wrap gap-2">
-            {socials.map((social) => (
-              <LinkBtm
-                key={social.id}
-                href={social.url}
-                target="_blank"
-                className="text-xs uppercase tracking-[0.2em]"
-                variant="outline"
-              >
-                {social.label}
-              </LinkBtm>
-            ))}
+            {socials.map((social) => {
+              const Icon = social.icon ? socialIcons[social.icon] : null;
+              return (
+                <LinkBtm
+                  key={social.id}
+                  href={social.url}
+                  target="_blank"
+                  size="icon"
+                  variant="outline"
+                  aria-label={social.label}
+                >
+                  {Icon && <Icon className="size-5" />}
+                </LinkBtm>
+              );
+            })}
           </div>
         </div>
         <div className="space-y-3">

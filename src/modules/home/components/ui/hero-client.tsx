@@ -4,6 +4,7 @@ import { ChevronDown } from "lucide-react";
 import type { Contact, Location, SocialMedia } from "@/payload-types";
 import { Hero } from "@/shared/components/ui/hero";
 import { LinkBtm } from "@/shared/components/ui/link";
+import { socialIcons } from "@/shared/config/social-icons";
 
 interface HeroSectionClientProps {
   firstLocation: Location;
@@ -44,17 +45,21 @@ export function HeroSectionClient({
           Redes sociales
         </p>
         <div className="flex flex-wrap gap-2">
-          {socials.map((social) => (
-            <LinkBtm
-              key={social.id}
-              href={social.url}
-              variant="outline"
-              target="_blank"
-              className="uppercase tracking-[0.2em]"
-            >
-              {social.label}
-            </LinkBtm>
-          ))}
+          {socials.map((social) => {
+            const Icon = social.icon ? socialIcons[social.icon] : null;
+            return (
+              <LinkBtm
+                key={social.id}
+                href={social.url}
+                variant="outline"
+                size="icon"
+                target="_blank"
+                aria-label={social.label}
+              >
+                {Icon && <Icon className="size-5" />}
+              </LinkBtm>
+            );
+          })}
         </div>
       </div>
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2">

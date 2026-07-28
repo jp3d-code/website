@@ -3,6 +3,7 @@ import Link from "next/link";
 import { getPayload } from "payload";
 import type { Location, SocialMedia } from "@/payload-types";
 import { LinkBtm } from "@/shared/components/ui/link";
+import { socialIcons } from "@/shared/config/social-icons";
 import { getCollections } from "@/shared/lib/utils";
 
 export async function ContactInfo() {
@@ -31,17 +32,21 @@ export async function ContactInfo() {
         </p>
       </div>
       <div className="flex flex-wrap gap-3">
-        {socials.map((social) => (
-          <LinkBtm
-            key={social.id}
-            href={social.url}
-            target="_blank"
-            variant="outline"
-            className="uppercase tracking-widest"
-          >
-            {social.label}
-          </LinkBtm>
-        ))}
+        {socials.map((social) => {
+          const Icon = social.icon ? socialIcons[social.icon] : null;
+          return (
+            <LinkBtm
+              key={social.id}
+              href={social.url}
+              target="_blank"
+              size="icon"
+              variant="outline"
+              aria-label={social.label}
+            >
+              {Icon && <Icon className="size-5" />}
+            </LinkBtm>
+          );
+        })}
       </div>
     </div>
   );
