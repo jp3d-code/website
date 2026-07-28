@@ -59,29 +59,29 @@ export const SocialMedia: CollectionConfig = {
       options: [
         {
           label: "LinkedIn",
-          value: "IconBrandLinkedin",
+          value: "Linkedin",
         },
         {
           label: "Instagram",
-          value: "IconBrandInstagram",
+          value: "Instagram",
         },
         {
           label: "TikTok",
-          value: "IconBrandTiktok",
+          value: "Tiktok",
         },
         {
           label: "Facebook",
-          value: "IconBrandFacebook",
+          value: "Facebook",
         },
         {
           label: "Twitter",
-          value: "IconBrandTwitter",
+          value: "Twitter",
         },
       ],
       admin: {
         description: {
-          en: "Tabler icon name (e.g. 'IconBrandLinkedin', 'IconBrandInstagram', 'IconBrandTiktok', 'IconBrandFacebook', 'IconBrandTwitter')",
-          es: "Nombre del icono Tabler (ej: 'IconBrandLinkedin', 'IconBrandInstagram', 'IconBrandTiktok', 'IconBrandFacebook', 'IconBrandTwitter')",
+          en: "Lucide icon name (e.g. 'Linkedin', 'Instagram', 'Tiktok', 'Facebook', 'Twitter')",
+          es: "Nombre del icono Lucide (ej: 'Linkedin', 'Instagram', 'Tiktok', 'Facebook', 'Twitter')",
         },
       },
     },

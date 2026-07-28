@@ -374,11 +374,9 @@ export interface SocialMedia {
   label: string;
   url: string;
   /**
-   * Tabler icon name (e.g. 'IconBrandLinkedin', 'IconBrandInstagram', 'IconBrandTiktok', 'IconBrandFacebook', 'IconBrandTwitter')
+   * Lucide icon name (e.g. 'Linkedin', 'Instagram', 'Tiktok', 'Facebook', 'Twitter')
    */
-  icon?:
-    | ('IconBrandLinkedin' | 'IconBrandInstagram' | 'IconBrandTiktok' | 'IconBrandFacebook' | 'IconBrandTwitter')
-    | null;
+  icon?: ('Linkedin' | 'Instagram' | 'Tiktok' | 'Facebook' | 'Twitter') | null;
   order: number;
   updatedAt: string;
   createdAt: string;

@@ -4,25 +4,25 @@ const socialMediaData = [
   {
     label: "LinkedIn",
     url: "https://www.linkedin.com/company/jp-3d/?viewAsMember=true",
-    icon: "IconBrandLinkedin",
+    icon: "Linkedin",
     order: 10,
   },
   {
     label: "Instagram",
     url: "https://www.instagram.com/jp_3d_makers?igsh=Zmo4cW55NmloZm43",
-    icon: "IconBrandInstagram",
+    icon: "Instagram",
     order: 20,
   },
   {
     label: "TikTok",
     url: "https://www.tiktok.com/@jp_3d_makers",
-    icon: "IconBrandTiktok",
+    icon: "Tiktok",
     order: 30,
   },
   {
     label: "Facebook",
     url: "https://web.facebook.com/kamaywasi3d",
-    icon: "IconBrandFacebook",
+    icon: "Facebook",
     order: 40,
   },
 ] as const;

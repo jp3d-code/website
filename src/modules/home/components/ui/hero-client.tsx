@@ -56,7 +56,7 @@ export function HeroSectionClient({
                 target="_blank"
                 aria-label={social.label}
               >
-                {Icon && <Icon className="size-5" />}
+                {Icon && <Icon className="size-7 stroke-1" />}
               </LinkBtm>
             );
           })}

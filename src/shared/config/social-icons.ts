@@ -10,9 +10,9 @@ import type { ComponentType, SVGProps } from "react";
 type TablerIcon = ComponentType<SVGProps<SVGSVGElement>>;
 
 export const socialIcons: Record<string, TablerIcon> = {
-  IconBrandLinkedin,
-  IconBrandInstagram,
-  IconBrandTiktok,
-  IconBrandFacebook,
-  IconBrandTwitter,
+  Linkedin: IconBrandLinkedin,
+  Instagram: IconBrandInstagram,
+  Tiktok: IconBrandTiktok,
+  Facebook: IconBrandFacebook,
+  Twitter: IconBrandTwitter,
 };
