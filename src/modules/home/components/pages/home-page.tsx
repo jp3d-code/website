@@ -13,9 +13,9 @@ export default function HomePage() {
   return (
     <>
       <HeroVideoSection />
-      <div className="h-100"/>
+      <div className="h-100" />
       <HeroCarouselSection />
-      <div className="h-100"/>
+      <div className="h-100" />
       <HeroSection />
       <AboutJp3dSection />
       <ServicesSection />
