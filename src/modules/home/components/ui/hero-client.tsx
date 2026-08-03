@@ -21,36 +21,27 @@ const slides = [
   {
     id: 1,
     highlight: "DIGITAL",
-    image: "https://jp3d-website.ynoacamino.me/api/media/file/imag.webp",
+    image: "/hero/1.webp",
   },
   {
     id: 2,
     highlight: "Y DISEÑO 3D",
-    image:
-      "https://hygacon-preview.ynoacamino.me/assets/d145c549-edb3-4168-9a24-f2692b01c3ef.webp",
+    image: "/hero/2.webp",
   },
   {
     id: 3,
     highlight: "TECNOLÓGICA",
-    image: "https://jp3d-website.ynoacamino.me/api/media/file/imag.webp",
+    image: "/hero/3.webp",
   },
   {
     id: 4,
     highlight: "STEM",
-    image:
-      "https://hygacon-preview.ynoacamino.me/assets/f1df974d-d711-4656-89d6-87df797f8779.webp",
+    image: "/hero/4.webp",
   },
   {
     id: 5,
     highlight: "EN 3D",
-    image:
-      "https://hygacon-preview.ynoacamino.me/assets/c25d5735-b29c-4dcc-9ca1-32977f6e664b.webp",
-  },
-  {
-    id: 6,
-    highlight: "INTEGRALES",
-    image:
-      "https://hygacon-preview.ynoacamino.me/assets/f6547048-8ff9-4eed-8bf1-2eb13cbd6527.webp",
+    image: "/hero/5.webp",
   },
 ];
 
