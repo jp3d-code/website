@@ -32,15 +32,7 @@ export async function Footer() {
     <footer className="flex items-center justify-center border-foreground/20 border-t bg-background/5 px-6 py-20">
       <Container className="grid items-start gap-y-15 md:grid-cols-4">
         <Link href={routes.path} className="flex items-center">
-          <Image src="/logo.webp" width={50} height={50} alt="logo jp3d" />
-          <div className="flex flex-col items-start justify-center gap-1">
-            <span className="font-bold text-2xl text-primary uppercase tracking-widest">
-              JP3D
-            </span>
-            <span className="text-muted-foreground text-xs leading-1.5">
-              Ingenieria y fabricacion
-            </span>
-          </div>
+          <Image src="/logotipo.png" width={130} height={130} alt="logo jp3d" />
         </Link>
 
         <div className="space-y-5">
