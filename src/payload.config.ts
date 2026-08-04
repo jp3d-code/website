@@ -68,7 +68,6 @@ export default buildConfig({
     s3Storage({
       collections: {
         media: {
-          disablePayloadAccessControl: true,
           signedDownloads: true,
         },
       },
