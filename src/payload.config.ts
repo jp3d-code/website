@@ -68,7 +68,7 @@ export default buildConfig({
     s3Storage({
       collections: {
         media: {
-          signedDownloads: true,
+          signedDownloads: false,
         },
       },
       bucket: process.env.S3_BUCKET || "",
