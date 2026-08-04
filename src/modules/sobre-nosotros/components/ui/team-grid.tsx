@@ -11,7 +11,7 @@ interface TeamGridProps {
 
 export function TeamGrid({ members }: TeamGridProps) {
   return (
-    <div className="grid w-full grid-cols-1 gap-x-12 gap-y-10 md:grid-cols-2">
+    <div className="grid w-full grid-cols-1 gap-x-16 gap-y-14 md:grid-cols-2">
       {members.map((member, index) => (
         <motion.div
           key={member.id}
@@ -31,8 +31,8 @@ function TeamCard({ member }: { member: TeamMember }) {
   const imageProps = getMediaImageProps(member.image);
 
   return (
-    <div className="flex items-start gap-6">
-      <div className="relative h-32 w-32 shrink-0 overflow-hidden rounded-full">
+    <div className="flex items-start gap-8">
+      <div className="relative size-36 shrink-0 overflow-hidden rounded-full">
         {imageProps ? (
           <Image
             src={imageProps.src}
@@ -50,7 +50,7 @@ function TeamCard({ member }: { member: TeamMember }) {
         <h3 className="font-bold text-foreground text-lg leading-tight">
           {member.name}
         </h3>
-        <p className="font-medium text-primary text-sm">{member.role}</p>
+        <p className="font-medium text-primary text-xs">{member.role}</p>
         {member.education && (
           <p className="text-muted-foreground text-sm leading-relaxed">
             {member.education}
