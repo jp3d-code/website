@@ -32,7 +32,7 @@ export async function Footer() {
     <footer className="flex items-center justify-center border-foreground/20 border-t bg-background/5 px-6 py-20">
       <Container className="grid items-start gap-y-15 md:grid-cols-4">
         <Link href={routes.path} className="flex items-center">
-          <Image src="/logotipo.png" width={130} height={130} alt="logo jp3d" />
+          <Image src="/logotipo.webp" width={130} height={130} alt="logo jp3d" />
         </Link>
 
         <div className="space-y-5">
