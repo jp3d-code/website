@@ -26,7 +26,7 @@ function HeaderDesktop() {
   return (
     <div className="mx-auto hidden h-16 w-full max-w-6xl items-center justify-between px-4 md:flex">
       <Link href={routes.path} className="flex items-center">
-        <Image src="/logotipo.webp" width={65} height={65} alt="logo jp3d" />
+        <Image src="/logotipo.webp" width={150} height={150} alt="logo jp3d" />
       </Link>
       <nav className="flex items-center gap-2">
         {navItems.map((route) => {
