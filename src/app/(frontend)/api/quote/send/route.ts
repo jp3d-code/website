@@ -9,6 +9,9 @@ import {
   RESEND_API_KEY,
 } from "@/shared/config/env";
 
+const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10 MB
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 export async function POST(request: Request) {
   try {
     const formData = await request.formData();
@@ -23,6 +26,23 @@ export async function POST(request: Request) {
       );
     }
 
+    if (pdfFile.size > MAX_FILE_SIZE) {
+      return NextResponse.json(
+        { error: "El archivo PDF excede el tamaño máximo permitido (10MB)." },
+        { status: 400 },
+      );
+    }
+
+    const isPdfType =
+      pdfFile.type === "application/pdf" ||
+      pdfFile.name.toLowerCase().endsWith(".pdf");
+    if (!isPdfType) {
+      return NextResponse.json(
+        { error: "El archivo adjunto debe ser un formato PDF válido." },
+        { status: 400 },
+      );
+    }
+
     let metadata: {
       email: string;
       comment?: string;
@@ -31,6 +51,7 @@ export async function POST(request: Request) {
       config: { infill: number; quantity: number };
       materialName: string;
     };
+
     try {
       metadata = JSON.parse(metadataStr);
     } catch (_e) {
@@ -42,14 +63,30 @@ export async function POST(request: Request) {
 
     const { email, comment, fileName, quote, config, materialName } = metadata;
 
-    if (!email) {
+    if (
+      !email ||
+      typeof email !== "string" ||
+      !EMAIL_REGEX.test(email.trim())
+    ) {
       return NextResponse.json(
-        { error: "El correo electrónico del cliente es requerido." },
+        { error: "Ingresa una dirección de correo electrónico válida." },
         { status: 400 },
       );
     }
 
+    const sanitizedEmail = email.trim().toLowerCase();
+    const sanitizedComment =
+      typeof comment === "string" ? comment.slice(0, 500).trim() : undefined;
+    const sanitizedFileName =
+      typeof fileName === "string" && fileName.trim()
+        ? fileName.trim()
+        : "Modelo 3D";
+
     if (!RESEND_API_KEY) {
+      // biome-ignore lint/suspicious/noConsole: server error logging
+      console.error(
+        "[Quote Send API Error]: RESEND_API_KEY no está configurada.",
+      );
       return NextResponse.json(
         { error: "El servicio de correo no está configurado en el servidor." },
         { status: 500 },
@@ -57,13 +94,12 @@ export async function POST(request: Request) {
     }
 
     const resend = new Resend(RESEND_API_KEY);
-
-    const emailSubject = `Cotización de Impresión 3D: ${fileName || "Modelo 3D"}`;
+    const emailSubject = `Cotización de Impresión 3D: ${sanitizedFileName}`;
 
     const emailElement = React.createElement(QuoteEmail, {
-      fileName: fileName || "N/A",
-      email,
-      comment: comment || undefined,
+      fileName: sanitizedFileName,
+      email: sanitizedEmail,
+      comment: sanitizedComment,
       materialName: materialName || "N/A",
       infill: config?.infill || 20,
       quantity: config?.quantity || 1,
@@ -77,34 +113,43 @@ export async function POST(request: Request) {
     const arrayBuffer = await pdfFile.arrayBuffer();
     const pdfBuffer = Buffer.from(arrayBuffer);
 
+    const safeFilename = `Cotizacion-${sanitizedFileName.replace(/[^a-zA-Z0-9_-]/g, "_")}.pdf`;
+
     const { error } = await resend.emails.send({
       from: `"JP3D Cotizaciones" <${FROM_EMAIL}>`,
       to: [BUSINESS_EMAIL],
-      cc: [email],
+      cc: [sanitizedEmail],
       subject: emailSubject,
       text: textContent,
       html: htmlContent,
       attachments: [
         {
-          filename: `Cotizacion-${fileName?.replace(/\.[^/.]+$/, "") || "Modelo"}.pdf`,
+          filename: safeFilename,
           content: pdfBuffer,
         },
       ],
     });
 
     if (error) {
+      // biome-ignore lint/suspicious/noConsole: server error logging
+      console.error("[Quote Send API Resend Error]:", error);
       return NextResponse.json(
-        { error: `Error al enviar el correo: ${error.message}` },
+        {
+          error:
+            "No se pudo enviar el correo de cotización. Inténtalo de nuevo.",
+        },
         { status: 500 },
       );
     }
 
     return NextResponse.json({ success: true });
   } catch (error: unknown) {
-    const errorMessage = error instanceof Error ? error.message : String(error);
+    // biome-ignore lint/suspicious/noConsole: server error logging
+    console.error("[Quote Send API Internal Error]:", error);
     return NextResponse.json(
       {
-        error: `Error interno del servidor al procesar el envío: ${errorMessage}`,
+        error:
+          "Ocurrió un error interno al procesar el envío de la cotización.",
       },
       { status: 500 },
     );
