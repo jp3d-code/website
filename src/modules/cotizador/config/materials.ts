@@ -15,7 +15,7 @@ export const MATERIALS: Material[] = [
     density: 1.27,
     pricePerKg: 95.0,
     color: "#3b82f6",
-    costAdjustmentFactor: 1.1,
+    costAdjustmentFactor: 1.05,
   },
   {
     id: "abs",
@@ -23,7 +23,7 @@ export const MATERIALS: Material[] = [
     density: 1.04,
     pricePerKg: 90.0,
     color: "#ef4444",
-    costAdjustmentFactor: 1.15,
+    costAdjustmentFactor: 1.05,
   },
   {
     id: "tpu",
@@ -31,7 +31,7 @@ export const MATERIALS: Material[] = [
     density: 1.21,
     pricePerKg: 130.0,
     color: "#10b981",
-    costAdjustmentFactor: 1.3,
+    costAdjustmentFactor: 1.8,
   },
 ];
 
