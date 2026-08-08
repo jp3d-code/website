@@ -42,7 +42,7 @@ export const Hero = forwardRef<HTMLElement, HeroProps>(function Hero(
         </div>
         <div className="hidden w-full max-w-lg md:block">
           <Image
-            src="/logo.webp"
+            src="/logotipo_title.webp"
             alt={title}
             width={800}
             height={800}
