@@ -71,8 +71,8 @@ function ClientLogo({ client }: ClientLogoProps) {
         <Image
           src={logoUrl}
           alt={client.name}
-          width={120}
-          height={120}
+          width={300}
+          height={300}
           className="h-full w-full object-contain"
         />
       ) : (
