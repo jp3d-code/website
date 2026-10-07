@@ -30,12 +30,6 @@ export function BrochureCard({ brochure, index = 0 }: BrochureCardProps) {
           <div className="flex size-12 shrink-0 items-center justify-center border-2 border-primary">
             <FileText className="size-6 text-primary" />
           </div>
-          <Badge
-            variant="outline"
-            className="font-mono uppercase tracking-widest"
-          >
-            PDF / Canva
-          </Badge>
         </div>
 
         <div className="flex flex-col items-start gap-2">

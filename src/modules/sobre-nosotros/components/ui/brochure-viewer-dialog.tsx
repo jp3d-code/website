@@ -22,7 +22,7 @@ export function BrochureViewerDialog({
 }: BrochureViewerDialogProps) {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="h-[85vh] overflow-hidden p-0 sm:max-w-5xl">
+      <DialogContent className="overflow-hidden p-0 sm:max-w-5xl">
         <DialogHeader className="border-border border-b p-4">
           <DialogTitle>{brochure.title}</DialogTitle>
           <DialogDescription className="line-clamp-1">
