@@ -105,6 +105,7 @@ const sobreNosotrosRoute = createStaticRoute({
 const sobreNosotrosSections = defineSections({
   equipo: createSection(sobreNosotrosRoute, "equipo", "Nuestro Equipo"),
   historia: createSection(sobreNosotrosRoute, "historia", "Nuestra Historia"),
+  brochures: createSection(sobreNosotrosRoute, "brochures", "Brochures"),
   testimonios: createSection(sobreNosotrosRoute, "testimonios", "Testimonios"),
   videos: createSection(sobreNosotrosRoute, "videos", "Videos"),
 } as const);

@@ -139,6 +139,14 @@ export type AboutPage = {
   testimonial: Testimonial;
 };
 
+export type Brochure = {
+  id: string;
+  title: string;
+  description: string;
+  viewUrl: string;
+  embedUrl: string;
+};
+
 export type HomeData = {
   banner: Banner;
   brandTokens: BrandToken[];

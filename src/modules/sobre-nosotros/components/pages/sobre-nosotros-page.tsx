@@ -1,3 +1,4 @@
+import { BrochuresSection } from "@/modules/sobre-nosotros/components/sections/brochures-section";
 import { HistorySection } from "@/modules/sobre-nosotros/components/sections/history-section";
 import { IntroSection } from "@/modules/sobre-nosotros/components/sections/intro-section";
 import { TeamSection } from "@/modules/sobre-nosotros/components/sections/team-section";
@@ -11,6 +12,7 @@ export default function SobreNosotrosPage() {
       <TeamSection />
       <TestimonialsSection />
       <HistorySection />
+      <BrochuresSection />
       <VideosSection />
     </>
   );
