@@ -4,7 +4,6 @@ import { ExternalLink, Eye, FileText } from "lucide-react";
 import * as motion from "motion/react-client";
 import { useState } from "react";
 import { BrochureViewerDialog } from "@/modules/sobre-nosotros/components/ui/brochure-viewer-dialog";
-import { Badge } from "@/shared/components/ui/badge";
 import { Button } from "@/shared/components/ui/button";
 import { LinkBtm } from "@/shared/components/ui/link";
 import type { Brochure } from "@/shared/types/data";

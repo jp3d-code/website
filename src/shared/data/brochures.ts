@@ -9,6 +9,7 @@ export const brochures: Brochure[] = [
     viewUrl: "https://canva.link/tvituu4bkblxtt3",
     embedUrl:
       "https://www.canva.com/design/DAHBC1Bbq_g/IO2sAz0qYYIgsgfrb36jEA/view?embed",
+    serviceSlug: "ingenieria",
   },
   {
     id: "manufactura",
@@ -18,5 +19,10 @@ export const brochures: Brochure[] = [
     viewUrl: "https://canva.link/3sswgluw7lbwzr5",
     embedUrl:
       "https://www.canva.com/design/DAG_Mj-554g/3I1Xh7XiRt19_6IpIqqf_A/view?embed",
+    serviceSlug: "fabricacion-digital",
   },
 ];
+
+export function getBrochureByServiceSlug(slug: string): Brochure | undefined {
+  return brochures.find((brochure) => brochure.serviceSlug === slug);
+}

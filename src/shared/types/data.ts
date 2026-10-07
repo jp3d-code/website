@@ -145,6 +145,7 @@ export type Brochure = {
   description: string;
   viewUrl: string;
   embedUrl: string;
+  serviceSlug?: string;
 };
 
 export type HomeData = {

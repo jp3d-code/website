@@ -1,7 +1,9 @@
 import { RichText } from "@payloadcms/richtext-lexical/react";
 import Image from "next/image";
+import { ServiceBrochureCta } from "@/modules/servicios/components/ui/service-brochure-cta";
 import type { Service } from "@/payload-types";
 import { Container, Section } from "@/shared/components/ui/section";
+import { getBrochureByServiceSlug } from "@/shared/data/brochures";
 import { getMediaImageProps } from "@/shared/lib/utils";
 
 interface ServiceDetailProps {
@@ -10,6 +12,7 @@ interface ServiceDetailProps {
 
 export function ServiceDetailSection({ service }: ServiceDetailProps) {
   const imageProps = getMediaImageProps(service.image);
+  const brochure = getBrochureByServiceSlug(service.slug);
 
   return (
     <Section>
@@ -23,6 +26,8 @@ export function ServiceDetailSection({ service }: ServiceDetailProps) {
               <RichText data={service.excerpt} />
             </div>
           </header>
+
+          {brochure && <ServiceBrochureCta brochure={brochure} />}
 
           {imageProps && (
             <Image
